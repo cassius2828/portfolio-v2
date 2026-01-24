@@ -131,3 +131,28 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+/**
+ * Admin procedure
+ *
+ * Only accessible to users with isAdmin flag set to true.
+ * Used for blog/project management operations.
+ */
+export const adminProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    if (!ctx.session.user.isAdmin) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin access required",
+      });
+    }
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  });

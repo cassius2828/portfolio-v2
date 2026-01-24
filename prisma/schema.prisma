@@ -7,39 +7,57 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+    provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// Portfolio Models
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
+model Project {
+    id            String       @id @default(auto()) @map("_id") @db.ObjectId
+    title         String
+    description   String
+    prodLink      String?
+    videoLink     String?
+    githubLink    String       @unique
+    technologies  Technology[]
+    featured      Boolean      @default(false)
+    img           String?
+    priorityLevel Int          @default(1)
+    createdAt     DateTime     @default(now())
+    updatedAt     DateTime     @updatedAt
 }
 
-// Necessary for Next auth
+type Technology {
+    name String
+    icon String?
+}
+
+model Blog {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    title     String
+    content   String
+    img       String?
+    ownerId   String   @db.ObjectId
+    owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// NextAuth Models
+
 model Account {
-    id                       String  @id @default(cuid())
-    userId                   String
+    id                       String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId                   String  @db.ObjectId
     type                     String
     provider                 String
     providerAccountId        String
-    refresh_token            String? @db.Text
-    access_token             String? // @db.Text
+    refresh_token            String?
+    access_token             String?
     expires_at               Int?
     token_type               String?
     scope                    String?
-    id_token                 String? // @db.Text
+    id_token                 String?
     session_state            String?
     user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     refresh_token_expires_in Int?
@@ -48,25 +66,27 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(cuid())
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
     sessionToken String   @unique
-    userId       String
+    userId       String   @db.ObjectId
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String    @id @default(auto()) @map("_id") @db.ObjectId
     name          String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+    isAdmin       Boolean   @default(false)
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
+    blogs         Blog[]
 }
 
 model VerificationToken {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
     identifier String
     token      String   @unique
     expires    DateTime
