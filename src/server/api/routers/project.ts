@@ -14,6 +14,7 @@ const technologySchema = z.object({
 export const projectRouter = createTRPCRouter({
   // Get all projects
   getAll: publicProcedure.query(async ({ ctx }) => {
+    console.log(ctx, '<--ctx')
     return ctx.db.project.findMany({
       orderBy: { priorityLevel: "desc" },
     });
@@ -70,8 +71,8 @@ export const projectRouter = createTRPCRouter({
         data: {
           title: input.title,
           description: input.description,
-          prodLink: input.prodLink || null,
-          videoLink: input.videoLink || null,
+          prodLink: input.prodLink ?? null,
+          videoLink: input.videoLink ?? null,
           githubLink: input.githubLink,
           technologies: input.technologies,
           featured: input.featured,
@@ -103,8 +104,8 @@ export const projectRouter = createTRPCRouter({
         where: { id },
         data: {
           ...data,
-          prodLink: data.prodLink || null,
-          videoLink: data.videoLink || null,
+          prodLink: data.prodLink ?? null,
+          videoLink: data.videoLink ?? null,
         },
       });
     }),

@@ -13,7 +13,7 @@ export const env = createEnv({
         : z.string().optional(),
         AUTH_GOOGLE_CLIENT_ID: z.string(),
         AUTH_GOOGLE_CLIENT_SECRET: z.string(),
-    DATABASE_URL: z.string(),
+    MONGODB_URI: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -48,7 +48,7 @@ export const env = createEnv({
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_GOOGLE_CLIENT_ID: process.env.AUTH_GOOGLE_CLIENT_ID,
     AUTH_GOOGLE_CLIENT_SECRET: process.env.AUTH_GOOGLE_CLIENT_SECRET,
-    DATABASE_URL: process.env.DATABASE_URL,
+    MONGODB_URI: process.env.MONGODB_URI,
     NODE_ENV: process.env.NODE_ENV,
     AWS_REGION: process.env.AWS_REGION,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,

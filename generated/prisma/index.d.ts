@@ -1590,11 +1590,11 @@ export namespace Prisma {
     prodLink: string | null
     videoLink: string | null
     githubLink: string
-    featured: boolean
+    featured: boolean | null
     img: string | null
     priorityLevel: number
-    createdAt: Date
-    updatedAt: Date
+    createdAt: Date | null
+    updatedAt: Date | null
     _count: ProjectCountAggregateOutputType | null
     _avg: ProjectAvgAggregateOutputType | null
     _sum: ProjectSumAggregateOutputType | null
@@ -1660,11 +1660,11 @@ export namespace Prisma {
       prodLink: string | null
       videoLink: string | null
       githubLink: string
-      featured: boolean
+      featured: boolean | null
       img: string | null
       priorityLevel: number
-      createdAt: Date
-      updatedAt: Date
+      createdAt: Date | null
+      updatedAt: Date | null
     }, ExtArgs["result"]["project"]>
     composites: {
       technologies: Prisma.$TechnologyPayload[]
@@ -7708,11 +7708,11 @@ export namespace Prisma {
     videoLink?: StringNullableFilter<"Project"> | string | null
     githubLink?: StringFilter<"Project"> | string
     technologies?: TechnologyCompositeListFilter | TechnologyObjectEqualityInput[]
-    featured?: BoolFilter<"Project"> | boolean
+    featured?: BoolNullableFilter<"Project"> | boolean | null
     img?: StringNullableFilter<"Project"> | string | null
     priorityLevel?: IntFilter<"Project"> | number
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    createdAt?: DateTimeNullableFilter<"Project"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -7741,11 +7741,11 @@ export namespace Prisma {
     prodLink?: StringNullableFilter<"Project"> | string | null
     videoLink?: StringNullableFilter<"Project"> | string | null
     technologies?: TechnologyCompositeListFilter | TechnologyObjectEqualityInput[]
-    featured?: BoolFilter<"Project"> | boolean
+    featured?: BoolNullableFilter<"Project"> | boolean | null
     img?: StringNullableFilter<"Project"> | string | null
     priorityLevel?: IntFilter<"Project"> | number
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    createdAt?: DateTimeNullableFilter<"Project"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
   }, "id" | "githubLink">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -7777,11 +7777,11 @@ export namespace Prisma {
     prodLink?: StringNullableWithAggregatesFilter<"Project"> | string | null
     videoLink?: StringNullableWithAggregatesFilter<"Project"> | string | null
     githubLink?: StringWithAggregatesFilter<"Project"> | string
-    featured?: BoolWithAggregatesFilter<"Project"> | boolean
+    featured?: BoolNullableWithAggregatesFilter<"Project"> | boolean | null
     img?: StringNullableWithAggregatesFilter<"Project"> | string | null
     priorityLevel?: IntWithAggregatesFilter<"Project"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+    createdAt?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
   }
 
   export type BlogWhereInput = {
@@ -8119,11 +8119,11 @@ export namespace Prisma {
     videoLink?: string | null
     githubLink: string
     technologies?: XOR<TechnologyListCreateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: boolean
+    featured?: boolean | null
     img?: string | null
     priorityLevel?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -8134,11 +8134,11 @@ export namespace Prisma {
     videoLink?: string | null
     githubLink: string
     technologies?: XOR<TechnologyListCreateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: boolean
+    featured?: boolean | null
     img?: string | null
     priorityLevel?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
   }
 
   export type ProjectUpdateInput = {
@@ -8148,11 +8148,11 @@ export namespace Prisma {
     videoLink?: NullableStringFieldUpdateOperationsInput | string | null
     githubLink?: StringFieldUpdateOperationsInput | string
     technologies?: XOR<TechnologyListUpdateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: BoolFieldUpdateOperationsInput | boolean
+    featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     img?: NullableStringFieldUpdateOperationsInput | string | null
     priorityLevel?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -8162,11 +8162,11 @@ export namespace Prisma {
     videoLink?: NullableStringFieldUpdateOperationsInput | string | null
     githubLink?: StringFieldUpdateOperationsInput | string
     technologies?: XOR<TechnologyListUpdateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: BoolFieldUpdateOperationsInput | boolean
+    featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     img?: NullableStringFieldUpdateOperationsInput | string | null
     priorityLevel?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectCreateManyInput = {
@@ -8177,11 +8177,11 @@ export namespace Prisma {
     videoLink?: string | null
     githubLink: string
     technologies?: XOR<TechnologyListCreateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: boolean
+    featured?: boolean | null
     img?: string | null
     priorityLevel?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
   }
 
   export type ProjectUpdateManyMutationInput = {
@@ -8191,11 +8191,11 @@ export namespace Prisma {
     videoLink?: NullableStringFieldUpdateOperationsInput | string | null
     githubLink?: StringFieldUpdateOperationsInput | string
     technologies?: XOR<TechnologyListUpdateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: BoolFieldUpdateOperationsInput | boolean
+    featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     img?: NullableStringFieldUpdateOperationsInput | string | null
     priorityLevel?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProjectUncheckedUpdateManyInput = {
@@ -8205,11 +8205,11 @@ export namespace Prisma {
     videoLink?: NullableStringFieldUpdateOperationsInput | string | null
     githubLink?: StringFieldUpdateOperationsInput | string
     technologies?: XOR<TechnologyListUpdateEnvelopeInput, TechnologyCreateInput> | TechnologyCreateInput[]
-    featured?: BoolFieldUpdateOperationsInput | boolean
+    featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     img?: NullableStringFieldUpdateOperationsInput | string | null
     priorityLevel?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type BlogCreateInput = {
@@ -8589,9 +8589,10 @@ export namespace Prisma {
     icon?: string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+    isSet?: boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8605,15 +8606,16 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
   }
 
   export type TechnologyOrderByCompositeAggregateInput = {
@@ -8707,12 +8709,13 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8731,7 +8734,22 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8739,10 +8757,7 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type UserScalarRelationFilter = {
@@ -8778,6 +8793,20 @@ export namespace Prisma {
     ownerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -8893,16 +8922,9 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-    isSet?: boolean
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type AccountListRelationFilter = {
@@ -8962,19 +8984,12 @@ export namespace Prisma {
     isAdmin?: SortOrder
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-    isSet?: boolean
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
@@ -9028,8 +9043,9 @@ export namespace Prisma {
     deleteMany?: TechnologyDeleteManyInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+    unset?: boolean
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -9040,14 +9056,19 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+    unset?: boolean
   }
 
   export type UserCreateNestedOneWithoutBlogsInput = {
     create?: XOR<UserCreateWithoutBlogsInput, UserUncheckedCreateWithoutBlogsInput>
     connectOrCreate?: UserCreateOrConnectWithoutBlogsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type UserUpdateOneRequiredWithoutBlogsNestedInput = {
@@ -9137,9 +9158,8 @@ export namespace Prisma {
     connect?: BlogWhereUniqueInput | BlogWhereUniqueInput[]
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-    unset?: boolean
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -9263,9 +9283,10 @@ export namespace Prisma {
     icon?: StringNullableFilter<"Technology"> | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+    isSet?: boolean
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -9279,15 +9300,16 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9337,12 +9359,13 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9370,6 +9393,32 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -9415,31 +9464,17 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-    isSet?: boolean
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-    isSet?: boolean
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TechnologyUpdateManyInput = {
