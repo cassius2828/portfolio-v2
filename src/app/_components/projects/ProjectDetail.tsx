@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import type { Project } from "../../../../generated/prisma";
+import { TechIcon } from "../shared/TechIcon";
 
 interface ProjectDetailProps {
   project: Project;
@@ -105,9 +106,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 + i * 0.05 }}
-              className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-2 text-[var(--color-text-secondary)]"
+              className="flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-2 text-[var(--color-text-secondary)]"
             >
-              {tech.icon && <span className="mr-2">{tech.icon}</span>}
+              <TechIcon name={tech.name} size={20} />
               {tech.name}
             </motion.span>
           ))}
