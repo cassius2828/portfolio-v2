@@ -2608,7 +2608,7 @@ export namespace Prisma {
     title: string
     content: string
     img: string | null
-    ownerId: string
+    ownerId: string | null
     createdAt: Date
     updatedAt: Date
     _count: BlogCountAggregateOutputType | null
@@ -2638,7 +2638,7 @@ export namespace Prisma {
     ownerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    owner?: boolean | UserDefaultArgs<ExtArgs>
+    owner?: boolean | Blog$ownerArgs<ExtArgs>
   }, ExtArgs["result"]["blog"]>
 
 
@@ -2655,20 +2655,20 @@ export namespace Prisma {
 
   export type BlogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "img" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["blog"]>
   export type BlogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    owner?: boolean | UserDefaultArgs<ExtArgs>
+    owner?: boolean | Blog$ownerArgs<ExtArgs>
   }
 
   export type $BlogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Blog"
     objects: {
-      owner: Prisma.$UserPayload<ExtArgs>
+      owner: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       content: string
       img: string | null
-      ownerId: string
+      ownerId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["blog"]>
@@ -3034,7 +3034,7 @@ export namespace Prisma {
    */
   export interface Prisma__BlogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    owner<T extends Blog$ownerArgs<ExtArgs> = {}>(args?: Subset<T, Blog$ownerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3438,6 +3438,25 @@ export namespace Prisma {
      * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
      */
     options?: InputJsonValue
+  }
+
+  /**
+   * Blog.owner
+   */
+  export type Blog$ownerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -7792,10 +7811,10 @@ export namespace Prisma {
     title?: StringFilter<"Blog"> | string
     content?: StringFilter<"Blog"> | string
     img?: StringNullableFilter<"Blog"> | string | null
-    ownerId?: StringFilter<"Blog"> | string
+    ownerId?: StringNullableFilter<"Blog"> | string | null
     createdAt?: DateTimeFilter<"Blog"> | Date | string
     updatedAt?: DateTimeFilter<"Blog"> | Date | string
-    owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    owner?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type BlogOrderByWithRelationInput = {
@@ -7817,10 +7836,10 @@ export namespace Prisma {
     title?: StringFilter<"Blog"> | string
     content?: StringFilter<"Blog"> | string
     img?: StringNullableFilter<"Blog"> | string | null
-    ownerId?: StringFilter<"Blog"> | string
+    ownerId?: StringNullableFilter<"Blog"> | string | null
     createdAt?: DateTimeFilter<"Blog"> | Date | string
     updatedAt?: DateTimeFilter<"Blog"> | Date | string
-    owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    owner?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type BlogOrderByWithAggregationInput = {
@@ -7844,7 +7863,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Blog"> | string
     content?: StringWithAggregatesFilter<"Blog"> | string
     img?: StringNullableWithAggregatesFilter<"Blog"> | string | null
-    ownerId?: StringWithAggregatesFilter<"Blog"> | string
+    ownerId?: StringNullableWithAggregatesFilter<"Blog"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Blog"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Blog"> | Date | string
   }
@@ -8219,7 +8238,7 @@ export namespace Prisma {
     img?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    owner: UserCreateNestedOneWithoutBlogsInput
+    owner?: UserCreateNestedOneWithoutBlogsInput
   }
 
   export type BlogUncheckedCreateInput = {
@@ -8227,7 +8246,7 @@ export namespace Prisma {
     title: string
     content: string
     img?: string | null
-    ownerId: string
+    ownerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8238,14 +8257,14 @@ export namespace Prisma {
     img?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner?: UserUpdateOneRequiredWithoutBlogsNestedInput
+    owner?: UserUpdateOneWithoutBlogsNestedInput
   }
 
   export type BlogUncheckedUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     img?: NullableStringFieldUpdateOperationsInput | string | null
-    ownerId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8255,7 +8274,7 @@ export namespace Prisma {
     title: string
     content: string
     img?: string | null
-    ownerId: string
+    ownerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8272,7 +8291,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     img?: NullableStringFieldUpdateOperationsInput | string | null
-    ownerId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8760,9 +8779,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type BlogCountOrderByAggregateInput = {
@@ -8819,6 +8838,11 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
     isSet?: boolean
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
@@ -9071,10 +9095,12 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserUpdateOneRequiredWithoutBlogsNestedInput = {
+  export type UserUpdateOneWithoutBlogsNestedInput = {
     create?: XOR<UserCreateWithoutBlogsInput, UserUncheckedCreateWithoutBlogsInput>
     connectOrCreate?: UserCreateOrConnectWithoutBlogsInput
     upsert?: UserUpsertWithoutBlogsInput
+    disconnect?: boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBlogsInput, UserUpdateWithoutBlogsInput>, UserUncheckedUpdateWithoutBlogsInput>
   }
@@ -9832,7 +9858,7 @@ export namespace Prisma {
     title?: StringFilter<"Blog"> | string
     content?: StringFilter<"Blog"> | string
     img?: StringNullableFilter<"Blog"> | string | null
-    ownerId?: StringFilter<"Blog"> | string
+    ownerId?: StringNullableFilter<"Blog"> | string | null
     createdAt?: DateTimeFilter<"Blog"> | Date | string
     updatedAt?: DateTimeFilter<"Blog"> | Date | string
   }
