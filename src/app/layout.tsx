@@ -6,6 +6,7 @@ import { Outfit, JetBrains_Mono } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Header } from "./_components/layout/Header";
 import { Footer } from "./_components/layout/Footer";
+import { personalInfo, skills, socialLinks } from "~/lib/content";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -19,18 +20,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(baseUrl),
   title: {
-    default: "Cassius Reynolds | Full Stack Developer",
-    template: "%s | Cassius Reynolds",
+    default: `${personalInfo.name} | ${personalInfo.title}`,
+    template: `%s | ${personalInfo.name}`,
   },
-  description:
-    "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building scalable web applications with modern technologies.",
+  description: `${personalInfo.footerDescription} Building scalable web applications with modern technologies.`,
   keywords: [
-    "Full Stack Developer",
+    personalInfo.title,
     "React Developer",
     "Next.js",
     "TypeScript",
@@ -39,31 +40,30 @@ export const metadata: Metadata = {
     "PostgreSQL",
     "Software Engineer",
     "Web Developer",
-    "Cassius Reynolds",
+    personalInfo.name,
   ],
-  authors: [{ name: "Cassius Reynolds" }],
-  creator: "Cassius Reynolds",
+  authors: [{ name: personalInfo.name }],
+  creator: personalInfo.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Cassius Reynolds Portfolio",
-    title: "Cassius Reynolds | Full Stack Developer",
-    description:
-      "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
+    url: baseUrl,
+    siteName: `${personalInfo.name} Portfolio`,
+    title: `${personalInfo.name} | ${personalInfo.title}`,
+    description: personalInfo.footerDescription,
     images: [
       {
         url: "/images/headshot.webp",
         width: 1200,
         height: 630,
-        alt: "Cassius Reynolds - Full Stack Developer",
+        alt: `${personalInfo.name} - ${personalInfo.title}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cassius Reynolds | Full Stack Developer",
-    description:
-      "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
+    title: `${personalInfo.name} | ${personalInfo.title}`,
+    description: personalInfo.footerDescription,
     images: ["/images/headshot.webp"],
   },
   robots: {
@@ -77,31 +77,24 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  alternates: {
+    canonical: baseUrl,
+  },
 };
 
 // JSON-LD structured data
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Cassius Reynolds",
-  jobTitle: "Full Stack Developer",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  name: personalInfo.name,
+  jobTitle: personalInfo.title,
+  url: baseUrl,
   sameAs: [
-    "https://github.com/cassius2828",
-    "https://www.linkedin.com/in/cassius-reynolds",
-    "https://www.credly.com/users/cassius-reynolds",
+    socialLinks.github.url,
+    socialLinks.linkedin.url,
+    socialLinks.credly.url,
   ],
-  knowsAbout: [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "MongoDB",
-    "PostgreSQL",
-    "AWS",
-    "Python",
-    "Django",
-  ],
+  knowsAbout: skills,
 };
 
 export default function RootLayout({

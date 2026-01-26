@@ -1,9 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import type { Project } from "../../../../generated/prisma";
 import { TechIcon } from "../shared/TechIcon";
 
@@ -14,18 +10,11 @@ interface ProjectDetailProps {
 const fallbackImg = "/images/api-programming.png";
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
-  const router = useRouter();
-
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="mx-auto max-w-5xl px-6 pb-24"
-    >
+    <article className="mx-auto max-w-5xl px-6 pb-24">
       {/* Back Button */}
-      <button
-        onClick={() => router.back()}
+      <Link
+        href="/#hero"
         className="mb-8 flex items-center gap-2 text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-accent)]"
       >
         <svg
@@ -41,19 +30,12 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             d="M10 19l-7-7m0 0l7-7m-7 7h18"
           />
         </svg>
-        Back
-      </button>
+        Back to Projects
+      </Link>
 
       {/* Header */}
       <header className="mb-12 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-4 text-4xl font-bold md:text-5xl"
-        >
-          {project.title}
-        </motion.h1>
+        <h1 className="mb-4 text-4xl font-bold md:text-5xl">{project.title}</h1>
 
         {project.featured && (
           <span className="inline-block rounded-full bg-[var(--color-accent-muted)] px-4 py-1 text-sm font-medium text-[var(--color-accent)]">
@@ -63,12 +45,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       </header>
 
       {/* Featured Image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
-        className="relative mb-12 aspect-video overflow-hidden rounded-2xl"
-      >
+      <div className="relative mb-12 aspect-video overflow-hidden rounded-2xl">
         <Image
           src={project.img || fallbackImg}
           alt={project.title}
@@ -76,51 +53,34 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           className="object-cover"
           priority
         />
-      </motion.div>
+      </div>
 
       {/* Description */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mb-12"
-      >
+      <section className="mb-12">
         <h2 className="mb-4 text-2xl font-bold">About This Project</h2>
         <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
           {project.description}
         </p>
-      </motion.section>
+      </section>
 
       {/* Technologies */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="mb-12"
-      >
+      <section className="mb-12">
         <h2 className="mb-6 text-2xl font-bold">Technologies Used</h2>
         <div className="flex flex-wrap gap-3">
-          {project.technologies.map((tech, i) => (
-            <motion.span
+          {project.technologies.map((tech) => (
+            <span
               key={tech.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 + i * 0.05 }}
               className="flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-2 text-[var(--color-text-secondary)]"
             >
               <TechIcon name={tech.name} size={20} />
               {tech.name}
-            </motion.span>
+            </span>
           ))}
         </div>
-      </motion.section>
+      </section>
 
       {/* Links */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
+      <section>
         <h2 className="mb-6 text-2xl font-bold">Links</h2>
         <div className="flex flex-wrap gap-4">
           {project.prodLink && (
@@ -193,7 +153,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </a>
           )}
         </div>
-      </motion.section>
+      </section>
 
       {/* Back to Projects */}
       <div className="mt-16 border-t border-[var(--color-border)] pt-8 text-center">
@@ -204,7 +164,6 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           ← Back to All Projects
         </Link>
       </div>
-    </motion.article>
+    </article>
   );
 }
-
