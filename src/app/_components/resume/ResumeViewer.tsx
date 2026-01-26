@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-
-const resumeS3Link =
-  "https://5-06-sei.s3.us-west-1.amazonaws.com/portfolio/resume/Cassius_Reynolds_-_Software_Engineer.pdf";
-const googleDriveResumeLink =
-  "https://drive.google.com/file/d/1Q3qWKgDjpOQriR39708bYz8hhhPDNFno/view?usp=drive_link";
+import { resumeLinks, personalInfo } from "~/lib/content";
 
 export function ResumeViewer() {
   const router = useRouter();
@@ -15,7 +11,7 @@ export function ResumeViewer() {
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(googleDriveResumeLink);
+      await navigator.clipboard.writeText(resumeLinks.googleDrive);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
@@ -39,8 +35,8 @@ export function ResumeViewer() {
       {/* Resume Iframe */}
       <div className="card mb-8 overflow-hidden">
         <iframe
-          src={resumeS3Link}
-          title="Cassius Reynolds Resume"
+          src={resumeLinks.s3}
+          title={`${personalInfo.name} Resume`}
           className="h-[80vh] w-full"
         />
       </div>
@@ -113,7 +109,7 @@ export function ResumeViewer() {
         </button>
 
         <a
-          href={resumeS3Link}
+          href={resumeLinks.s3}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 rounded-lg border border-[var(--color-accent)] px-6 py-3 font-medium text-[var(--color-accent)] transition-all hover:bg-[var(--color-accent)] hover:text-white"
@@ -149,4 +145,3 @@ export function ResumeViewer() {
     </motion.div>
   );
 }
-

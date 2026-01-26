@@ -3,15 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { api } from "~/trpc/react";
-
-const connectionOptions = [
-  { value: "recruiter", label: "Recruiter" },
-  { value: "freelance client", label: "Freelance Client" },
-  { value: "collaborative developer", label: "Collaborative Developer" },
-  { value: "other", label: "Other" },
-] as const;
-
-type ConnectionType = (typeof connectionOptions)[number]["value"];
+import {
+  contactInfo,
+  socialLinks,
+  connectionOptions,
+  type ConnectionType,
+} from "~/lib/content";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -103,17 +100,17 @@ export function Contact() {
                 <p className="mb-1 text-sm text-[var(--color-text-muted)]">
                   Phone
                 </p>
-                <p className="text-lg">(707) 724-1815</p>
+                <p className="text-lg">{contactInfo.phone}</p>
               </div>
               <div>
                 <p className="mb-1 text-sm text-[var(--color-text-muted)]">
                   Email
                 </p>
                 <a
-                  href="mailto:cassius.reynolds.dev@gmail.com"
+                  href={`mailto:${contactInfo.email}`}
                   className="text-lg text-[var(--color-accent)] hover:underline"
                 >
-                  cassius.reynolds.dev@gmail.com
+                  {contactInfo.email}
                 </a>
               </div>
               <div>
@@ -121,12 +118,12 @@ export function Contact() {
                   LinkedIn
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/cassius-reynolds"
+                  href={socialLinks.linkedin.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-lg text-[var(--color-accent)] hover:underline"
                 >
-                  Cassius Reynolds
+                  {socialLinks.linkedin.displayName}
                 </a>
               </div>
               <div>
@@ -134,12 +131,12 @@ export function Contact() {
                   GitHub
                 </p>
                 <a
-                  href="https://github.com/cassius2828"
+                  href={socialLinks.github.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-lg text-[var(--color-accent)] hover:underline"
                 >
-                  github.com/cassius2828
+                  github.com/{socialLinks.github.username}
                 </a>
               </div>
             </div>
@@ -292,4 +289,3 @@ export function Contact() {
     </section>
   );
 }
-

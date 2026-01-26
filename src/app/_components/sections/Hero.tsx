@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { type Project } from "../../../../generated/prisma";
 import { ProjectCard } from "../shared/ProjectCard";
+import { personalInfo, socialLinks } from "~/lib/content";
 
 interface HeroProps {
   featuredProjects: Project[];
@@ -37,7 +38,7 @@ export function Hero({ featuredProjects }: HeroProps) {
               transition={{ delay: 0.2 }}
               className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--color-accent)]"
             >
-              Full Stack Developer
+              {personalInfo.title}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -46,7 +47,7 @@ export function Hero({ featuredProjects }: HeroProps) {
               className="mb-6 text-5xl font-bold leading-tight md:text-6xl lg:text-7xl"
             >
               Hi, I&apos;m{" "}
-              <span className="gradient-text">Cassius Reynolds</span>
+              <span className="gradient-text">{personalInfo.name}</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -54,8 +55,7 @@ export function Hero({ featuredProjects }: HeroProps) {
               transition={{ delay: 0.4 }}
               className="mb-8 max-w-xl text-lg text-[var(--color-text-secondary)] lg:text-xl"
             >
-              I build scalable web applications with modern technologies.
-              Passionate about creating efficient, user-friendly solutions.
+              {personalInfo.tagline}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ export function Hero({ featuredProjects }: HeroProps) {
                 Get in Touch
               </Link>
               <a
-                href="https://www.credly.com/users/cassius-reynolds"
+                href={socialLinks.credly.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
@@ -87,7 +87,7 @@ export function Hero({ featuredProjects }: HeroProps) {
             <div className="animate-pulse-glow relative h-72 w-72 overflow-hidden rounded-2xl md:h-96 md:w-96">
               <Image
                 src="/images/headshot.webp"
-                alt="Cassius Reynolds"
+                alt={personalInfo.name}
                 fill
                 className="object-cover"
                 priority
@@ -130,4 +130,3 @@ export function Hero({ featuredProjects }: HeroProps) {
     </section>
   );
 }
-

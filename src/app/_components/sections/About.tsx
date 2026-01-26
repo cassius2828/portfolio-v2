@@ -1,31 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const highlights = [
-  { label: "1+ Years Experience", icon: "💻" },
-  { label: "Freelance Experience", icon: "💼" },
-  { label: "Cloud Knowledge", icon: "☁️" },
-  { label: "GA Graduate 2024", icon: "🎓" },
-];
-
-const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Node.js",
-  "Express",
-  "MongoDB",
-  "PostgreSQL",
-  "Python",
-  "Django",
-  "Tailwind CSS",
-  "AWS",
-  "GraphQL",
-  "REST APIs",
-  "Git",
-  "Docker",
-];
+import {
+  highlights,
+  skills,
+  stats,
+  primarySkills,
+  secondarySkills,
+  codingJourneyStart,
+} from "~/lib/content";
 
 export function About() {
   return (
@@ -75,17 +58,16 @@ export function About() {
               <p>
                 I am a passionate software engineer with strong expertise in{" "}
                 <span className="text-[var(--color-accent)]">
-                  React, Express, MongoDB, PostgreSQL, JavaScript, TypeScript
+                  {primarySkills}
                 </span>
                 , and building RESTful APIs. Additionally, I have working
-                knowledge of Python, Django, Remix, Next.js, Shopify, Cypress,
-                AWS, system design, GraphQL, and more.
+                knowledge of {secondarySkills}, and more.
               </p>
               <p>
-                Since starting my coding journey in December 2022, I&apos;ve
-                graduated from General Assembly&apos;s Software Engineering
-                Bootcamp (2024), earned cloud certifications, and completed
-                numerous real-world freelance projects.
+                Since starting my coding journey in {codingJourneyStart},
+                I&apos;ve graduated from General Assembly&apos;s Software
+                Engineering Bootcamp (2024), earned cloud certifications, and
+                completed numerous real-world freelance projects.
               </p>
               <p>
                 I bring team-oriented skills, honed through collaboration with
@@ -135,10 +117,10 @@ export function About() {
                 className="text-center"
               >
                 <div className="text-3xl font-bold text-[var(--color-accent)]">
-                  15+
+                  {stats.projects.value}
                 </div>
                 <div className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  Projects
+                  {stats.projects.label}
                 </div>
               </motion.div>
               <motion.div
@@ -149,10 +131,10 @@ export function About() {
                 className="text-center"
               >
                 <div className="text-3xl font-bold text-[var(--color-accent)]">
-                  5+
+                  {stats.certifications.value}
                 </div>
                 <div className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  Certifications
+                  {stats.certifications.label}
                 </div>
               </motion.div>
               <motion.div
@@ -163,10 +145,10 @@ export function About() {
                 className="text-center"
               >
                 <div className="text-3xl font-bold text-[var(--color-accent)]">
-                  1+
+                  {stats.yearsExperience.value}
                 </div>
                 <div className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  Years Experience
+                  {stats.yearsExperience.label}
                 </div>
               </motion.div>
             </div>
@@ -176,4 +158,3 @@ export function About() {
     </section>
   );
 }
-

@@ -1,24 +1,19 @@
 import Link from "next/link";
+import { personalInfo, socialLinks, footerNavLinks } from "~/lib/content";
 
-const socialLinks = [
+const socialLinksArray = [
   {
-    href: "https://github.com/cassius2828",
-    label: "GitHub",
+    href: socialLinks.github.url,
+    label: socialLinks.github.label,
   },
   {
-    href: "https://www.linkedin.com/in/cassius-reynolds",
-    label: "LinkedIn",
+    href: socialLinks.linkedin.url,
+    label: socialLinks.linkedin.label,
   },
   {
-    href: "https://www.credly.com/users/cassius-reynolds",
-    label: "Credly",
+    href: socialLinks.credly.url,
+    label: socialLinks.credly.label,
   },
-];
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/blogs", label: "Blog" },
-  { href: "/resume", label: "Resume" },
 ];
 
 export function Footer() {
@@ -31,11 +26,10 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="text-2xl font-bold">
-              <span className="gradient-text">Cassius Reynolds</span>
+              <span className="gradient-text">{personalInfo.name}</span>
             </Link>
             <p className="mt-4 text-[var(--color-text-secondary)]">
-              Full Stack Developer specializing in React, Next.js, TypeScript,
-              and Node.js.
+              {personalInfo.footerDescription}
             </p>
           </div>
 
@@ -45,7 +39,7 @@ export function Footer() {
               Navigation
             </h3>
             <ul className="space-y-2">
-              {navLinks.map((link) => (
+              {footerNavLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -64,7 +58,7 @@ export function Footer() {
               Connect
             </h3>
             <ul className="space-y-2">
-              {socialLinks.map((link) => (
+              {socialLinksArray.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -83,7 +77,7 @@ export function Footer() {
         <div className="section-divider mt-12" />
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 text-center text-sm text-[var(--color-text-muted)] md:flex-row">
-          <p>&copy; {currentYear} Cassius Reynolds. All rights reserved.</p>
+          <p>&copy; {currentYear} {personalInfo.name}. All rights reserved.</p>
           <p>
             Built with{" "}
             <a
@@ -109,4 +103,3 @@ export function Footer() {
     </footer>
   );
 }
-
