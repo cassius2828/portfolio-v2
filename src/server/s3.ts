@@ -101,7 +101,7 @@ export async function uploadBase64Image(
   }
 
   // Extract the base64 data (remove data:image/...;base64, prefix)
-  const matches = base64Data.match(/^data:(.+);base64,(.+)$/);
+  const matches = /^data:(.+);base64,(.+)$/.exec(base64Data);
   if (!matches) {
     throw new Error("Invalid base64 image format");
   }
