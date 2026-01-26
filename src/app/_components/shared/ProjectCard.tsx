@@ -22,7 +22,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
         {/* Image */}
         <div className="relative aspect-video overflow-hidden">
           <Image
-            src={project.img || fallbackImg}
+            src={project.img ?? fallbackImg}
             alt={project.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"

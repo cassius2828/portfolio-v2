@@ -3,6 +3,7 @@ import { PrismaClient } from "../../generated/prisma";
 
 const createPrismaClient = () =>
   new PrismaClient({
+    datasourceUrl: env.MONGODB_URI,
     log:
       env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   });

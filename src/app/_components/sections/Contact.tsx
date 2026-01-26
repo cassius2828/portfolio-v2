@@ -43,7 +43,7 @@ export function Contact() {
     onError: (error) => {
       setStatus({
         type: "error",
-        message: error.message || "Failed to send message. Please try again.",
+        message: error.message ?? "Failed to send message. Please try again.",
       });
       setTimeout(() => setStatus({ type: null, message: "" }), 5000);
     },

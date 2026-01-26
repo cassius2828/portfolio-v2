@@ -47,7 +47,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Featured Image */}
       <div className="relative mb-12 aspect-video overflow-hidden rounded-2xl">
         <Image
-          src={project.img || fallbackImg}
+          src={project.img ?? fallbackImg}
           alt={project.title}
           fill
           className="object-cover"
