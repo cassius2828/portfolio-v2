@@ -353,6 +353,8 @@ const getIconColor = (name: string): string => {
   const colorMap: Record<string, string> = {
     react: "#61DAFB",
     nodejs: "#339933",
+    "node js": "#339933",
+    "node.js": "#339933",
     javascript: "#F7DF1E",
     typescript: "#3178C6",
     python: "#3776AB",
@@ -369,7 +371,6 @@ const getIconColor = (name: string): string => {
     django: "#092E20",
     bootstrap: "#7952B3",
     vite: "#FFC018",
-    // vite: "#646CFF",
     "google cloud": "#4285F4",
     supabase: "#3ECF8E",
     graphql: "#E10098",
