@@ -4,11 +4,11 @@
 export const personalInfo = {
   name: "Cassius Reynolds",
   initials: "CR",
-  title: "Full Stack Developer",
+  title: "Frontend Engineer | Full Stack Developer",
   tagline:
-    "I build scalable web applications with modern technologies. Passionate about creating efficient, user-friendly solutions.",
+    "Full-time engineer leading teams, driving system design decisions, and building scalable web applications. I combine technical expertise with strong leadership to deliver impactful solutions.",
   footerDescription:
-    "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
+    "Frontend Engineer specializing in React, Next.js, TypeScript, and cloud infrastructure.",
 };
 
 // ============================================
@@ -43,59 +43,95 @@ export const socialLinks = {
 // SKILLS & TECHNOLOGIES
 // ============================================
 export const skills = [
+  // Frontend
   "React",
   "Next.js",
   "TypeScript",
+  "JavaScript",
+  // Backend
   "Node.js",
   "Express",
+  "Python",
+  // Databases
   "MongoDB",
   "PostgreSQL",
-  "Python",
-  "Django",
-  "Tailwind CSS",
+  "NoSQL",
+  "SQL",
+  // Cloud & Infrastructure
   "AWS",
-  "GraphQL",
+  "GCP",
+  "Vercel",
+  "Heroku",
+  // APIs & Architecture
   "REST APIs",
+  "GraphQL",
+  "System Design",
+  // DevOps & Tools
   "Git",
+  "CI/CD",
   "Docker",
+  // Methodologies
+  "Scrum",
+  "Agile",
 ];
 
 // Primary skills mentioned in the about section
 export const primarySkills =
-  "React, Express, MongoDB, PostgreSQL, JavaScript, TypeScript";
+  "React, Next.js, TypeScript, Node.js, and cloud infrastructure";
 
 // Secondary skills mentioned in the about section
 export const secondarySkills =
-  "Python, Django, Remix, Next.js, Shopify, Cypress, AWS, system design, GraphQL";
+  "Python, PostgreSQL, MongoDB, GraphQL, system design, and CI/CD pipelines";
 
 // ============================================
 // EXPERIENCE HIGHLIGHTS
 // ============================================
 export const highlights = [
-  { label: "1+ Years Experience", icon: "💻" },
-  { label: "Freelance Experience", icon: "💼" },
-  { label: "Cloud Knowledge", icon: "☁️" },
-  { label: "GA Graduate 2024", icon: "🎓" },
+  { label: "Full-Time Engineer", icon: "💼" },
+  { label: "Team Lead", icon: "👥" },
+  { label: "AWS & Scrum Certified", icon: "🏆" },
+  { label: "CS Degree In Progress", icon: "🎓" },
 ];
 
 export const stats = {
-  projects: { value: "15+", label: "Projects" },
-  certifications: { value: "5+", label: "Certifications" },
-  yearsExperience: { value: "1+", label: "Years Experience" },
+  projects: { value: "20+", label: "Projects" },
+  certifications: { value: "AWS + Scrum", label: "Certified" },
+  yearsExperience: { value: "2+", label: "Years Experience" },
 };
 
 // ============================================
 // BIO / ABOUT ME
 // ============================================
 export const bioParagraphs = [
-  `I am a passionate software engineer with strong expertise in React, Express, MongoDB, PostgreSQL, JavaScript, TypeScript, and building RESTful APIs. Additionally, I have working knowledge of Python, Django, Remix, Next.js, Shopify, Cypress, AWS, system design, GraphQL, and more.`,
-  `Since starting my coding journey in December 2022, I've graduated from General Assembly's Software Engineering Bootcamp (2024), earned cloud certifications, and completed numerous real-world freelance projects.`,
-  `I bring team-oriented skills, honed through collaboration with mid- and senior-level engineers on various group projects, along with managerial experience from previous roles. I hold a BA in Communication Studies and plan to further my education with a BS in Computer Science.`,
-  `I'm continuously refining my skills while contributing to ongoing freelance projects, and I'm driven to build efficient, scalable solutions.`,
+  `I'm a Frontend Engineer at a data integration company where I lead a team of developers and own multiple projects. Hired as a Junior Data Integration Platform Engineer in April 2025, I was promoted within 3 months to lead frontend development, contribute to system design decisions, and drive developer experience improvements across the organization.`,
+  `My technical contributions include upgrading codebases to Next.js 16 and React 19, implementing major feature improvements from each upgrade, configuring authentication systems, and gaining hands-on experience with cloud infrastructure. I work cross-functionally with other engineering teams and bring dependable problem-solving skills to project planning and iterations.`,
+  `I hold a BA in Communication Management and am currently pursuing a BS in Computer Science with a concentration in software engineering. My journey into tech began with freelance work in 2023, followed by General Assembly's Software Engineering Bootcamp in 2024, where I built a strong foundation before transitioning to full-time engineering.`,
+  `Beyond code, I bring 13 years of football leadership experience—serving as team captain or on leadership council every year. I'm active in my community through the Black Student Association, youth mentoring, and community organizing. I contribute to open source projects and believe in understanding engineering fundamentals to complement AI tools, not replace them.`,
 ];
 
 // Coding journey start date
-export const codingJourneyStart = "December 2022";
+export const codingJourneyStart = "2023";
+
+// ============================================
+// RECOMMENDATIONS
+// ============================================
+export interface Recommendation {
+  name: string;
+  role: string;
+  text: string;
+  linkedinUrl: string;
+}
+
+export const recommendations: Recommendation[] = [
+  // Add your recommendations here
+  // Example:
+  // {
+  //   name: "John Doe",
+  //   role: "Senior Engineer at Company",
+  //   text: "Cassius is an exceptional engineer who...",
+  //   linkedinUrl: "https://linkedin.com/in/johndoe/details/recommendations",
+  // },
+];
 
 // ============================================
 // RESUME LINKS
@@ -134,4 +170,3 @@ export const connectionOptions = [
 ] as const;
 
 export type ConnectionType = (typeof connectionOptions)[number]["value"];
-

@@ -2,6 +2,7 @@ import { api } from "~/trpc/server";
 import { Hero } from "./_components/sections/Hero";
 import { Projects } from "./_components/sections/Projects";
 import { About } from "./_components/sections/About";
+import { Recommendations } from "./_components/sections/Recommendations";
 import { Contact } from "./_components/sections/Contact";
 
 export default async function Home() {
@@ -14,8 +15,9 @@ export default async function Home() {
   return (
     <>
       <Hero featuredProjects={featuredProjects} />
-      <Projects projects={regularProjects} />
       <About />
+      <Recommendations />
+      <Projects projects={regularProjects} />
       <Contact />
     </>
   );
