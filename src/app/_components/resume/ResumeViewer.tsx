@@ -35,7 +35,7 @@ export function ResumeViewer() {
       {/* Resume Iframe */}
       <div className="card mb-8 overflow-hidden">
         <iframe
-          src={resumeLinks.s3}
+          src={resumeLinks.publicPortfolioUrl}
           title={`${personalInfo.name} Resume`}
           className="h-[80vh] w-full"
         />

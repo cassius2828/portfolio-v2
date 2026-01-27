@@ -127,7 +127,7 @@ export const recommendations: Recommendation[] = [
   {
     name: "Eric Popelka",
     role: "Platform Architect",
-    img:"https://media.licdn.com/dms/image/v2/D5603AQHQAUKsZNNCrw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1685231406979?e=1770854400&v=beta&t=Ly8jSfmq7SDeREoGRDpiH0ZoVnd8wZpNUhqoX_iHP4o",
+    img: "https://media.licdn.com/dms/image/v2/D5603AQHQAUKsZNNCrw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1685231406979?e=1770854400&v=beta&t=Ly8jSfmq7SDeREoGRDpiH0ZoVnd8wZpNUhqoX_iHP4o",
     text: "Cassius is a standout React/Node/Next.js developer who brought real impact to our team. He’s not only technically sharp, but also an incredibly hard worker and an excellent communicator. Add to that a genuinely friendly and positive personality, and you’ve got someone any team would be lucky to have. Highly recommend!F",
     linkedinUrl: "https://www.linkedin.com/in/eric-popelka-b6024145/",
   }
@@ -146,6 +146,7 @@ export const recommendations: Recommendation[] = [
 // ============================================
 export const resumeLinks = {
   s3: "https://5-06-sei.s3.us-west-1.amazonaws.com/portfolio/resume/Cassius_Reynolds_-_Software_Engineer.pdf",
+  publicPortfolioUrl: "/images/Cassius_Reynolds_portfolio_2026.pdf",
   googleDrive:
     "https://drive.google.com/file/d/1Q3qWKgDjpOQriR39708bYz8hhhPDNFno/view?usp=drive_link",
 };
