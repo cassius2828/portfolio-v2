@@ -1,14 +1,25 @@
 import { z } from "zod";
-import nodemailer from "nodemailer";
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { env } from "~/env";
 
+const sesClient = new SESClient({
+  region: env.AWS_REGION,
+  credentials:
+    env.AWS_ACCESS_KEY_ID && env.AWS_SECRET_ACCESS_KEY
+      ? {
+          accessKeyId: env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+        }
+      : undefined,
+});
+
 const contactSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  subject: z.string().min(1, "Subject is required"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  name: z.string().min(1, { error: "Name is required" }),
+  email: z.string().email({ error: "Invalid email address" }),
+  subject: z.string().min(1, { error: "Subject is required" }),
+  message: z.string().min(10, { error: "Message must be at least 10 characters" }),
   affiliation: z.string().optional(),
   connection: z.enum([
     "recruiter",
@@ -24,25 +35,24 @@ export const contactRouter = createTRPCRouter({
     const { name, email, subject, message, affiliation, connection } = input;
 
     // Check if email configuration is available
-    if (!env.SMTP_HOST || !env.SMTP_USER || !env.SMTP_PASS || !env.ADMIN_EMAIL) {
+    if (!env.SES_FROM_EMAIL || !env.ADMIN_EMAIL || !env.AWS_REGION) {
       throw new Error("Email configuration is not set up");
     }
 
-    const transporter = nodemailer.createTransport({
-      host: env.SMTP_HOST,
-      port: parseInt(env.SMTP_PORT ?? "587"),
-      secure: false,
-      auth: {
-        user: env.SMTP_USER,
-        pass: env.SMTP_PASS,
+    const command = new SendEmailCommand({
+      Source: env.SES_FROM_EMAIL,
+      Destination: {
+        ToAddresses: [env.ADMIN_EMAIL],
       },
-    });
-
-    const mailOptions = {
-      from: env.SMTP_USER,
-      to: env.ADMIN_EMAIL,
-      subject: `Portfolio Contact: ${subject}`,
-      text: `
+      ReplyToAddresses: [email],
+      Message: {
+        Subject: {
+          Data: `Portfolio Contact: ${subject}`,
+          Charset: "UTF-8",
+        },
+        Body: {
+          Text: {
+            Data: `
 Message from ${name}
 
 ${message}
@@ -51,8 +61,11 @@ ${message}
 Company / Affiliation: ${affiliation ?? "Not specified"}
 Role/Connection: ${connection}
 Email: ${email}
-      `.trim(),
-      html: `
+            `.trim(),
+            Charset: "UTF-8",
+          },
+          Html: {
+            Data: `
 <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
   <h2 style="color: #333;">New Portfolio Contact</h2>
   <p><strong>From:</strong> ${name}</p>
@@ -65,10 +78,14 @@ Email: ${email}
     <p style="white-space: pre-wrap;">${message}</p>
   </div>
 </div>
-      `.trim(),
-    };
+            `.trim(),
+            Charset: "UTF-8",
+          },
+        },
+      },
+    });
 
-    await transporter.sendMail(mailOptions);
+    await sesClient.send(command);
 
     return {
       success: true,
@@ -76,4 +93,3 @@ Email: ${email}
     };
   }),
 });
-

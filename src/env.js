@@ -23,11 +23,8 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: z.string().optional(),
     S3_BUCKET_NAME: z.string().optional(),
     CLOUDFRONT_URL: z.string().optional(),
-    // Email Configuration
-    SMTP_HOST: z.string().optional(),
-    SMTP_PORT: z.string().optional(),
-    SMTP_USER: z.string().optional(),
-    SMTP_PASS: z.string().optional(),
+    // SES Email Configuration
+    SES_FROM_EMAIL: z.string().email().optional(),
     ADMIN_EMAIL: z.string().email().optional(),
   },
 
@@ -55,10 +52,7 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
     CLOUDFRONT_URL: process.env.CLOUDFRONT_URL,
-    SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_PORT: process.env.SMTP_PORT,
-    SMTP_USER: process.env.SMTP_USER,
-    SMTP_PASS: process.env.SMTP_PASS,
+    SES_FROM_EMAIL: process.env.SES_FROM_EMAIL,
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },

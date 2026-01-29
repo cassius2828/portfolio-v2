@@ -157,6 +157,7 @@ export const resumeLinks = {
 export const navItems = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About" },
+  { href: "/clients", label: "Clients" },
   { href: "/blogs", label: "Blog" },
   { href: "/#contact", label: "Contact" },
   { href: "/resume", label: "Resume" },
