@@ -4,6 +4,7 @@ import { api } from "~/trpc/server";
 import { ProjectDetail } from "../../_components/projects/ProjectDetail";
 import { db } from "~/server/db";
 import { personalInfo, socialLinks } from "~/lib/content";
+import { serializeProject } from "~/lib/serialize";
 import type { Project } from "../../../../generated/prisma";
 
 interface ProjectPageProps {
@@ -130,7 +131,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="absolute left-1/4 top-1/4 h-[400px] w-[400px] rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
       </div>
 
-      <ProjectDetail project={project} />
+      <ProjectDetail project={serializeProject(project)} />
     </div>
   );
 }

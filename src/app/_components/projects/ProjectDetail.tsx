@@ -1,10 +1,12 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-import type { Project } from "../../../../generated/prisma";
+import { type SerializedProject } from "../shared/ProjectCard";
+import { SafeImage } from "../shared/SafeImage";
 import { TechIcon } from "../shared/TechIcon";
 
 interface ProjectDetailProps {
-  project: Project;
+  project: SerializedProject;
 }
 
 const fallbackImg = "/images/api-programming.png";
@@ -46,10 +48,12 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
       {/* Featured Image */}
       <div className="relative mb-12 aspect-video overflow-hidden rounded-2xl">
-        <Image
-          src={project.img ?? fallbackImg}
+        <SafeImage
+          src={project.img || fallbackImg}
           alt={project.title}
+          fallbackSrc={fallbackImg}
           fill
+          sizes="(max-width: 1280px) 100vw, 1024px"
           className="object-cover"
           priority
         />

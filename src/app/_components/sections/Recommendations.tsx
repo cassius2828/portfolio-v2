@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { recommendations } from "~/lib/content";
+import { SafeImage } from "../shared/SafeImage";
 
 export function Recommendations() {
     // Don't render section if there are no recommendations
@@ -52,7 +52,7 @@ export function Recommendations() {
 
                             {/* Author image */}
                             <div className="flex items-center justify-center mb-4">
-                                <Image src={rec.img} alt={rec.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover" />
+                                <SafeImage src={rec.img} alt={rec.name} fallbackSrc="/images/headshot.webp" width={64} height={64} className="w-16 h-16 rounded-full object-cover" />
                             </div>
 
                             {/* Recommendation text */}

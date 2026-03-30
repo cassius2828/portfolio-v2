@@ -3,12 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { type Project } from "../../../../generated/prisma";
-import { ProjectCard } from "../shared/ProjectCard";
+import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
 import { personalInfo, socialLinks } from "~/lib/content";
 
 interface HeroProps {
-  featuredProjects: Project[];
+  featuredProjects: SerializedProject[];
 }
 
 export function Hero({ featuredProjects }: HeroProps) {

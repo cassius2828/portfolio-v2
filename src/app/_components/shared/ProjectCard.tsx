@@ -1,11 +1,23 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { type Project } from "../../../../generated/prisma";
+import { SafeImage } from "./SafeImage";
+
+export interface SerializedProject {
+  id: string;
+  title: string;
+  description: string;
+  prodLink: string | null;
+  videoLink: string | null;
+  githubLink: string;
+  technologies: { name: string; icon?: string | null }[];
+  featured: boolean | null;
+  img: string | null;
+  priorityLevel: number;
+}
 
 interface ProjectCardProps {
-  project: Project;
+  project: SerializedProject;
   featured?: boolean;
 }
 
@@ -21,10 +33,12 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
       >
         {/* Image */}
         <div className="relative aspect-video overflow-hidden">
-          <Image
-            src={project.img ?? fallbackImg}
+          <SafeImage
+            src={project.img || fallbackImg}
             alt={project.title}
+            fallbackSrc={fallbackImg}
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-card)] to-transparent opacity-60" />

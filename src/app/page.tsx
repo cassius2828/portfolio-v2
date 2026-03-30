@@ -4,9 +4,9 @@ import { Projects } from "./_components/sections/Projects";
 import { About } from "./_components/sections/About";
 import { Recommendations } from "./_components/sections/Recommendations";
 import { Contact } from "./_components/sections/Contact";
+import { serializeProject } from "~/lib/serialize";
 
 export default async function Home() {
-  // Fetch projects data on the server for SSR
   const [featuredProjects, regularProjects] = await Promise.all([
     api.project.getFeatured(),
     api.project.getRegular(),
@@ -14,10 +14,10 @@ export default async function Home() {
 
   return (
     <>
-      <Hero featuredProjects={featuredProjects} />
+      <Hero featuredProjects={featuredProjects.map(serializeProject)} />
       <About />
       <Recommendations />
-      <Projects projects={regularProjects} />
+      <Projects projects={regularProjects.map(serializeProject)} />
       <Contact />
     </>
   );

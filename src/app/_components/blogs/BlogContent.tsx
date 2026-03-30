@@ -38,11 +38,7 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
     }
   };
 
-  // Sanitize HTML content
-  const sanitizedContent =
-    typeof window !== "undefined"
-      ? DOMPurify.sanitize(blog.content)
-      : blog.content;
+  const sanitizedContent = DOMPurify.sanitize(blog.content);
 
   return (
     <motion.article

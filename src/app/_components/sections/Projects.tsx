@@ -1,11 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { type Project } from "../../../../generated/prisma";
-import { ProjectCard } from "../shared/ProjectCard";
+import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
 
 interface ProjectsProps {
-  projects: Project[];
+  projects: SerializedProject[];
 }
 
 export function Projects({ projects }: ProjectsProps) {
