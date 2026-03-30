@@ -127,7 +127,7 @@ export const recommendations: Recommendation[] = [
   {
     name: "Eric Popelka",
     role: "Platform Architect",
-    img: "https://media.licdn.com/dms/image/v2/D5603AQHQAUKsZNNCrw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1685231406979?e=1770854400&v=beta&t=Ly8jSfmq7SDeREoGRDpiH0ZoVnd8wZpNUhqoX_iHP4o",
+    img: "https://media.licdn.com/dms/image/v2/D5603AQHQAUKsZNNCrw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1685231406979?e=1776297600&v=beta&t=3ICWHu6JQ3KEW1ImRz-t9ryEaeA1BA6O8Pd-CwlvBfk",
     text: "Cassius is a standout React/Node/Next.js developer who brought real impact to our team. He’s not only technically sharp, but also an incredibly hard worker and an excellent communicator. Add to that a genuinely friendly and positive personality, and you’ve got someone any team would be lucky to have. Highly recommend!F",
     linkedinUrl: "https://www.linkedin.com/in/eric-popelka-b6024145/",
   }
