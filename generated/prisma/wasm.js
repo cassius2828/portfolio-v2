@@ -179,7 +179,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/cassiusreynolds/code/portfolio/portfolio-v2/cassius-portfolio/generated/prisma",
+      "value": "C:\\Users\\Cassius\\code\\personal\\projects\\current\\portfolio-v2\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -188,17 +188,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/cassiusreynolds/code/portfolio/portfolio-v2/cassius-portfolio/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\Cassius\\code\\personal\\projects\\current\\portfolio-v2\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.19.2",
