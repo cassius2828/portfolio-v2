@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { api } from "~/trpc/server";
 import { BlogList } from "../_components/blogs/BlogList";
+import { serializeBlog } from "~/lib/serialize";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -34,7 +35,7 @@ export default async function BlogsPage() {
           </p>
         </div>
 
-        <BlogList blogs={blogs} />
+        <BlogList blogs={blogs.map(serializeBlog)} />
       </div>
     </div>
   );

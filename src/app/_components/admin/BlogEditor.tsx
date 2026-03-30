@@ -3,14 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
-import type { Blog, User } from "../../../../generated/prisma";
-
-type BlogWithOwner = Blog & {
-  owner: Pick<User, "id" | "name" | "image"> | null;
-};
+import type { SerializedBlog } from "~/lib/serialize";
 
 interface BlogEditorProps {
-  blog?: BlogWithOwner;
+  blog?: SerializedBlog;
 }
 
 export function BlogEditor({ blog }: BlogEditorProps) {

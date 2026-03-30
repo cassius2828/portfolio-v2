@@ -49,6 +49,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Featured Image */}
       <div className="relative mb-12 aspect-video overflow-hidden rounded-2xl">
         <SafeImage
+          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- intentional: empty string "" must trigger fallback
           src={project.img || fallbackImg}
           alt={project.title}
           fallbackSrc={fallbackImg}

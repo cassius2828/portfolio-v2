@@ -1,15 +1,15 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Blog, User } from "../../../../generated/prisma";
+"use client";
 
-type BlogWithOwner = Blog & {
-  owner: Pick<User, "id" | "name" | "image"> | null;
-};
+import Link from "next/link";
+import type { SerializedBlog } from "~/lib/serialize";
+import { SafeImage } from "../shared/SafeImage";
 
 interface BlogCardProps {
-  blog: BlogWithOwner;
+  blog: SerializedBlog;
   variant?: "grid" | "list";
 }
+
+const fallbackImg = "/images/api-programming.png";
 
 export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -18,7 +18,6 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
     day: "numeric",
   }).format(new Date(blog.createdAt));
 
-  // Strip HTML and truncate for preview
   const plainText = blog.content.replace(/<[^>]*>/g, "");
   const preview = plainText.slice(0, 150) + (plainText.length > 150 ? "..." : "");
 
@@ -28,10 +27,12 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
         <article className="card group flex gap-6 p-6 transition-all hover:border-[var(--color-accent)]">
           {blog.img && (
             <div className="relative hidden h-32 w-48 flex-shrink-0 overflow-hidden rounded-lg md:block">
-              <Image
+              <SafeImage
                 src={blog.img}
                 alt={blog.title}
+                fallbackSrc={fallbackImg}
                 fill
+                sizes="192px"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
@@ -48,9 +49,10 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
             </div>
             <div className="mt-4 flex items-center gap-2">
               {blog.owner?.image && (
-                <Image
+                <SafeImage
                   src={blog.owner.image}
                   alt={blog.owner.name ?? "Author"}
+                  fallbackSrc="/images/headshot.webp"
                   width={24}
                   height={24}
                   className="rounded-full"
@@ -71,10 +73,12 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
       <article className="card group h-full overflow-hidden transition-all hover:border-[var(--color-accent)]">
         {blog.img && (
           <div className="relative aspect-video overflow-hidden">
-            <Image
+            <SafeImage
               src={blog.img}
               alt={blog.title}
+              fallbackSrc={fallbackImg}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
           </div>
@@ -91,9 +95,10 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
           </p>
           <div className="mt-4 flex items-center gap-2">
             {blog.owner?.image && (
-              <Image
+              <SafeImage
                 src={blog.owner.image}
                 alt={blog.owner.name ?? "Author"}
+                fallbackSrc="/images/headshot.webp"
                 width={24}
                 height={24}
                 className="rounded-full"
@@ -108,4 +113,3 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
     </Link>
   );
 }
-

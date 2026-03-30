@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { api } from "~/trpc/server";
 import { AdminBlogList } from "../../_components/admin/AdminBlogList";
+import { serializeBlog } from "~/lib/serialize";
 
 export default async function AdminBlogsPage() {
   const blogs = await api.blog.getAll();
@@ -14,7 +15,7 @@ export default async function AdminBlogsPage() {
         </Link>
       </div>
 
-      <AdminBlogList blogs={blogs} />
+      <AdminBlogList blogs={blogs.map(serializeBlog)} />
     </div>
   );
 }

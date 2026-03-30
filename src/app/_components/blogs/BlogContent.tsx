@@ -1,23 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import DOMPurify from "dompurify";
-import type { Blog, User } from "../../../../generated/prisma";
-
-type BlogWithOwner = Blog & {
-  owner: Pick<User, "id" | "name" | "image"> | null;
-};
+import type { SerializedBlog } from "~/lib/serialize";
+import { SafeImage } from "../shared/SafeImage";
 
 interface BlogContentProps {
-  blog: BlogWithOwner;
+  blog: SerializedBlog;
   adjacent: {
     prev: { id: string; title: string } | null;
     next: { id: string; title: string } | null;
   };
 }
+
+const fallbackImg = "/images/api-programming.png";
 
 export function BlogContent({ blog, adjacent }: BlogContentProps) {
   const [copied, setCopied] = useState(false);
@@ -58,9 +56,10 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
         {/* Author */}
         <div className="flex items-center justify-center gap-3">
           {blog.owner?.image && (
-            <Image
+            <SafeImage
               src={blog.owner.image}
               alt={blog.owner.name ?? "Author"}
+              fallbackSrc="/images/headshot.webp"
               width={40}
               height={40}
               className="rounded-full"
@@ -75,10 +74,12 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
       {/* Featured Image */}
       {blog.img && (
         <div className="relative mb-12 aspect-video overflow-hidden rounded-2xl">
-          <Image
+          <SafeImage
             src={blog.img}
             alt={blog.title}
+            fallbackSrc={fallbackImg}
             fill
+            sizes="(max-width: 896px) 100vw, 896px"
             className="object-cover"
             priority
           />
@@ -180,4 +181,3 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
     </motion.article>
   );
 }
-

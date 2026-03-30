@@ -4,6 +4,7 @@ import { api } from "~/trpc/server";
 import { BlogContent } from "../../_components/blogs/BlogContent";
 import { db } from "~/server/db";
 import { personalInfo, socialLinks } from "~/lib/content";
+import { serializeBlog } from "~/lib/serialize";
 
 interface BlogPageProps {
   params: Promise<{ blogId: string }>;
@@ -131,7 +132,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <div className="absolute inset-0 bg-[var(--color-bg-primary)]" />
       </div>
 
-      <BlogContent blog={blog} adjacent={adjacent} />
+      <BlogContent blog={serializeBlog(blog)} adjacent={adjacent} />
     </div>
   );
 }

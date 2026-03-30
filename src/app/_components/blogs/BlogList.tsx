@@ -3,14 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BlogCard } from "./BlogCard";
-import type { Blog, User } from "../../../../generated/prisma";
-
-type BlogWithOwner = Blog & {
-  owner: Pick<User, "id" | "name" | "image"> | null;
-};
+import type { SerializedBlog } from "~/lib/serialize";
 
 interface BlogListProps {
-  blogs: BlogWithOwner[];
+  blogs: SerializedBlog[];
 }
 
 export function BlogList({ blogs }: BlogListProps) {

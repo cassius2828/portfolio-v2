@@ -34,6 +34,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
         {/* Image */}
         <div className="relative aspect-video overflow-hidden">
           <SafeImage
+            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- intentional: empty string "" must trigger fallback
             src={project.img || fallbackImg}
             alt={project.title}
             fallbackSrc={fallbackImg}

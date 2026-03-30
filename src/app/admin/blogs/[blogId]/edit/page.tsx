@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { api } from "~/trpc/server";
 import { BlogEditor } from "../../../../_components/admin/BlogEditor";
+import { serializeBlog } from "~/lib/serialize";
 
 interface EditBlogPageProps {
   params: Promise<{ blogId: string }>;
@@ -17,7 +18,7 @@ export default async function EditBlogPage({ params }: EditBlogPageProps) {
   return (
     <div>
       <h1 className="mb-8 text-3xl font-bold">Edit Blog</h1>
-      <BlogEditor blog={blog} />
+      <BlogEditor blog={serializeBlog(blog)} />
     </div>
   );
 }

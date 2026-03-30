@@ -3,14 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
-import type { Blog, User } from "../../../../generated/prisma";
-
-type BlogWithOwner = Blog & {
-  owner: Pick<User, "id" | "name" | "image"> | null;
-};
+import type { SerializedBlog } from "~/lib/serialize";
 
 interface AdminBlogListProps {
-  blogs: BlogWithOwner[];
+  blogs: SerializedBlog[];
 }
 
 export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
@@ -27,7 +23,7 @@ export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
     }
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string) => {
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "short",
