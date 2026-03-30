@@ -38,7 +38,10 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
     }
   };
 
-  const sanitizedContent = DOMPurify.sanitize(blog.content);
+  const sanitizedContent =
+    typeof window !== "undefined"
+      ? DOMPurify.sanitize(blog.content)
+      : blog.content;
 
   return (
     <motion.article
@@ -85,6 +88,7 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
       {/* Content */}
       <div
         className="prose-custom mb-12"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: sanitizedContent }}
       />
 
