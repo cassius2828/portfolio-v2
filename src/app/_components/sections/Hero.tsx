@@ -5,12 +5,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
 import { personalInfo, socialLinks } from "~/lib/content";
+import { withLineupLegendsFirst } from "~/lib/projectOrder";
 
 interface HeroProps {
   featuredProjects: SerializedProject[];
 }
 
 export function Hero({ featuredProjects }: HeroProps) {
+  const orderedFeatured = withLineupLegendsFirst(featuredProjects);
+
   return (
     <section className="relative min-h-screen overflow-hidden pt-20">
       {/* Animated Background */}
@@ -113,7 +116,7 @@ export function Hero({ featuredProjects }: HeroProps) {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project, i) => (
+            {orderedFeatured.map((project, i) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
