@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
+import { SectionHeading } from "../shared/SectionHeading";
 
 interface ProjectsProps {
   projects: SerializedProject[];
@@ -24,12 +25,11 @@ export function Projects({ projects }: ProjectsProps) {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">More Projects</h2>
-          <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-          <p className="mx-auto mt-6 max-w-2xl text-[var(--color-text-secondary)]">
-            A collection of projects showcasing my skills in full-stack
-            development, from web applications to APIs and more.
-          </p>
+          <SectionHeading
+            title="More Projects"
+            subtitle="A collection of projects showcasing my skills in full-stack development, from web applications to APIs and more."
+            className="mb-0 text-center"
+          />
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

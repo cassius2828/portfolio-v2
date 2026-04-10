@@ -2,9 +2,13 @@ import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { api } from "~/trpc/server";
 import { BlogContent } from "../../_components/blogs/BlogContent";
+import { PageShell } from "../../_components/layout/PageShell";
 import { db } from "~/server/db";
 import { personalInfo, socialLinks } from "~/lib/content";
 import { serializeBlog } from "~/lib/serialize";
+import { sanitizeContent } from "~/lib/sanitize";
+import { SITE_URL } from "~/lib/constants";
+import { stripHtml } from "~/lib/format";
 
 interface BlogPageProps {
   params: Promise<{ blogId: string }>;
@@ -27,8 +31,6 @@ export async function generateMetadata({
 }: BlogPageProps): Promise<Metadata> {
   const { blogId } = await params;
   const blog = await api.blog.getById({ id: blogId });
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
 
   if (!blog) {
     return {
@@ -36,23 +38,19 @@ export async function generateMetadata({
     };
   }
 
-  // Strip HTML tags for description
-  const plainTextContent = blog.content
-    .replace(/<[^>]*>/g, "")
-    .slice(0, 160)
-    .trim();
+  const plainTextContent = stripHtml(blog.content).slice(0, 160).trim();
 
   return {
     title: blog.title,
     description: plainTextContent,
     alternates: {
-      canonical: `${baseUrl}/blogs/${blogId}`,
+      canonical: `${SITE_URL}/blogs/${blogId}`,
     },
     openGraph: {
       title: `${blog.title} | ${personalInfo.name}`,
       description: plainTextContent,
       type: "article",
-      url: `${baseUrl}/blogs/${blogId}`,
+      url: `${SITE_URL}/blogs/${blogId}`,
       publishedTime: blog.createdAt.toISOString(),
       modifiedTime: blog.updatedAt.toISOString(),
       authors: [blog.owner?.name ?? personalInfo.name],
@@ -77,9 +75,7 @@ function generateArticleJsonLd(blog: {
   updatedAt: Date;
   owner: { name: string | null } | null;
 }) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
-  const plainTextContent = blog.content.replace(/<[^>]*>/g, "").slice(0, 200);
+  const plainTextContent = stripHtml(blog.content).slice(0, 200);
 
   return {
     "@context": "https://schema.org",
@@ -92,17 +88,17 @@ function generateArticleJsonLd(blog: {
     author: {
       "@type": "Person",
       name: blog.owner?.name ?? personalInfo.name,
-      url: baseUrl,
+      url: SITE_URL,
       sameAs: [socialLinks.github.url, socialLinks.linkedin.url],
     },
     publisher: {
       "@type": "Person",
       name: personalInfo.name,
-      url: baseUrl,
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${baseUrl}/blogs/${blog.id}`,
+      "@id": `${SITE_URL}/blogs/${blog.id}`,
     },
   };
 }
@@ -121,19 +117,19 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const articleJsonLd = generateArticleJsonLd(blog);
 
   return (
-    <div className="min-h-screen pt-28">
-      {/* Article JSON-LD */}
+    <PageShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replaceAll("</", "<\\/"),
+        }}
       />
 
-      {/* Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[var(--color-bg-primary)]" />
-      </div>
-
-      <BlogContent blog={serializeBlog(blog)} adjacent={adjacent} />
-    </div>
+      <BlogContent
+        blog={serializeBlog(blog)}
+        sanitizedHtml={sanitizeContent(blog.content)}
+        adjacent={adjacent}
+      />
+    </PageShell>
   );
 }

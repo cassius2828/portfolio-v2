@@ -3,22 +3,18 @@
 import Link from "next/link";
 import type { SerializedBlog } from "~/lib/serialize";
 import { SafeImage } from "../shared/SafeImage";
+import { FALLBACK_IMG } from "~/lib/constants";
+import { formatDate, stripHtml } from "~/lib/format";
 
 interface BlogCardProps {
   blog: SerializedBlog;
   variant?: "grid" | "list";
 }
 
-const fallbackImg = "/images/api-programming.png";
-
 export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(new Date(blog.createdAt));
+  const formattedDate = formatDate(blog.createdAt);
 
-  const plainText = blog.content.replace(/<[^>]*>/g, "");
+  const plainText = stripHtml(blog.content);
   const preview =
     plainText.slice(0, 150) + (plainText.length > 150 ? "..." : "");
 
@@ -31,7 +27,7 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
               <SafeImage
                 src={blog.img}
                 alt={blog.title}
-                fallbackSrc={fallbackImg}
+                fallbackSrc={FALLBACK_IMG}
                 fill
                 sizes="192px"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -77,7 +73,7 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
             <SafeImage
               src={blog.img}
               alt={blog.title}
-              fallbackSrc={fallbackImg}
+              fallbackSrc={FALLBACK_IMG}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-110"

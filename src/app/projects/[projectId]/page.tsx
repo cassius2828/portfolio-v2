@@ -2,9 +2,11 @@ import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { api } from "~/trpc/server";
 import { ProjectDetail } from "../../_components/projects/ProjectDetail";
+import { PageShell } from "../../_components/layout/PageShell";
 import { db } from "~/server/db";
 import { personalInfo, socialLinks } from "~/lib/content";
 import { serializeProject } from "~/lib/serialize";
+import { SITE_URL } from "~/lib/constants";
 import type { Project } from "../../../../generated/prisma";
 
 interface ProjectPageProps {
@@ -28,8 +30,6 @@ export async function generateMetadata({
 }: ProjectPageProps): Promise<Metadata> {
   const { projectId } = await params;
   const project = await api.project.getById({ id: projectId });
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
 
   if (!project) {
     return {
@@ -43,13 +43,13 @@ export async function generateMetadata({
     title: project.title,
     description,
     alternates: {
-      canonical: `${baseUrl}/projects/${projectId}`,
+      canonical: `${SITE_URL}/projects/${projectId}`,
     },
     openGraph: {
       title: `${project.title} | ${personalInfo.name}`,
       description,
       type: "article",
-      url: `${baseUrl}/projects/${projectId}`,
+      url: `${SITE_URL}/projects/${projectId}`,
       images: project.img ? [{ url: project.img }] : undefined,
     },
     twitter: {
@@ -63,9 +63,6 @@ export async function generateMetadata({
 
 // SoftwareSourceCode JSON-LD structured data for projects
 function generateProjectJsonLd(project: Project) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
-
   // Extract programming languages from technologies
   const programmingLanguages = project.technologies
     .map((tech) => tech.name)
@@ -91,11 +88,11 @@ function generateProjectJsonLd(project: Project) {
     description: project.description,
     image: project.img ?? undefined,
     codeRepository: project.githubLink,
-    url: project.prodLink ?? `${baseUrl}/projects/${project.id}`,
+    url: project.prodLink ?? `${SITE_URL}/projects/${project.id}`,
     author: {
       "@type": "Person",
       name: personalInfo.name,
-      url: baseUrl,
+      url: SITE_URL,
       sameAs: [socialLinks.github.url, socialLinks.linkedin.url],
     },
     programmingLanguage:
@@ -119,20 +116,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const projectJsonLd = generateProjectJsonLd(project);
 
   return (
-    <div className="min-h-screen pt-28">
-      {/* Project JSON-LD */}
+    <PageShell
+      bgSlot={
+        <div className="absolute top-1/4 left-1/4 h-[400px] w-[400px] rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
+      }
+    >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(projectJsonLd).replaceAll("</", "<\\/"),
+        }}
       />
 
-      {/* Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[var(--color-bg-primary)]" />
-        <div className="absolute top-1/4 left-1/4 h-[400px] w-[400px] rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
-      </div>
-
       <ProjectDetail project={serializeProject(project)} />
-    </div>
+    </PageShell>
   );
 }

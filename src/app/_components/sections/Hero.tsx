@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
+import { SectionHeading } from "../shared/SectionHeading";
 import { personalInfo, socialLinks } from "~/lib/content";
 import { withLineupLegendsFirst } from "~/lib/projectOrder";
 
@@ -108,12 +109,7 @@ export function Hero({ featuredProjects }: HeroProps) {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-32"
         >
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-              Featured Projects
-            </h2>
-            <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-          </div>
+          <SectionHeading title="Featured Projects" />
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {orderedFeatured.map((project, i) => (

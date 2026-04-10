@@ -1,29 +1,52 @@
-# Create T3 App
+# Portfolio v2
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Personal portfolio built with the T3 Stack — Next.js 15, TypeScript, tRPC, Prisma (MongoDB), Tailwind CSS, and NextAuth.
 
-## What's next? How do I make an app with this?
+## Getting Started
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+```bash
+# Install dependencies
+npm install
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+# Copy environment variables and fill in values
+cp .env.example .env
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+# Generate Prisma client
+npx prisma generate
 
-## Learn More
+# Start dev server
+npm run dev
+```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Tech Stack
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **API:** tRPC
+- **Database:** MongoDB via Prisma
+- **Auth:** NextAuth.js (GitHub provider)
+- **Storage:** AWS S3 + CloudFront CDN
+- **Email:** AWS SES (contact form)
+- **Testing:** Jest (unit), Playwright (e2e)
+- **CI/CD:** GitHub Actions, Husky + lint-staged + Commitlint
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Scripts
 
-## How do I deploy this?
+| Command                | Description                     |
+| ---------------------- | ------------------------------- |
+| `npm run dev`          | Start dev server with Turbopack |
+| `npm run build`        | Production build                |
+| `npm test`             | Run unit tests                  |
+| `npm run test:e2e`     | Run Playwright e2e tests        |
+| `npm run lint`         | Lint with ESLint                |
+| `npm run typecheck`    | Type-check with TypeScript      |
+| `npm run format:check` | Check formatting with Prettier  |
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Environment Variables
+
+See `.env.example` for the full list. Required variables:
+
+- `AUTH_SECRET` — NextAuth secret (required in production)
+- `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` — GitHub OAuth credentials
+- `MONGODB_URI` — MongoDB connection string

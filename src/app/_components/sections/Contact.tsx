@@ -9,6 +9,7 @@ import {
   connectionOptions,
   type ConnectionType,
 } from "~/lib/content";
+import { SectionHeading } from "../shared/SectionHeading";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -79,8 +80,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Get in Touch</h2>
-          <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
+          <SectionHeading title="Get in Touch" className="mb-0 text-center" />
         </motion.div>
 
         <div className="grid gap-12 lg:grid-cols-2">
@@ -151,6 +151,8 @@ export function Contact() {
           >
             {status.type && (
               <div
+                role="alert"
+                aria-live="polite"
                 className={`rounded-lg p-4 ${
                   status.type === "success"
                     ? "bg-green-500/10 text-green-400"

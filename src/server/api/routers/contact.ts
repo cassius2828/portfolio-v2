@@ -1,8 +1,10 @@
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { env } from "~/env";
+import { escapeHtml } from "~/lib/html-escape";
 
 const sesClient = new SESClient({
   region: env.AWS_REGION,
@@ -38,7 +40,10 @@ export const contactRouter = createTRPCRouter({
 
     // Check if email configuration is available
     if (!env.SES_FROM_EMAIL || !env.ADMIN_EMAIL || !env.AWS_REGION) {
-      throw new Error("Email configuration is not set up");
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Contact form is temporarily unavailable",
+      });
     }
 
     const command = new SendEmailCommand({
@@ -70,14 +75,14 @@ Email: ${email}
             Data: `
 <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
   <h2 style="color: #333;">New Portfolio Contact</h2>
-  <p><strong>From:</strong> ${name}</p>
-  <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-  <p><strong>Subject:</strong> ${subject}</p>
-  <p><strong>Company/Affiliation:</strong> ${affiliation ?? "Not specified"}</p>
-  <p><strong>Role:</strong> ${connection}</p>
+  <p><strong>From:</strong> ${escapeHtml(name)}</p>
+  <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+  <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+  <p><strong>Company/Affiliation:</strong> ${escapeHtml(affiliation ?? "Not specified")}</p>
+  <p><strong>Role:</strong> ${escapeHtml(connection)}</p>
   <hr style="border: 1px solid #eee; margin: 20px 0;" />
   <div style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
-    <p style="white-space: pre-wrap;">${message}</p>
+    <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
   </div>
 </div>
             `.trim(),

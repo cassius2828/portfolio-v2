@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { recommendations } from "~/lib/content";
 import { SafeImage } from "../shared/SafeImage";
+import { SectionHeading } from "../shared/SectionHeading";
 
 export function Recommendations() {
   // Don't render section if there are no recommendations
@@ -26,13 +27,11 @@ export function Recommendations() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Recommendations
-          </h2>
-          <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-          <p className="mx-auto mt-6 max-w-2xl text-[var(--color-text-secondary)]">
-            What colleagues and collaborators have to say about working with me
-          </p>
+          <SectionHeading
+            title="Recommendations"
+            subtitle="What colleagues and collaborators have to say about working with me"
+            className="mb-0 text-center"
+          />
         </motion.div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
