@@ -35,6 +35,8 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
+    /** Same distribution base as server `CLOUDFRONT_URL` when serving static portfolio assets from the CDN. */
+    NEXT_PUBLIC_CLOUDFRONT_URL: z.string().url().optional(),
   },
 
   /**
@@ -55,6 +57,7 @@ export const env = createEnv({
     SES_FROM_EMAIL: process.env.SES_FROM_EMAIL,
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_CLOUDFRONT_URL: process.env.NEXT_PUBLIC_CLOUDFRONT_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

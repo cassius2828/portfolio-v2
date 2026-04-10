@@ -158,6 +158,7 @@ export const navItems = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About" },
   { href: "/clients", label: "Clients" },
+  { href: "/community-impact", label: "Community Impact" },
   { href: "/blogs", label: "Blog" },
   { href: "/#contact", label: "Contact" },
   { href: "/resume", label: "Resume" },
@@ -165,6 +166,7 @@ export const navItems = [
 
 export const footerNavLinks = [
   { href: "/", label: "Home" },
+  { href: "/community-impact", label: "Community Impact" },
   { href: "/blogs", label: "Blog" },
   { href: "/resume", label: "Resume" },
 ];
