@@ -22,7 +22,6 @@ export const env = createEnv({
     AWS_ACCESS_KEY_ID: z.string().optional(),
     AWS_SECRET_ACCESS_KEY: z.string().optional(),
     S3_BUCKET_NAME: z.string().optional(),
-    CLOUDFRONT_URL: z.string().optional(),
     // SES Email Configuration
     SES_FROM_EMAIL: z.string().email().optional(),
     ADMIN_EMAIL: z.string().email().optional(),
@@ -35,6 +34,12 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
+    /**
+     * Public CloudFront origin for S3 objects (portfolio images, uploads). Available on server
+     * and client. Prefer this name; legacy `CLOUDFRONT_URL` / `CLOUDFRONT_PATH` are merged in
+     * `runtimeEnv` if unset.
+     */
+    NEXT_PUBLIC_CLOUDFRONT_URL: z.string().url().optional(),
   },
 
   /**
@@ -51,10 +56,11 @@ export const env = createEnv({
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
-    CLOUDFRONT_URL: process.env.CLOUDFRONT_URL,
     SES_FROM_EMAIL: process.env.SES_FROM_EMAIL,
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_CLOUDFRONT_URL:
+      process.env.NEXT_PUBLIC_CLOUDFRONT_URL
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
