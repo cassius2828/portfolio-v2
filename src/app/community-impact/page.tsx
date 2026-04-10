@@ -1,6 +1,8 @@
 import { type Metadata } from "next";
 import { CommunityImpactContent } from "../_components/community/CommunityImpactContent";
 import { personalInfo } from "~/lib/content";
+import { COMMUNITY_IMPACT_SECTION_DEFS } from "~/lib/community-impact-data";
+import { portfolioObjectUrl } from "~/lib/portfolio-public-url";
 
 export const metadata: Metadata = {
   title: "Community Impact",
@@ -12,6 +14,16 @@ export const metadata: Metadata = {
 };
 
 export default function CommunityImpactPage() {
+  const sections = COMMUNITY_IMPACT_SECTION_DEFS.map((section) => ({
+    id: section.id,
+    title: section.title,
+    description: section.description,
+    photos: section.photoDefs.map(({ key, alt }) => ({
+      src: portfolioObjectUrl(key),
+      alt,
+    })),
+  }));
+
   return (
     <div className="min-h-screen pt-28">
       <div className="fixed inset-0 -z-10">
@@ -20,7 +32,7 @@ export default function CommunityImpactPage() {
         <div className="absolute bottom-1/3 right-1/4 h-96 w-96 rounded-full bg-purple-500 opacity-5 blur-[100px]" />
       </div>
 
-      <CommunityImpactContent />
+      <CommunityImpactContent sections={sections} />
     </div>
   );
 }

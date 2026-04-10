@@ -1,27 +1,29 @@
-import { portfolioObjectUrl } from "./portfolio-public-url";
-
 /**
+ * Static photo definitions (S3 keys + copy). URLs are resolved on the server via
+ * `portfolioObjectUrl` using `NEXT_PUBLIC_CLOUDFRONT_URL` (see `env.js`; legacy env names merge as
+ * fallbacks).
+ *
  * Asset keys must use web-safe formats (JPEG, WebP, or PNG). HEIC does not render in most
- * browsers; former HEIC shots are referenced below as `.webp`—upload those exports beside the originals.
+ * browsers; former HEIC shots use `.webp`—upload those exports beside the originals.
  */
-export interface CommunityImpactPhoto {
-  /** Resolved HTTPS URL (CDN or S3). */
-  src: string;
-  /** Accessibility label; also shown as the hover caption. */
+export interface CommunityImpactPhotoDef {
+  key: string;
   alt: string;
 }
 
-function photos(
-  items: { key: string; alt: string }[],
-): CommunityImpactPhoto[] {
-  return items.map(({ key, alt }) => ({
-    src: portfolioObjectUrl(key),
-    alt,
-  }));
+export interface CommunityImpactPhoto {
+  src: string;
+  alt: string;
 }
 
-/** `s3://…/portfolio/community/coaching/` */
-export const communityImpactCoachingPhotos = photos([
+export interface CommunityImpactSectionDef {
+  id: string;
+  title: string;
+  description: string;
+  photoDefs: CommunityImpactPhotoDef[];
+}
+
+const coachingPhotoDefs: CommunityImpactPhotoDef[] = [
   {
     key: "portfolio/community/coaching/bubba-signing-day.JPG",
     alt: "Signing day celebration — Bubba",
@@ -39,7 +41,7 @@ export const communityImpactCoachingPhotos = photos([
     alt: "Practice on the field",
   },
   {
-    key: "portfolio/community/coaching/Imani_jeff_DVC.png",
+    key: "portfolio/community/coaching/Amani_jeff_DVC.png",
     alt:
       "Showing support to former athletes in their collegiate careers — Jeff and Amani at DVC",
   },
@@ -47,10 +49,9 @@ export const communityImpactCoachingPhotos = photos([
     key: "portfolio/community/coaching/practice-back-turned.png",
     alt: "Practice — from behind on the field",
   },
-]);
+];
 
-/** `s3://…/portfolio/community/mentorship/` */
-export const communityImpactMentorshipPhotos = photos([
+const mentorshipPhotoDefs: CommunityImpactPhotoDef[] = [
   {
     key: "portfolio/community/mentorship/comm-1.JPG",
     alt:
@@ -66,10 +67,9 @@ export const communityImpactMentorshipPhotos = photos([
     alt:
       "Motivational talk for the Richmond Youth Program on succeeding as a student-athlete in high school and college, and how discipline, teamwork, and lessons from sports transfer to school, work, and life",
   },
-]);
+];
 
-/** `s3://…/portfolio/community/art/` */
-export const communityImpactArtPhotos = photos([
+const artPhotoDefs: CommunityImpactPhotoDef[] = [
   {
     key: "portfolio/community/art/art-image-1.jpg",
     alt:
@@ -85,4 +85,28 @@ export const communityImpactArtPhotos = photos([
     alt:
       "Giving presentation and speech on MLK Day at Vacaville Community Center about the experience for the Rocky Hill Art Piece, what it meant to be a part of, and the importance of inclusion and representation for minority children",
   },
-]);
+];
+
+export const COMMUNITY_IMPACT_SECTION_DEFS: CommunityImpactSectionDef[] = [
+  {
+    id: "coaching",
+    title: "Coaching",
+    description:
+      "I coached with Vacaville High School football at my alma mater for the 2021–22 and 2022–23 seasons, helping athletes grow within the program. From 2021–2025 I also trained athletes independently and at Fitness Explosion, where I was the lead trainer for youth athletes—bringing the same habits, knowledge, and energy I learned through my own career and supporting young people in sport and beyond.",
+    photoDefs: coachingPhotoDefs,
+  },
+  {
+    id: "youth-center-mentorships",
+    title: "Youth Center Mentorships",
+    description:
+      "The Richmond Youth Program, affiliated with the Rosie the Riveter Foundation, is the main focus of this work—toy drives, mentorship days, guest speakers, and talks that meet young people where they are. I also continue mentoring former athletes and youth from other programs, building on the same commitment to growth, opportunity, and community.",
+    photoDefs: mentorshipPhotoDefs,
+  },
+  {
+    id: "community-art-contributions",
+    title: "Community Art Contributions",
+    description:
+      "Main contributions include the Rocky Hill mural: I worked alongside lead artist Leslie Molera and helped guide youth artists from vision to finished wall. I spoke at the unveiling and again on MLK Day in Vacaville, CA. I also helped plan additional park art across Vacaville, including work at Trower Park.",
+    photoDefs: artPhotoDefs,
+  },
+];

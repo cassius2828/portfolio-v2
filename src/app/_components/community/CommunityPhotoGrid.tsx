@@ -1,6 +1,6 @@
 "use client";
 
-import type { CommunityImpactPhoto } from "~/lib/community-impact-images";
+import type { CommunityImpactPhoto } from "~/lib/community-impact-data";
 
 interface CommunityPhotoGridProps {
   photos: CommunityImpactPhoto[];

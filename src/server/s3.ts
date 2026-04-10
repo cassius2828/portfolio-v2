@@ -43,8 +43,9 @@ export async function getUploadPresignedUrl(
     expiresIn: 3600, // 1 hour
   });
 
-  const publicUrl = env.CLOUDFRONT_URL
-    ? `${env.CLOUDFRONT_URL}/${key}`
+  const cdnBase = env.NEXT_PUBLIC_CLOUDFRONT_URL?.replace(/\/$/, "");
+  const publicUrl = cdnBase
+    ? `${cdnBase}/${key}`
     : `https://${env.S3_BUCKET_NAME}.s3.${env.AWS_REGION}.amazonaws.com/${key}`;
 
   return {
@@ -78,8 +79,9 @@ export async function uploadFile(
 
   await s3Client.send(command);
 
-  const publicUrl = env.CLOUDFRONT_URL
-    ? `${env.CLOUDFRONT_URL}/${key}`
+  const cdnBase = env.NEXT_PUBLIC_CLOUDFRONT_URL?.replace(/\/$/, "");
+  const publicUrl = cdnBase
+    ? `${cdnBase}/${key}`
     : `https://${env.S3_BUCKET_NAME}.s3.${env.AWS_REGION}.amazonaws.com/${key}`;
 
   return {
