@@ -54,6 +54,8 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           alt={project.title}
           fallbackSrc={FALLBACK_IMG}
           fill
+          quality={100}
+          unoptimized={project.img?.endsWith(".png")}
           sizes="(max-width: 1280px) 100vw, 1024px"
           className="object-cover"
           priority
