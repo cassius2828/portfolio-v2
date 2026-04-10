@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useState } from "react";
 import type { CommunityImpactPhoto } from "~/lib/community-impact-data";
 
@@ -35,13 +36,14 @@ export function CommunityPhotoGrid({ photos }: CommunityPhotoGridProps) {
                 </span>
               </div>
             ) : (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
+              <Image
                 src={photo.src}
                 alt={photo.alt}
-                loading="lazy"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                quality={85}
                 onError={() => handleError(photo.src)}
-                className="h-full w-full object-cover transition-transform duration-300 group-focus-within:scale-[1.02] group-hover:scale-[1.02]"
+                className="object-cover transition-transform duration-300 group-focus-within:scale-[1.02] group-hover:scale-[1.02]"
               />
             )}
             <figcaption className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3 opacity-0 transition-opacity duration-300 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100 sm:p-4">
