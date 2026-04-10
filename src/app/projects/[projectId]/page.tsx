@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[var(--color-bg-primary)]" />
-        <div className="absolute left-1/4 top-1/4 h-[400px] w-[400px] rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
+        <div className="absolute top-1/4 left-1/4 h-[400px] w-[400px] rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
       </div>
 
       <ProjectDetail project={serializeProject(project)} />

@@ -19,7 +19,9 @@ const contactSchema = z.object({
   name: z.string().min(1, { error: "Name is required" }),
   email: z.string().email({ error: "Invalid email address" }),
   subject: z.string().min(1, { error: "Subject is required" }),
-  message: z.string().min(10, { error: "Message must be at least 10 characters" }),
+  message: z
+    .string()
+    .min(10, { error: "Message must be at least 10 characters" }),
   affiliation: z.string().optional(),
   connection: z.enum([
     "recruiter",

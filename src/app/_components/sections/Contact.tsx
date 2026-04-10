@@ -67,8 +67,8 @@ export function Contact() {
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[var(--color-bg-secondary)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f10_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f10_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f10_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f10_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-[size:14px_24px]" />
+        <div className="absolute top-0 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[150px]" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
@@ -79,9 +79,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Get in Touch
-          </h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Get in Touch</h2>
           <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
         </motion.div>
 

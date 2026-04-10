@@ -176,8 +176,8 @@ export function ClientsContent() {
         <p className="mx-auto max-w-3xl text-lg text-[var(--color-text-secondary)] md:text-xl">
           From concept to deployment, I build digital solutions that solve real
           problems. Whether you need a content-rich website, an e-commerce
-          platform, or a custom application, I bring the technical expertise
-          and creative vision to make it happen.
+          platform, or a custom application, I bring the technical expertise and
+          creative vision to make it happen.
         </p>
       </motion.div>
 

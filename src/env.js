@@ -11,8 +11,8 @@ export const env = createEnv({
       process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
-        AUTH_GOOGLE_CLIENT_ID: z.string(),
-        AUTH_GOOGLE_CLIENT_SECRET: z.string(),
+    AUTH_GOOGLE_CLIENT_ID: z.string(),
+    AUTH_GOOGLE_CLIENT_SECRET: z.string(),
     MONGODB_URI: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
@@ -59,8 +59,7 @@ export const env = createEnv({
     SES_FROM_EMAIL: process.env.SES_FROM_EMAIL,
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-    NEXT_PUBLIC_CLOUDFRONT_URL:
-      process.env.NEXT_PUBLIC_CLOUDFRONT_URL
+    NEXT_PUBLIC_CLOUDFRONT_URL: process.env.NEXT_PUBLIC_CLOUDFRONT_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

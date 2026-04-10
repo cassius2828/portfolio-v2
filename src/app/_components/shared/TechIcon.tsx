@@ -211,7 +211,10 @@ const HydrogenIcon: FC<IconProps> = (props) => (
 // REST API
 const RestApiIcon: FC<IconProps> = (props) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M7.5 3C4.462 3 2 5.462 2 8.5S4.462 14 7.5 14H9v2H7.5C4.462 16 2 18.462 2 21.5S4.462 27 7.5 27h9c3.038 0 5.5-2.462 5.5-5.5S19.538 16 16.5 16H15v-2h1.5c3.038 0 5.5-2.462 5.5-5.5S19.538 3 16.5 3h-9zM7.5 5h9C18.43 5 20 6.57 20 8.5S18.43 12 16.5 12h-9C5.57 12 4 10.43 4 8.5S5.57 5 7.5 5zm0 13h9c1.93 0 3.5 1.57 3.5 3.5S18.43 25 16.5 25h-9C5.57 25 4 23.43 4 21.5S5.57 18 7.5 18z" transform="scale(0.75) translate(4, 0)" />
+    <path
+      d="M7.5 3C4.462 3 2 5.462 2 8.5S4.462 14 7.5 14H9v2H7.5C4.462 16 2 18.462 2 21.5S4.462 27 7.5 27h9c3.038 0 5.5-2.462 5.5-5.5S19.538 16 16.5 16H15v-2h1.5c3.038 0 5.5-2.462 5.5-5.5S19.538 3 16.5 3h-9zM7.5 5h9C18.43 5 20 6.57 20 8.5S18.43 12 16.5 12h-9C5.57 12 4 10.43 4 8.5S5.57 5 7.5 5zm0 13h9c1.93 0 3.5 1.57 3.5 3.5S18.43 25 16.5 25h-9C5.57 25 4 23.43 4 21.5S5.57 18 7.5 18z"
+      transform="scale(0.75) translate(4, 0)"
+    />
   </svg>
 );
 
@@ -423,4 +426,3 @@ export const getTechIconByFaName = (faName: string): FC<IconProps> => {
 };
 
 export default TechIcon;
-

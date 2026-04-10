@@ -131,11 +131,7 @@ export function BlogEditor({ blog }: BlogEditorProps) {
           disabled={isPending}
           className="btn-primary disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isPending
-            ? "Saving..."
-            : isEditing
-              ? "Update Blog"
-              : "Create Blog"}
+          {isPending ? "Saving..." : isEditing ? "Update Blog" : "Create Blog"}
         </button>
         <button
           type="button"
@@ -148,4 +144,3 @@ export function BlogEditor({ blog }: BlogEditorProps) {
     </form>
   );
 }
-

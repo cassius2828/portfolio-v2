@@ -19,10 +19,10 @@ export function Hero({ featuredProjects }: HeroProps) {
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[var(--gradient-bg)]" />
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[var(--color-accent)] opacity-5 blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-purple-500 opacity-5 blur-[100px]" />
+        <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[var(--color-accent)] opacity-5 blur-[100px]" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-purple-500 opacity-5 blur-[100px]" />
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a2520_1px,transparent_1px),linear-gradient(to_bottom,#1a1a2520_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a2520_1px,transparent_1px),linear-gradient(to_bottom,#1a1a2520_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] bg-[size:4rem_4rem]" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6 py-20">
@@ -38,7 +38,7 @@ export function Hero({ featuredProjects }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--color-accent)]"
+              className="mb-4 text-sm font-medium tracking-widest text-[var(--color-accent)] uppercase"
             >
               {personalInfo.title}
             </motion.p>
@@ -46,7 +46,7 @@ export function Hero({ featuredProjects }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 text-5xl font-bold leading-tight md:text-6xl lg:text-7xl"
+              className="mb-6 text-5xl leading-tight font-bold md:text-6xl lg:text-7xl"
             >
               Hi, I&apos;m{" "}
               <span className="gradient-text">{personalInfo.name}</span>
@@ -96,7 +96,7 @@ export function Hero({ featuredProjects }: HeroProps) {
               />
             </div>
             {/* Decorative elements */}
-            <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full border-2 border-[var(--color-accent)] opacity-30" />
+            <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full border-2 border-[var(--color-accent)] opacity-30" />
             <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[var(--color-accent)] opacity-20" />
           </motion.div>
         </div>

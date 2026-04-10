@@ -47,7 +47,7 @@ export function Header() {
   };
 
   return (
-    <header className="glass fixed left-0 right-0 top-0 z-50">
+    <header className="glass fixed top-0 right-0 left-0 z-50">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link
@@ -128,7 +128,7 @@ export function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="glass absolute left-0 right-0 top-20 border-t border-[var(--color-border)] md:hidden"
+            className="glass absolute top-20 right-0 left-0 border-t border-[var(--color-border)] md:hidden"
           >
             <nav className="flex flex-col p-6">
               {navItems.map((item, i) => (

@@ -19,7 +19,8 @@ export function BlogCard({ blog, variant = "grid" }: BlogCardProps) {
   }).format(new Date(blog.createdAt));
 
   const plainText = blog.content.replace(/<[^>]*>/g, "");
-  const preview = plainText.slice(0, 150) + (plainText.length > 150 ? "..." : "");
+  const preview =
+    plainText.slice(0, 150) + (plainText.length > 150 ? "..." : "");
 
   if (variant === "list") {
     return (

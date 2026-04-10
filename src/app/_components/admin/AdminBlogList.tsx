@@ -107,4 +107,3 @@ export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
     </div>
   );
 }
-
