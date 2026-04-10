@@ -11,8 +11,9 @@ interface ProjectPageProps {
   params: Promise<{ projectId: string }>;
 }
 
-// Generate static params for all projects at build time
 export async function generateStaticParams() {
+  if (process.env.SKIP_ENV_VALIDATION) return [];
+
   const projects = await db.project.findMany({
     select: { id: true },
   });

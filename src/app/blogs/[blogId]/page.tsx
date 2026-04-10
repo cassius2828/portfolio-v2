@@ -10,8 +10,9 @@ interface BlogPageProps {
   params: Promise<{ blogId: string }>;
 }
 
-// Generate static params for all blog posts at build time
 export async function generateStaticParams() {
+  if (process.env.SKIP_ENV_VALIDATION) return [];
+
   const blogs = await db.blog.findMany({
     select: { id: true },
   });
