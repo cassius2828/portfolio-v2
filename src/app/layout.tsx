@@ -7,6 +7,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { Header } from "./_components/layout/Header";
 import { Footer } from "./_components/layout/Footer";
 import { personalInfo, skills, socialLinks } from "~/lib/content";
+import { SITE_URL } from "~/lib/constants";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -20,8 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
+const baseUrl = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -109,7 +109,9 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replaceAll("</", "<\\/"),
+          }}
         />
       </head>
       <body className="min-h-screen bg-[var(--color-bg-primary)] font-sans antialiased">

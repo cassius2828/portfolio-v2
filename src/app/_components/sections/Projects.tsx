@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
+import { SectionHeading } from "../shared/SectionHeading";
 
 interface ProjectsProps {
   projects: SerializedProject[];
@@ -12,8 +13,8 @@ export function Projects({ projects }: ProjectsProps) {
     <section className="relative py-24">
       {/* Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-0 top-0 h-full w-full bg-[var(--color-bg-secondary)]" />
-        <div className="absolute right-0 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.02] blur-[150px]" />
+        <div className="absolute top-0 left-0 h-full w-full bg-[var(--color-bg-secondary)]" />
+        <div className="absolute top-1/2 right-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.02] blur-[150px]" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
@@ -24,12 +25,11 @@ export function Projects({ projects }: ProjectsProps) {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">More Projects</h2>
-          <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-          <p className="mx-auto mt-6 max-w-2xl text-[var(--color-text-secondary)]">
-            A collection of projects showcasing my skills in full-stack
-            development, from web applications to APIs and more.
-          </p>
+          <SectionHeading
+            title="More Projects"
+            subtitle="A collection of projects showcasing my skills in full-stack development, from web applications to APIs and more."
+            className="mb-0 text-center"
+          />
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -49,4 +49,3 @@ export function Projects({ projects }: ProjectsProps) {
     </section>
   );
 }
-

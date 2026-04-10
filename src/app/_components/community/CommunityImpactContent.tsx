@@ -15,7 +15,9 @@ interface CommunityImpactContentProps {
   sections: CommunityImpactSectionView[];
 }
 
-export function CommunityImpactContent({ sections }: CommunityImpactContentProps) {
+export function CommunityImpactContent({
+  sections,
+}: CommunityImpactContentProps) {
   return (
     <div className="mx-auto max-w-7xl px-6 pb-20">
       <motion.div

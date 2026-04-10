@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
@@ -13,9 +14,14 @@ export function AdminProjectList({
   projects: initialProjects,
 }: AdminProjectListProps) {
   const router = useRouter();
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const deleteMutation = api.project.delete.useMutation({
     onSuccess: () => {
+      setDeleteError(null);
       router.refresh();
+    },
+    onError: (error) => {
+      setDeleteError(error.message ?? "Failed to delete project");
     },
   });
 
@@ -37,6 +43,14 @@ export function AdminProjectList({
 
   return (
     <div className="card overflow-hidden">
+      {deleteError && (
+        <div
+          role="alert"
+          className="border-b border-red-500/20 bg-red-500/10 px-6 py-3 text-sm text-red-400"
+        >
+          {deleteError}
+        </div>
+      )}
       <table className="w-full">
         <thead className="border-b border-[var(--color-border)] bg-[var(--color-bg-tertiary)]">
           <tr>
@@ -126,4 +140,3 @@ export function AdminProjectList({
     </div>
   );
 }
-

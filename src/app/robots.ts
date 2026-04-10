@@ -1,8 +1,8 @@
 import { type MetadataRoute } from "next";
+import { SITE_URL } from "~/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://cassiusreynolds.dev";
+  const baseUrl = SITE_URL;
 
   return {
     rules: [
@@ -15,4 +15,3 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
-

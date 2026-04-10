@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { ResumeViewer } from "../_components/resume/ResumeViewer";
+import { PageShell } from "../_components/layout/PageShell";
 import { personalInfo } from "~/lib/content";
 
 export const metadata: Metadata = {
@@ -13,13 +14,8 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <div className="min-h-screen pt-28">
-      {/* Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[var(--color-bg-primary)]" />
-      </div>
-
+    <PageShell>
       <ResumeViewer />
-    </div>
+    </PageShell>
   );
 }

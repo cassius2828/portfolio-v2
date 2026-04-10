@@ -73,4 +73,3 @@ export function BlogList({ blogs }: BlogListProps) {
     </div>
   );
 }
-

@@ -1,11 +1,12 @@
 import type { Project, Blog, User } from "../../generated/prisma";
-import type { SerializedProject } from "~/app/_components/shared/ProjectCard";
+import type { SerializedProject, SerializedBlog } from "~/lib/types";
 
-/**
- * Strips non-serializable fields (Date objects) from Prisma models
- * before passing them as props to client components, preventing
- * hydration mismatches from Date serialization inconsistencies.
- */
+export type {
+  SerializedProject,
+  SerializedBlog,
+  SerializedBlogOwner,
+} from "~/lib/types";
+
 export function serializeProject(project: Project): SerializedProject {
   return {
     id: project.id,
@@ -19,22 +20,6 @@ export function serializeProject(project: Project): SerializedProject {
     img: project.img,
     priorityLevel: project.priorityLevel,
   };
-}
-
-export interface SerializedBlogOwner {
-  id: string;
-  name: string | null;
-  image: string | null;
-}
-
-export interface SerializedBlog {
-  id: string;
-  title: string;
-  content: string;
-  img: string | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: SerializedBlogOwner | null;
 }
 
 type BlogWithOwner = Blog & {

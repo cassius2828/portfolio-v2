@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
 import type { SerializedBlog } from "~/lib/serialize";
+import { formatDate } from "~/lib/format";
 
 interface AdminBlogListProps {
   blogs: SerializedBlog[];
@@ -11,9 +13,14 @@ interface AdminBlogListProps {
 
 export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
   const router = useRouter();
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const deleteMutation = api.blog.delete.useMutation({
     onSuccess: () => {
+      setDeleteError(null);
       router.refresh();
+    },
+    onError: (error) => {
+      setDeleteError(error.message ?? "Failed to delete blog post");
     },
   });
 
@@ -21,14 +28,6 @@ export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
     if (confirm(`Are you sure you want to delete "${title}"?`)) {
       deleteMutation.mutate({ id });
     }
-  };
-
-  const formatDate = (date: string) => {
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    }).format(new Date(date));
   };
 
   if (initialBlogs.length === 0) {
@@ -46,6 +45,14 @@ export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
 
   return (
     <div className="card overflow-hidden">
+      {deleteError && (
+        <div
+          role="alert"
+          className="border-b border-red-500/20 bg-red-500/10 px-6 py-3 text-sm text-red-400"
+        >
+          {deleteError}
+        </div>
+      )}
       <table className="w-full">
         <thead className="border-b border-[var(--color-border)] bg-[var(--color-bg-tertiary)]">
           <tr>
@@ -78,10 +85,10 @@ export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
                 </Link>
               </td>
               <td className="px-6 py-4 text-[var(--color-text-muted)]">
-                {formatDate(blog.createdAt)}
+                {formatDate(blog.createdAt, "short")}
               </td>
               <td className="px-6 py-4 text-[var(--color-text-muted)]">
-                {formatDate(blog.updatedAt)}
+                {formatDate(blog.updatedAt, "short")}
               </td>
               <td className="px-6 py-4">
                 <div className="flex items-center justify-end gap-3">
@@ -107,4 +114,3 @@ export function AdminBlogList({ blogs: initialBlogs }: AdminBlogListProps) {
     </div>
   );
 }
-

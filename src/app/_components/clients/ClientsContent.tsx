@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { WorkInProgress } from "../shared/WorkInProgress";
+import { SectionHeading } from "../shared/SectionHeading";
 
 // Toggle to show/hide client sections when ready
 const SHOW_CLIENT_SECTIONS = false;
@@ -176,8 +177,8 @@ export function ClientsContent() {
         <p className="mx-auto max-w-3xl text-lg text-[var(--color-text-secondary)] md:text-xl">
           From concept to deployment, I build digital solutions that solve real
           problems. Whether you need a content-rich website, an e-commerce
-          platform, or a custom application, I bring the technical expertise
-          and creative vision to make it happen.
+          platform, or a custom application, I bring the technical expertise and
+          creative vision to make it happen.
         </p>
       </motion.div>
 
@@ -188,12 +189,7 @@ export function ClientsContent() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="mb-24"
       >
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Services I Offer
-          </h2>
-          <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-        </div>
+        <SectionHeading title="Services I Offer" />
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
@@ -223,12 +219,7 @@ export function ClientsContent() {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="mb-24"
       >
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Why Work With Me
-          </h2>
-          <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-        </div>
+        <SectionHeading title="Why Work With Me" />
 
         <div className="grid gap-8 md:grid-cols-2">
           {valuePropositions.map((prop, i) => (
@@ -273,23 +264,13 @@ export function ClientsContent() {
         <>
           {/* Past Clients Section */}
           <section className="mb-24">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                Past Clients
-              </h2>
-              <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-            </div>
+            <SectionHeading title="Past Clients" />
             {/* Client logos/cards will go here */}
           </section>
 
           {/* Testimonials Section */}
           <section className="mb-24">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                What Clients Say
-              </h2>
-              <div className="mx-auto h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
-            </div>
+            <SectionHeading title="What Clients Say" />
             {/* Testimonial cards will go here */}
           </section>
 

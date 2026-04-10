@@ -35,7 +35,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+            <h3 className="mb-4 text-sm font-semibold tracking-wider text-[var(--color-text-muted)] uppercase">
               Navigation
             </h3>
             <ul className="space-y-2">
@@ -54,7 +54,7 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+            <h3 className="mb-4 text-sm font-semibold tracking-wider text-[var(--color-text-muted)] uppercase">
               Connect
             </h3>
             <ul className="space-y-2">
@@ -77,7 +77,9 @@ export function Footer() {
         <div className="section-divider mt-12" />
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 text-center text-sm text-[var(--color-text-muted)] md:flex-row">
-          <p>&copy; {currentYear} {personalInfo.name}. All rights reserved.</p>
+          <p>
+            &copy; {currentYear} {personalInfo.name}. All rights reserved.
+          </p>
           <p>
             Built with{" "}
             <a

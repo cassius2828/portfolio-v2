@@ -1,45 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import DOMPurify from "dompurify";
 import type { SerializedBlog } from "~/lib/serialize";
 import { SafeImage } from "../shared/SafeImage";
+import { CopyLinkButton } from "../shared/CopyLinkButton";
+import { FALLBACK_IMG } from "~/lib/constants";
+import { formatDate } from "~/lib/format";
 
 interface BlogContentProps {
   blog: SerializedBlog;
+  sanitizedHtml: string;
   adjacent: {
     prev: { id: string; title: string } | null;
     next: { id: string; title: string } | null;
   };
 }
 
-const fallbackImg = "/images/api-programming.png";
-
-export function BlogContent({ blog, adjacent }: BlogContentProps) {
-  const [copied, setCopied] = useState(false);
-
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(new Date(blog.createdAt));
-
-  const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      console.error("Failed to copy link:", error);
-    }
-  };
-
-  const sanitizedContent =
-    typeof window !== "undefined"
-      ? DOMPurify.sanitize(blog.content)
-      : blog.content;
+export function BlogContent({
+  blog,
+  sanitizedHtml,
+  adjacent,
+}: BlogContentProps) {
+  const formattedDate = formatDate(blog.createdAt);
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
     <motion.article
@@ -77,7 +61,7 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
           <SafeImage
             src={blog.img}
             alt={blog.title}
-            fallbackSrc={fallbackImg}
+            fallbackSrc={FALLBACK_IMG}
             fill
             sizes="(max-width: 896px) 100vw, 896px"
             className="object-cover"
@@ -89,52 +73,12 @@ export function BlogContent({ blog, adjacent }: BlogContentProps) {
       {/* Content */}
       <div
         className="prose-custom mb-12"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+        dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
       />
 
       {/* Share Section */}
       <div className="mb-12 flex justify-center">
-        <button
-          onClick={handleCopyLink}
-          className="flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-6 py-3 text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-        >
-          {copied ? (
-            <>
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              Link Copied!
-            </>
-          ) : (
-            <>
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
-                />
-              </svg>
-              Copy Link
-            </>
-          )}
-        </button>
+        <CopyLinkButton text={shareUrl} />
       </div>
 
       {/* Navigation */}
