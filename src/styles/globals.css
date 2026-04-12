@@ -309,17 +309,23 @@ body {
   box-sizing: border-box;
 }
 
+/* Winslow-style resume: white page, slate blue accents, black body text */
 .resume-page {
+  --resume-accent: #2b4c7e;
+  --resume-text: #000000;
+  --resume-bg: #ffffff;
   font-family: "Times New Roman", "Georgia", serif;
+  background-color: var(--resume-bg);
+  color: var(--resume-text);
 }
 
 @media screen {
   .resume-sheet {
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #d9e0eb;
   }
 
   .resume-sheet + .resume-sheet {
-    border-top: 4px solid #f3f4f6;
+    border-top: 4px solid #e8ecf2;
   }
 }
 
@@ -369,9 +375,15 @@ body {
     box-shadow: none !important;
   }
 
-  /* Ensure links don't show URLs */
+  /* Ensure links don't show URLs; keep body text black */
   .resume-page a {
     text-decoration: none;
     color: inherit;
+  }
+
+  /* Preserve Winslow-style accent in PDF (body color can flatten headings) */
+  .resume-page h1,
+  .resume-page h2 {
+    color: var(--resume-accent) !important;
   }
 }
