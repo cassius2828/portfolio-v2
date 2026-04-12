@@ -1,13 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useCallback, useRef } from "react";
 import { motion } from "framer-motion";
-import { resumeLinks, personalInfo } from "~/lib/content";
 import { SectionHeading } from "../shared/SectionHeading";
-import { CopyLinkButton } from "../shared/CopyLinkButton";
+import { ResumeDocument } from "./ResumeDocument";
 
 export function ResumeViewer() {
   const router = useRouter();
+  const resumeRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useCallback(() => {
+    window.print();
+  }, []);
 
   return (
     <motion.div
@@ -16,19 +21,25 @@ export function ResumeViewer() {
       transition={{ duration: 0.5 }}
       className="mx-auto max-w-5xl px-6 pb-24"
     >
-      <SectionHeading as="h1" title="My Resume" className="mb-8 text-center" />
-
-      {/* Resume Iframe */}
-      <div className="card mb-8 overflow-hidden">
-        <iframe
-          src={resumeLinks.publicPortfolioUrl}
-          title={`${personalInfo.name} Resume`}
-          className="h-[80vh] w-full"
+      {/* Screen-only heading & actions */}
+      <div className="print:hidden">
+        <SectionHeading
+          as="h1"
+          title="My Resume"
+          className="mb-8 text-center"
         />
       </div>
 
-      {/* Actions */}
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      {/* Resume preview */}
+      <div
+        ref={resumeRef}
+        className="mx-auto mb-8 max-w-[8.5in] overflow-hidden rounded-lg shadow-2xl print:max-w-none print:rounded-none print:shadow-none"
+      >
+        <ResumeDocument />
+      </div>
+
+      {/* Screen-only action buttons */}
+      <div className="flex flex-wrap items-center justify-center gap-4 print:hidden">
         <button
           onClick={() => router.back()}
           className="flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-6 py-3 font-medium text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)]"
@@ -49,17 +60,9 @@ export function ResumeViewer() {
           Back
         </button>
 
-        <CopyLinkButton
-          text={resumeLinks.googleDrive}
-          variant="solid"
-          className="font-medium"
-        />
-
-        <a
-          href={resumeLinks.s3}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 rounded-lg border border-[var(--color-accent)] px-6 py-3 font-medium text-[var(--color-accent)] transition-all hover:bg-[var(--color-accent)] hover:text-white"
+        <button
+          onClick={handlePrint}
+          className="flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-6 py-3 font-medium text-[var(--color-bg-primary)] transition-all hover:bg-[var(--color-accent-hover)]"
         >
           <svg
             className="h-5 w-5"
@@ -74,8 +77,8 @@ export function ResumeViewer() {
               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
             />
           </svg>
-          Download PDF
-        </a>
+          Export PDF
+        </button>
       </div>
     </motion.div>
   );

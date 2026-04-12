@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif,
+  --font-sans:
+    var(--font-outfit), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
@@ -11,22 +12,26 @@
   --color-bg-tertiary: #1a1a25;
   --color-bg-card: #16161f;
   --color-bg-hover: #1e1e2a;
-  
+
   --color-text-primary: #f0f0f5;
   --color-text-secondary: #a0a0b0;
   --color-text-muted: #707080;
-  
+
   --color-accent: #00d4ff;
   --color-accent-hover: #00b8e0;
   --color-accent-muted: rgba(0, 212, 255, 0.15);
-  
+
   --color-border: #2a2a35;
   --color-border-hover: #3a3a45;
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
   --gradient-bg: radial-gradient(ellipse at top, #1a1a25 0%, #0a0a0f 100%);
-  --gradient-glow: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+  --gradient-glow: radial-gradient(
+    circle,
+    rgba(0, 212, 255, 0.1) 0%,
+    transparent 70%
+  );
 }
 
 /* Base styles */
@@ -100,7 +105,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
   }
   50% {
@@ -109,7 +115,8 @@ body {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -143,12 +150,24 @@ body {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
-.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-children > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 /* Glass effect */
 .glass {
@@ -220,7 +239,12 @@ body {
 /* Section divider */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border),
+    transparent
+  );
 }
 
 /* Rich text content styles */
@@ -275,4 +299,79 @@ body {
 
 .prose-custom li {
   margin-bottom: 0.5rem;
+}
+
+/* ─── Resume print styles ─── */
+.resume-sheet {
+  width: 8.5in;
+  min-height: 11in;
+  padding: 0.6in 0.75in;
+  box-sizing: border-box;
+}
+
+.resume-page {
+  font-family: "Times New Roman", "Georgia", serif;
+}
+
+@media screen {
+  .resume-sheet {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .resume-sheet + .resume-sheet {
+    border-top: 4px solid #f3f4f6;
+  }
+}
+
+@media print {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide portfolio chrome */
+  header:not(.resume-page header),
+  footer,
+  nav {
+    display: none !important;
+  }
+
+  /* Hide everything except the resume */
+  body > * {
+    display: none !important;
+  }
+
+  body > #__next,
+  body > div[data-nextjs-scroll-focus-boundary] {
+    display: block !important;
+  }
+
+  /* Page setup */
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
+  .resume-page-break {
+    page-break-before: always;
+  }
+
+  .resume-sheet {
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure links don't show URLs */
+  .resume-page a {
+    text-decoration: none;
+    color: inherit;
+  }
 }

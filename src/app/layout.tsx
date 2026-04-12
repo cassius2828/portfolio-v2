@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 
+import { Toaster } from "sonner";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Header } from "./_components/layout/Header";
 import { Footer } from "./_components/layout/Footer";
@@ -116,6 +117,16 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-[var(--color-bg-primary)] font-sans antialiased">
         <TRPCReactProvider>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: "var(--color-bg-card)",
+                border: "1px solid var(--color-border)",
+                color: "var(--color-text-primary)",
+              },
+            }}
+          />
           <Header />
           <main>{children}</main>
           <Footer />

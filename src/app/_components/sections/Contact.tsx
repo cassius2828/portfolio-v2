@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { api } from "~/trpc/react";
 import {
   contactInfo,
@@ -10,6 +11,20 @@ import {
   type ConnectionType,
 } from "~/lib/content";
 import { SectionHeading } from "../shared/SectionHeading";
+
+const MIN_MESSAGE_LENGTH = 10;
+
+function getHumanErrorMessage(raw: string): string {
+  const lower = raw.toLowerCase();
+  if (lower.includes("email")) return "Please enter a valid email address.";
+  if (lower.includes("name")) return "Please enter your name.";
+  if (lower.includes("subject")) return "Please enter a subject.";
+  if (lower.includes("message") || lower.includes("10 characters"))
+    return "Your message must be at least 10 characters.";
+  if (lower.includes("unavailable"))
+    return "The contact form is temporarily unavailable. Please try again later.";
+  return "Something went wrong. Please try again.";
+}
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -20,17 +35,16 @@ export function Contact() {
     affiliation: "",
     connection: "recruiter" as ConnectionType,
   });
-  const [status, setStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+
+  const messageLength = formData.message.length;
+  const showMessageError = hasAttemptedSubmit || messageLength > 0;
+  const isMessageInvalid =
+    showMessageError && messageLength < MIN_MESSAGE_LENGTH;
 
   const submitMutation = api.contact.submit.useMutation({
     onSuccess: () => {
-      setStatus({
-        type: "success",
-        message: "Message sent successfully! I'll get back to you soon.",
-      });
+      toast.success("Message sent successfully! I'll get back to you soon.");
       setFormData({
         name: "",
         email: "",
@@ -39,19 +53,22 @@ export function Contact() {
         affiliation: "",
         connection: "recruiter",
       });
-      setTimeout(() => setStatus({ type: null, message: "" }), 5000);
+      setHasAttemptedSubmit(false);
     },
     onError: (error) => {
-      setStatus({
-        type: "error",
-        message: error.message ?? "Failed to send message. Please try again.",
-      });
-      setTimeout(() => setStatus({ type: null, message: "" }), 5000);
+      toast.error(getHumanErrorMessage(error.message));
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setHasAttemptedSubmit(true);
+
+    if (messageLength < MIN_MESSAGE_LENGTH) {
+      toast.error("Your message must be at least 10 characters.");
+      return;
+    }
+
     submitMutation.mutate(formData);
   };
 
@@ -149,20 +166,6 @@ export function Contact() {
             onSubmit={handleSubmit}
             className="card space-y-6 p-8"
           >
-            {status.type && (
-              <div
-                role="alert"
-                aria-live="polite"
-                className={`rounded-lg p-4 ${
-                  status.type === "success"
-                    ? "bg-green-500/10 text-green-400"
-                    : "bg-red-500/10 text-red-400"
-                }`}
-              >
-                {status.message}
-              </div>
-            )}
-
             <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <label
@@ -272,8 +275,31 @@ export function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full resize-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                className={`w-full resize-none rounded-lg border bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:outline-none ${
+                  isMessageInvalid
+                    ? "border-red-500 focus:border-red-500"
+                    : "border-[var(--color-border)] focus:border-[var(--color-accent)]"
+                }`}
               />
+              <div className="mt-1.5 flex items-center justify-between">
+                <p
+                  className={`text-xs ${
+                    isMessageInvalid ? "text-red-400" : "text-transparent"
+                  }`}
+                >
+                  {MIN_MESSAGE_LENGTH - messageLength} more character
+                  {MIN_MESSAGE_LENGTH - messageLength !== 1 ? "s" : ""} needed
+                </p>
+                <p
+                  className={`text-xs tabular-nums ${
+                    showMessageError && messageLength < MIN_MESSAGE_LENGTH
+                      ? "text-red-400"
+                      : "text-[var(--color-text-muted)]"
+                  }`}
+                >
+                  {messageLength}/{MIN_MESSAGE_LENGTH}
+                </p>
+              </div>
             </div>
 
             <button
