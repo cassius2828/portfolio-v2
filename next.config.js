@@ -23,6 +23,11 @@ const config = {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
           },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.cloudfront.net https://*.s3.*.amazonaws.com https://5-06-sei.s3.us-west-1.amazonaws.com https://avatars.githubusercontent.com https://media.licdn.com https://lh3.googleusercontent.com; font-src 'self'; connect-src 'self'; frame-ancestors 'none';",
+          },
         ],
       },
     ];

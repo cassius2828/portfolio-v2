@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
+import { ProjectCard } from "../shared/ProjectCard";
+import type { SerializedProject } from "~/lib/types";
 import { SectionHeading } from "../shared/SectionHeading";
+import { FADE_UP, staggerItem } from "~/lib/motion";
 
 interface ProjectsProps {
   projects: SerializedProject[];
@@ -18,13 +20,7 @@ export function Projects({ projects }: ProjectsProps) {
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+        <motion.div {...FADE_UP} className="mb-12 text-center">
           <SectionHeading
             title="More Projects"
             subtitle="A collection of projects showcasing my skills in full-stack development, from web applications to APIs and more."
@@ -34,13 +30,7 @@ export function Projects({ projects }: ProjectsProps) {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {projects.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-            >
+            <motion.div key={project.id} {...staggerItem(i)}>
               <ProjectCard project={project} />
             </motion.div>
           ))}

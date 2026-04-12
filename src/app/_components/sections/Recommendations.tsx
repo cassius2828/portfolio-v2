@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { recommendations } from "~/lib/content";
 import { SafeImage } from "../shared/SafeImage";
 import { SectionHeading } from "../shared/SectionHeading";
+import { FADE_UP, staggerItem } from "~/lib/motion";
 
 export function Recommendations() {
   // Don't render section if there are no recommendations
@@ -20,13 +21,7 @@ export function Recommendations() {
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+        <motion.div {...FADE_UP} className="mb-12 text-center">
           <SectionHeading
             title="Recommendations"
             subtitle="What colleagues and collaborators have to say about working with me"
@@ -38,10 +33,7 @@ export function Recommendations() {
           {recommendations.map((rec, i) => (
             <motion.div
               key={`${rec.name}-${i}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              {...staggerItem(i)}
               className="card group relative flex flex-col p-6"
             >
               {/* Quote icon */}

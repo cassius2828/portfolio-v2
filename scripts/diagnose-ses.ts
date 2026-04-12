@@ -2,40 +2,15 @@
  * Read-only SES checks: quota + verification status for SES_FROM_EMAIL / domain.
  * Does not send mail. Run: npx tsx scripts/diagnose-ses.ts
  */
-import { readFileSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
 import {
   SESClient,
   GetSendQuotaCommand,
   GetIdentityVerificationAttributesCommand,
 } from "@aws-sdk/client-ses";
-
-function loadEnv(): Record<string, string> {
-  const out: Record<string, string> = {};
-  const envPath = resolve(process.cwd(), ".env");
-  if (existsSync(envPath)) {
-    const raw = readFileSync(envPath, "utf8");
-    for (const line of raw.split("\n")) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith("#")) continue;
-      const eq = trimmed.indexOf("=");
-      if (eq === -1) continue;
-      const key = trimmed.slice(0, eq).trim();
-      let val = trimmed.slice(eq + 1).trim();
-      if (
-        (val.startsWith('"') && val.endsWith('"')) ||
-        (val.startsWith("'") && val.endsWith("'"))
-      ) {
-        val = val.slice(1, -1);
-      }
-      out[key] = val;
-    }
-  }
-  return out;
-}
+import { parseDotEnv } from "./lib/env";
 
 async function main() {
-  const env = loadEnv();
+  const env = parseDotEnv();
   const region = env.AWS_REGION;
   const accessKeyId = env.AWS_ACCESS_KEY_ID;
   const secretAccessKey = env.AWS_SECRET_ACCESS_KEY;

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Toaster, toast } from "sonner";
 import { api } from "~/trpc/react";
+import { FADE_UP, FADE_LEFT, FADE_RIGHT } from "~/lib/motion";
 import {
   contactInfo,
   socialLinks,
@@ -11,6 +12,7 @@ import {
   type ConnectionType,
 } from "~/lib/content";
 import { SectionHeading } from "../shared/SectionHeading";
+import { INPUT_CLASS, LABEL_CLASS } from "~/lib/form-styles";
 
 const MIN_MESSAGE_LENGTH = 10;
 
@@ -36,6 +38,7 @@ export function Contact() {
     message: "",
     affiliation: "",
     connection: "recruiter" as ConnectionType,
+    website: "",
   });
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
 
@@ -56,6 +59,7 @@ export function Contact() {
         message: "",
         affiliation: "",
         connection: "recruiter",
+        website: "",
       });
       setHasAttemptedSubmit(false);
     },
@@ -162,13 +166,7 @@ export function Contact() {
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+        <motion.div {...FADE_UP} className="mb-12 text-center">
           <SectionHeading title="Get in Touch" className="mb-0 text-center" />
         </motion.div>
 
@@ -187,31 +185,20 @@ export function Contact() {
         />
 
         <div className="grid gap-12 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="card p-8"
-          >
+          <motion.div {...FADE_LEFT} className="card p-8">
             <h3 className="mb-6 text-2xl font-bold">Contact Information</h3>
             {contactInformationContent}
           </motion.div>
 
           <motion.form
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            {...FADE_RIGHT}
             transition={{ duration: 0.6, delay: 0.2 }}
             onSubmit={handleSubmit}
             className="card space-y-6 p-8"
           >
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-medium"
-                >
+                <label htmlFor="name" className={LABEL_CLASS}>
                   Name *
                 </label>
                 <input
@@ -221,14 +208,11 @@ export function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                  className={INPUT_CLASS}
                 />
               </div>
               <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium"
-                >
+                <label htmlFor="email" className={LABEL_CLASS}>
                   Email *
                 </label>
                 <input
@@ -238,16 +222,13 @@ export function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                  className={INPUT_CLASS}
                 />
               </div>
             </div>
 
             <div>
-              <label
-                htmlFor="subject"
-                className="mb-2 block text-sm font-medium"
-              >
+              <label htmlFor="subject" className={LABEL_CLASS}>
                 Subject *
               </label>
               <input
@@ -257,16 +238,13 @@ export function Contact() {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                className={INPUT_CLASS}
               />
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label
-                  htmlFor="affiliation"
-                  className="mb-2 block text-sm font-medium"
-                >
+                <label htmlFor="affiliation" className={LABEL_CLASS}>
                   Company / Affiliation
                 </label>
                 <input
@@ -275,14 +253,11 @@ export function Contact() {
                   name="affiliation"
                   value={formData.affiliation}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                  className={INPUT_CLASS}
                 />
               </div>
               <div>
-                <label
-                  htmlFor="connection"
-                  className="mb-2 block text-sm font-medium"
-                >
+                <label htmlFor="connection" className={LABEL_CLASS}>
                   Your Role
                 </label>
                 <select
@@ -290,7 +265,7 @@ export function Contact() {
                   name="connection"
                   value={formData.connection}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                  className={INPUT_CLASS}
                 >
                   {connectionOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -302,10 +277,7 @@ export function Contact() {
             </div>
 
             <div>
-              <label
-                htmlFor="message"
-                className="mb-2 block text-sm font-medium"
-              >
+              <label htmlFor="message" className={LABEL_CLASS}>
                 Message *
               </label>
               <textarea
@@ -315,6 +287,8 @@ export function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
+                aria-invalid={isMessageInvalid}
+                aria-describedby="message-hint"
                 className={`w-full resize-none rounded-lg border bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:outline-none ${
                   isMessageInvalid
                     ? "border-red-500 focus:border-red-500"
@@ -323,6 +297,8 @@ export function Contact() {
               />
               <div className="mt-1.5 flex items-center justify-between">
                 <p
+                  id="message-hint"
+                  role={isMessageInvalid ? "alert" : undefined}
                   className={`text-xs ${
                     isMessageInvalid ? "text-red-400" : "text-transparent"
                   }`}
@@ -341,6 +317,19 @@ export function Contact() {
                   {messageLength}/{MIN_MESSAGE_LENGTH}
                 </p>
               </div>
+            </div>
+
+            <div aria-hidden="true" className="absolute left-[-9999px]">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+              />
             </div>
 
             <button

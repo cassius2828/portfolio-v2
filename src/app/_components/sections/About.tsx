@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FADE_LEFT, FADE_RIGHT, staggerItem } from "~/lib/motion";
 import {
   highlights,
   skills,
@@ -26,10 +27,7 @@ export function About() {
             {highlights.map((item, i) => (
               <motion.div
                 key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                {...staggerItem(i)}
                 className="flex flex-col items-center gap-2 text-center"
               >
                 <span className="text-3xl">{item.icon}</span>
@@ -45,12 +43,7 @@ export function About() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2">
           {/* About Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div {...FADE_LEFT}>
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">About Me</h2>
             <div className="mb-4 h-1 w-24 rounded-full bg-[var(--gradient-primary)]" />
 
@@ -95,9 +88,7 @@ export function About() {
 
           {/* Skills */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            {...FADE_RIGHT}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="mb-6 text-2xl font-bold">Skills & Technologies</h3>
@@ -118,48 +109,24 @@ export function About() {
 
             {/* Stats */}
             <div className="mt-12 grid grid-cols-3 gap-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="text-center"
-              >
-                <div className="text-3xl font-bold text-[var(--color-accent)]">
-                  {stats.projects.value}
-                </div>
-                <div className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  {stats.projects.label}
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="text-center"
-              >
-                <div className="text-3xl font-bold text-[var(--color-accent)]">
-                  {stats.certifications.value}
-                </div>
-                <div className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  {stats.certifications.label}
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
-                className="text-center"
-              >
-                <div className="text-3xl font-bold text-[var(--color-accent)]">
-                  {stats.yearsExperience.value}
-                </div>
-                <div className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  {stats.yearsExperience.label}
-                </div>
-              </motion.div>
+              {[
+                stats.projects,
+                stats.certifications,
+                stats.yearsExperience,
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  {...staggerItem(i, 0.4)}
+                  className="text-center"
+                >
+                  <div className="text-3xl font-bold text-[var(--color-accent)]">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-sm text-[var(--color-text-muted)]">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>

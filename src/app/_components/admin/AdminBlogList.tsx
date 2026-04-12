@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
-import type { SerializedBlog } from "~/lib/serialize";
+import type { SerializedBlog } from "~/lib/types";
 import { formatDate } from "~/lib/format";
 
 interface AdminBlogListProps {

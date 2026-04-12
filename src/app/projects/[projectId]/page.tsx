@@ -6,6 +6,7 @@ import { PageShell } from "../../_components/layout/PageShell";
 import { db } from "~/server/db";
 import { personalInfo, socialLinks } from "~/lib/content";
 import { serializeProject } from "~/lib/serialize";
+import { sanitizeContent } from "~/lib/sanitize";
 import { stripHtml } from "~/lib/format";
 import { SITE_URL } from "~/lib/constants";
 import type { Project } from "../../../../generated/prisma";
@@ -14,8 +15,7 @@ interface ProjectPageProps {
   params: Promise<{ projectId: string }>;
 }
 
-/** Project copy and metadata (e.g. `year`) come from MongoDB — avoid stale SSG from last build. */
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   if (process.env.SKIP_ENV_VALIDATION) return [];
@@ -133,7 +133,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         }}
       />
 
-      <ProjectDetail project={serializeProject(project)} />
+      <ProjectDetail
+        project={{
+          ...serializeProject(project),
+          description: sanitizeContent(project.description),
+        }}
+      />
     </PageShell>
   );
 }

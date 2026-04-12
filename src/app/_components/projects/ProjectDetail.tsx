@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { type SerializedProject } from "../shared/ProjectCard";
+import type { SerializedProject } from "~/lib/types";
 import { SafeImage } from "../shared/SafeImage";
 import { TechIcon } from "../shared/TechIcon";
 import { GithubIcon } from "../icons/GithubIcon";
+import { ExternalLinkIcon } from "../icons/ExternalLinkIcon";
+import { PlayCircleIcon } from "../icons/PlayCircleIcon";
 import { FALLBACK_IMG } from "~/lib/constants";
 
 interface ProjectDetailProps {
@@ -67,7 +69,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           alt=""
           fallbackSrc={FALLBACK_IMG}
           fill
-          quality={100}
+          quality={85}
           unoptimized={project.img?.endsWith(".png")}
           sizes="(max-width: 1280px) 100vw, 1024px"
           className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
@@ -112,19 +114,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               rel="noopener noreferrer"
               className="btn-primary flex items-center gap-2"
             >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
+              <ExternalLinkIcon />
               View Live
             </a>
           )}
@@ -146,25 +136,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               rel="noopener noreferrer"
               className="btn-outline flex items-center gap-2"
             >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              <PlayCircleIcon />
               Watch Demo
             </a>
           )}

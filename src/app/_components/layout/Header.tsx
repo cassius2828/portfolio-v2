@@ -92,6 +92,8 @@ export function Header() {
           onClick={() => setIsOpen(!isOpen)}
           className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
           aria-label="Toggle menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <motion.span
             animate={{
@@ -121,6 +123,7 @@ export function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
+            id="mobile-menu"
             className="glass absolute top-20 right-0 left-0 border-t border-[var(--color-border)] md:hidden"
           >
             <nav className="flex flex-col p-6">

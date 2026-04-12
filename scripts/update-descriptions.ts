@@ -2,34 +2,8 @@
  * Updates project descriptions in MongoDB with formatted HTML.
  * Run:  npx tsx scripts/update-descriptions.ts
  */
-import { readFileSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
 import { PrismaClient } from "../generated/prisma";
-
-function loadMongoUri(): string {
-  const envPath = resolve(process.cwd(), ".env");
-  if (existsSync(envPath)) {
-    const raw = readFileSync(envPath, "utf8");
-    for (const line of raw.split("\n")) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith("#")) continue;
-      const eq = trimmed.indexOf("=");
-      if (eq === -1) continue;
-      const key = trimmed.slice(0, eq).trim();
-      let val = trimmed.slice(eq + 1).trim();
-      if (
-        (val.startsWith('"') && val.endsWith('"')) ||
-        (val.startsWith("'") && val.endsWith("'"))
-      ) {
-        val = val.slice(1, -1);
-      }
-      if (key === "MONGODB_URI") return val;
-    }
-  }
-  const fromEnv = process.env.MONGODB_URI;
-  if (fromEnv) return fromEnv;
-  throw new Error("MONGODB_URI not found.");
-}
+import { loadMongoUri } from "./lib/env";
 
 const descriptions: Record<string, string> = {
   "Lineup Legends": `<p>Lineup Legends is a full-stack fantasy basketball platform where users build their dream lineup under a <strong>$15 salary cap</strong>. Create lineups, rate and compete against others, and engage with a passionate community of basketball fans.</p>

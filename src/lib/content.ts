@@ -146,14 +146,6 @@ export const recommendations: Recommendation[] = [
     text: "Cassius is a standout React/Node/Next.js developer who brought real impact to our team. He’s not only technically sharp, but also an incredibly hard worker and an excellent communicator. Add to that a genuinely friendly and positive personality, and you’ve got someone any team would be lucky to have. Highly recommend!",
     linkedinUrl: "https://www.linkedin.com/in/eric-popelka-b6024145/",
   },
-  // Add your recommendations here
-  // Example:
-  // {
-  //   name: "John Doe",
-  //   role: "Senior Engineer at Company",
-  //   text: "Cassius is an exceptional engineer who...",
-  //   linkedinUrl: "https://linkedin.com/in/johndoe/details/recommendations",
-  // },
 ];
 
 // ============================================
