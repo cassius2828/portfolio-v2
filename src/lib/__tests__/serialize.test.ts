@@ -18,6 +18,7 @@ describe("serializeProject", () => {
       { name: "TypeScript", icon: null },
     ],
     featured: true,
+    archived: false,
     img: "https://img.com/test.png",
     priorityLevel: 1,
     createdAt: new Date("2025-01-01"),
@@ -38,6 +39,7 @@ describe("serializeProject", () => {
         { name: "TypeScript", icon: null },
       ],
       featured: true,
+      archived: false,
       img: "https://img.com/test.png",
       priorityLevel: 1,
     });
