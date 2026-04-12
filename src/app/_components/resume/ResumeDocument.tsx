@@ -305,7 +305,7 @@ export function ResumeDocument() {
             />
             <SkillGroup
               label="Cloud & DevOps"
-              items="AWS, Google Cloud Platform, Docker, GitHub Actions, CI/CD"
+              items="AWS, Google Cloud Platform, Vercel, Heroku, Docker, GitHub Actions, CI/CD"
             />
             <SkillGroup
               label="Authentication & Billing"

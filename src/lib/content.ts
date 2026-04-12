@@ -4,11 +4,11 @@
 export const personalInfo = {
   name: "Cassius Reynolds",
   initials: "CR",
-  title: "Frontend Engineer | Full Stack Developer",
+  title: "Full Stack Engineer",
   tagline:
-    "Full-time engineer leading teams, driving system design decisions, and building scalable web applications. I combine technical expertise with strong leadership to deliver impactful solutions.",
+    "Full Stack Engineer who builds and scales production systems from the ground up. I lead teams, own projects end-to-end, and deliver reliable, high-impact solutions across modern web architectures.",
   footerDescription:
-    "Frontend Engineer specializing in React, Next.js, TypeScript, and cloud infrastructure.",
+    "Full Stack Engineer specializing in React, Next.js, TypeScript, and cloud infrastructure.",
 };
 
 // ============================================
@@ -48,28 +48,44 @@ export const skills = [
   "Next.js",
   "TypeScript",
   "JavaScript",
+  "Tailwind CSS",
+  "HTML5",
+  "CSS3",
   // Backend
   "Node.js",
   "Express",
+  "tRPC",
   "Python",
-  // Databases
+  // Databases & Caching
   "MongoDB",
   "PostgreSQL",
-  "NoSQL",
+  "Redis",
   "SQL",
+  "NoSQL",
   // Cloud & Infrastructure
   "AWS",
   "GCP",
   "Vercel",
   "Heroku",
+  "Docker",
   // APIs & Architecture
   "REST APIs",
   "GraphQL",
   "System Design",
+  // Auth & Billing
+  "OAuth",
+  "NextAuth",
+  "Stripe",
   // DevOps & Tools
   "Git",
+  "GitHub Actions",
   "CI/CD",
-  "Docker",
+  "Zod",
+  "ESLint",
+  "Postman",
+  // Testing
+  "Cypress",
+  "Playwright",
   // Methodologies
   "Scrum",
   "Agile",
@@ -77,11 +93,10 @@ export const skills = [
 
 // Primary skills mentioned in the about section
 export const primarySkills =
-  "React, Next.js, TypeScript, Node.js, and cloud infrastructure";
+  "React, Next.js, TypeScript, Node.js, tRPC, and AWS";
 
-// Secondary skills mentioned in the about section
 export const secondarySkills =
-  "Python, PostgreSQL, MongoDB, GraphQL, system design, and CI/CD pipelines";
+  "PostgreSQL, MongoDB, Redis, Docker, Stripe, GitHub Actions, and system design";
 
 // ============================================
 // EXPERIENCE HIGHLIGHTS
@@ -103,10 +118,10 @@ export const stats = {
 // BIO / ABOUT ME
 // ============================================
 export const bioParagraphs = [
-  `I'm a Frontend Engineer at a data integration company where I lead a team of developers and own multiple projects. Hired as a Junior Data Integration Platform Engineer in April 2025, I was promoted within 3 months to lead frontend development, contribute to system design decisions, and drive developer experience improvements across the organization.`,
-  `My technical contributions include upgrading codebases to Next.js 16 and React 19, implementing major feature improvements from each upgrade, configuring authentication systems, and gaining hands-on experience with cloud infrastructure. I work cross-functionally with other engineering teams and bring dependable problem-solving skills to project planning and iterations.`,
-  `I hold a BA in Communication Management and am currently pursuing a BS in Computer Science with a concentration in software engineering. My journey into tech began with freelance work in 2023, followed by General Assembly's Software Engineering Bootcamp in 2024, where I built a strong foundation before transitioning to full-time engineering.`,
-  `Beyond code, I bring 13 years of football leadership experience—serving as team captain or on leadership council every year. I'm active in my community through the Black Student Association, youth mentoring, and community organizing. I contribute to open source projects and believe in understanding engineering fundamentals to complement AI tools, not replace them.`,
+  `Full Stack Engineer at SyncSmart, where I lead development of multiple production applications and own features end-to-end—from architecture and system design through deployment. Promoted from Data Integration Platform Engineer within three months, I now drive frontend strategy, build and scale integrations across CRM and ERP platforms (HubSpot, NetSuite, PandaDoc, ConnectWise, Microsoft Dynamics), and architect authentication and billing systems with OAuth, Stripe, and Orb.`,
+  `I build with React, Next.js, TypeScript, Node.js, tRPC, and PostgreSQL/MongoDB, backed by AWS, Redis, Docker, and CI/CD pipelines via GitHub Actions. My work spans complex frontend systems, type-safe API design with Zod validation, performance optimization through caching strategies, and third-party integrations including Slack, Jira, and Linear. I hold AWS Cloud Practitioner, AWS AI Practitioner, and Professional Scrum Master I certifications.`,
+  `Before SyncSmart, I ran a freelance practice delivering client-facing applications from concept to deployment—handling full project lifecycles including DNS, hosting, SEO, and backend systems. I'm currently pursuing a BS in Computer Science (Software Engineering) at SNHU with a 3.85 GPA and multi-term Honor Roll recognition, building on a Software Engineering Immersive from General Assembly and a BA in Communication Management (Cum Laude) from Azusa Pacific University.`,
+  `Outside of engineering, I mentor and coach youth athletes at the Richmond Youth Center, bringing the same discipline and leadership that defined 13 years of competitive football—serving as team captain or on the leadership council every season. I'm active in community organizing, contribute to open-source projects, and believe in mastering engineering fundamentals to complement AI-assisted development, not replace it.`,
 ];
 
 // Coding journey start date

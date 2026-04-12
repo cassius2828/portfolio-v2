@@ -6,6 +6,7 @@ import { PageShell } from "../../_components/layout/PageShell";
 import { db } from "~/server/db";
 import { personalInfo, socialLinks } from "~/lib/content";
 import { serializeProject } from "~/lib/serialize";
+import { stripHtml } from "~/lib/format";
 import { SITE_URL } from "~/lib/constants";
 import type { Project } from "../../../../generated/prisma";
 
@@ -38,7 +39,7 @@ export async function generateMetadata({
     };
   }
 
-  const description = project.description.slice(0, 160);
+  const description = stripHtml(project.description).slice(0, 160);
 
   return {
     title: project.title,
@@ -86,7 +87,7 @@ function generateProjectJsonLd(project: Project) {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     name: project.title,
-    description: project.description,
+    description: stripHtml(project.description),
     image: project.img ?? undefined,
     codeRepository: project.githubLink,
     url: project.prodLink ?? `${SITE_URL}/projects/${project.id}`,

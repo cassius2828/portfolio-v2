@@ -8,7 +8,7 @@ import { SectionHeading } from "../_components/shared/SectionHeading";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Read my latest thoughts on web development, software engineering, and technology. Tips, tutorials, and insights from a full stack developer.",
+    "Read my latest thoughts on web development, software engineering, and technology. Tips, tutorials, and insights from a full stack engineer.",
   openGraph: {
     title: "Blog | Cassius Reynolds",
     description:

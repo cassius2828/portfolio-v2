@@ -56,30 +56,39 @@ export function About() {
 
             <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                I am a passionate software engineer with strong expertise in{" "}
+                Full Stack Engineer at SyncSmart with deep expertise in{" "}
                 <span className="text-[var(--color-accent)]">
                   {primarySkills}
                 </span>
-                , and building RESTful APIs. Additionally, I have working
-                knowledge of {secondarySkills}, and more.
+                , and building type-safe APIs. I also work extensively with{" "}
+                {secondarySkills}. I lead development of production
+                applications, own features end-to-end, and architect solutions
+                that scale.
               </p>
               <p>
-                Since starting my coding journey in {codingJourneyStart},
-                I&apos;ve graduated from General Assembly&apos;s Software
-                Engineering Bootcamp (2024), earned cloud certifications, and
-                completed numerous real-world freelance projects.
+                Since {codingJourneyStart}, I&apos;ve shipped real-world
+                freelance projects, graduated from General Assembly&apos;s
+                Software Engineering Immersive, and earned AWS Cloud
+                Practitioner, AWS AI Practitioner, and Professional Scrum Master
+                I certifications. I was promoted within three months at
+                SyncSmart to lead frontend development and drive system design
+                decisions across the organization.
               </p>
               <p>
-                I bring team-oriented skills, honed through collaboration with
-                mid- and senior-level engineers on various group projects, along
-                with managerial experience from previous roles. I hold a BA in
-                Communication Studies and plan to further my education with a BS
-                in Computer Science.
+                I hold a BA in Communication Management (Cum Laude) from Azusa
+                Pacific University and am currently pursuing a{" "}
+                <span className="text-[var(--color-accent)]">
+                  BS in Computer Science
+                </span>{" "}
+                with a concentration in Software Engineering at SNHU,
+                maintaining a 3.85 GPA and earning Honor Roll every term.
               </p>
               <p>
-                I&apos;m continuously refining my skills while contributing to
-                ongoing freelance projects, and I&apos;m driven to build
-                efficient, scalable solutions.
+                Beyond engineering, I bring leadership shaped by 13 years of
+                competitive football, youth mentoring at the Richmond Youth
+                Center, and active community involvement. I&apos;m driven to
+                build efficient, scalable systems and to master engineering
+                fundamentals that complement modern tooling.
               </p>
             </div>
           </motion.div>

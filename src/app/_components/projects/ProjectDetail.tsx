@@ -65,9 +65,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Description */}
       <section className="mb-12">
         <h2 className="mb-4 text-2xl font-bold">About This Project</h2>
-        <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
-          {project.description}
-        </p>
+        <div
+          className="prose-project text-lg leading-relaxed text-[var(--color-text-secondary)]"
+          dangerouslySetInnerHTML={{ __html: project.description }}
+        />
       </section>
 
       {/* Technologies */}

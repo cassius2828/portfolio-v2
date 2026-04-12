@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SafeImage } from "./SafeImage";
 import { GithubIcon } from "../icons/GithubIcon";
 import { FALLBACK_IMG } from "~/lib/constants";
+import { stripHtml } from "~/lib/format";
 import type { SerializedProject } from "~/lib/types";
 
 export type { SerializedProject };
@@ -42,7 +43,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
             {project.title}
           </h3>
           <p className="mb-4 line-clamp-2 text-sm text-[var(--color-text-secondary)]">
-            {project.description}
+            {stripHtml(project.description)}
           </p>
 
           {/* Technologies */}
