@@ -41,7 +41,13 @@ const descriptions: Record<string, string> = {
 <li>File uploads to S3 with CloudFront CDN delivery, MIME-type validation, and integrated YouTube Data API for curated video content</li>
 <li>Admin dashboard with user management, ban/suspend enforcement, flagged content review, and player request queue with community value voting</li>
 </ul>
-<p><em>Guest login — USERNAME: guest, EMAIL: llguest@gmail.com, PASSWORD: 123. For the best experience, sign in with Google.</em></p>`,
+<p><strong>Guest login</strong></p>
+<ul>
+<li>USERNAME: guest</li>
+<li>EMAIL: llguest@gmail.com</li>
+<li>PASSWORD: 123</li>
+</ul>
+<p><em>For the best experience, sign in with Google.</em></p>`,
 
   "Sommelier Circle": `<p>A full-stack MERN application designed to foster a vibrant online wine community. Users can create and manage blog posts, connect with other wine enthusiasts, and explore an extensive wine encyclopedia.</p>
 <ul>

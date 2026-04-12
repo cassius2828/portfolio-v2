@@ -124,6 +124,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   featured: 'featured',
   archived: 'archived',
   img: 'img',
+  year: 'year',
   priorityLevel: 'priorityLevel',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

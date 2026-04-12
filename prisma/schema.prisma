@@ -24,6 +24,7 @@ model Project {
     featured      Boolean?     @default(false)
     archived      Boolean      @default(false)
     img           String?
+    year          Int          @default(2024)
     priorityLevel Int          @default(1)
     createdAt     DateTime?
     updatedAt     DateTime?

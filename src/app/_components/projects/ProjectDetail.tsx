@@ -169,6 +169,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </a>
           )}
         </div>
+        <p className="mt-5 text-lg text-[var(--color-text-muted)]">
+          {project.year}
+        </p>
       </section>
 
       {/* Back to Projects */}

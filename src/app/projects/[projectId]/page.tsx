@@ -14,6 +14,9 @@ interface ProjectPageProps {
   params: Promise<{ projectId: string }>;
 }
 
+/** Project copy and metadata (e.g. `year`) come from MongoDB — avoid stale SSG from last build. */
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   if (process.env.SKIP_ENV_VALIDATION) return [];
 

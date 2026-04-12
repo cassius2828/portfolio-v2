@@ -9,6 +9,7 @@ export interface SerializedProject {
   featured: boolean | null;
   archived: boolean;
   img: string | null;
+  year: number;
   priorityLevel: number;
 }
 

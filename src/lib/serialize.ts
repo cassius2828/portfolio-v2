@@ -19,6 +19,7 @@ export function serializeProject(project: Project): SerializedProject {
     featured: project.featured,
     archived: project.archived,
     img: project.img,
+    year: project.year ?? 2024,
     priorityLevel: project.priorityLevel,
   };
 }
