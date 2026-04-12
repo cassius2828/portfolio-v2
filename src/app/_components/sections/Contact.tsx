@@ -14,13 +14,6 @@ import { SectionHeading } from "../shared/SectionHeading";
 
 const MIN_MESSAGE_LENGTH = 10;
 
-/**
- * Full contact form (name, email, subject, message, SES submit) is development-only while outbound
- * email is being finished and verified. It is hidden in production so visitors are not offered a
- * flow that can fail until the setup is ready — remove this gate once SES identities and sending are stable.
- */
-const SHOW_CONTACT_FORM = process.env.NODE_ENV === "development";
-
 /** Toasts from this section render here (below header) instead of the global top-of-page toaster. */
 const CONTACT_TOASTER_ID = "contact-form";
 
@@ -179,203 +172,186 @@ export function Contact() {
           <SectionHeading title="Get in Touch" className="mb-0 text-center" />
         </motion.div>
 
-        {SHOW_CONTACT_FORM ? (
-          /* Toasts for this section: below the fixed header, above the form area */
-          <Toaster
-            id={CONTACT_TOASTER_ID}
-            position="top-center"
-            offset={{ top: "6.5rem" }}
-            toastOptions={{
-              style: {
-                background: "var(--color-bg-card)",
-                border: "1px solid var(--color-border)",
-                color: "var(--color-text-primary)",
-              },
-            }}
-          />
-        ) : null}
+        {/* Toasts for this section: below the fixed header, above the form area */}
+        <Toaster
+          id={CONTACT_TOASTER_ID}
+          position="top-center"
+          offset={{ top: "6.5rem" }}
+          toastOptions={{
+            style: {
+              background: "var(--color-bg-card)",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text-primary)",
+            },
+          }}
+        />
 
-        {SHOW_CONTACT_FORM ? (
-          <div className="grid gap-12 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="card p-8"
-            >
-              <h3 className="mb-6 text-2xl font-bold">Contact Information</h3>
-              {contactInformationContent}
-            </motion.div>
+        <div className="grid gap-12 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="card p-8"
+          >
+            <h3 className="mb-6 text-2xl font-bold">Contact Information</h3>
+            {contactInformationContent}
+          </motion.div>
 
-            <motion.form
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              onSubmit={handleSubmit}
-              className="card space-y-6 p-8"
-            >
-              <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-2 block text-sm font-medium"
-                  >
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block text-sm font-medium"
-                  >
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
-                  />
-                </div>
-              </div>
-
+          <motion.form
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            onSubmit={handleSubmit}
+            className="card space-y-6 p-8"
+          >
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <label
-                  htmlFor="subject"
+                  htmlFor="name"
                   className="mb-2 block text-sm font-medium"
                 >
-                  Subject *
+                  Name *
                 </label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                   className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
                 />
               </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label
-                    htmlFor="affiliation"
-                    className="mb-2 block text-sm font-medium"
-                  >
-                    Company / Affiliation
-                  </label>
-                  <input
-                    type="text"
-                    id="affiliation"
-                    name="affiliation"
-                    value={formData.affiliation}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="connection"
-                    className="mb-2 block text-sm font-medium"
-                  >
-                    Your Role
-                  </label>
-                  <select
-                    id="connection"
-                    name="connection"
-                    value={formData.connection}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
-                  >
-                    {connectionOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
               <div>
                 <label
-                  htmlFor="message"
+                  htmlFor="email"
                   className="mb-2 block text-sm font-medium"
                 >
-                  Message *
+                  Email *
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
-                  rows={5}
-                  className={`w-full resize-none rounded-lg border bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:outline-none ${
-                    isMessageInvalid
-                      ? "border-red-500 focus:border-red-500"
-                      : "border-[var(--color-border)] focus:border-[var(--color-accent)]"
-                  }`}
+                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
                 />
-                <div className="mt-1.5 flex items-center justify-between">
-                  <p
-                    className={`text-xs ${
-                      isMessageInvalid ? "text-red-400" : "text-transparent"
-                    }`}
-                  >
-                    {`${MIN_MESSAGE_LENGTH - messageLength} more character${
-                      MIN_MESSAGE_LENGTH - messageLength !== 1 ? "s" : ""
-                    } needed`}
-                  </p>
-                  <p
-                    className={`text-xs tabular-nums ${
-                      showMessageError && messageLength < MIN_MESSAGE_LENGTH
-                        ? "text-red-400"
-                        : "text-[var(--color-text-muted)]"
-                    }`}
-                  >
-                    {messageLength}/{MIN_MESSAGE_LENGTH}
-                  </p>
-                </div>
               </div>
-
-              <button
-                type="submit"
-                disabled={submitMutation.isPending}
-                className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {submitMutation.isPending ? "Sending..." : "Send Message"}
-              </button>
-            </motion.form>
-          </div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-xl"
-          >
-            <div className="card p-8 text-center">
-              <h3 className="mb-6 text-2xl font-bold">Contact Information</h3>
-              {contactInformationContent}
             </div>
-          </motion.div>
-        )}
+
+            <div>
+              <label
+                htmlFor="subject"
+                className="mb-2 block text-sm font-medium"
+              >
+                Subject *
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+                className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+              />
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="affiliation"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Company / Affiliation
+                </label>
+                <input
+                  type="text"
+                  id="affiliation"
+                  name="affiliation"
+                  value={formData.affiliation}
+                  onChange={handleChange}
+                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="connection"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Your Role
+                </label>
+                <select
+                  id="connection"
+                  name="connection"
+                  value={formData.connection}
+                  onChange={handleChange}
+                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+                >
+                  {connectionOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="message"
+                className="mb-2 block text-sm font-medium"
+              >
+                Message *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className={`w-full resize-none rounded-lg border bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:outline-none ${
+                  isMessageInvalid
+                    ? "border-red-500 focus:border-red-500"
+                    : "border-[var(--color-border)] focus:border-[var(--color-accent)]"
+                }`}
+              />
+              <div className="mt-1.5 flex items-center justify-between">
+                <p
+                  className={`text-xs ${
+                    isMessageInvalid ? "text-red-400" : "text-transparent"
+                  }`}
+                >
+                  {`${MIN_MESSAGE_LENGTH - messageLength} more character${
+                    MIN_MESSAGE_LENGTH - messageLength !== 1 ? "s" : ""
+                  } needed`}
+                </p>
+                <p
+                  className={`text-xs tabular-nums ${
+                    showMessageError && messageLength < MIN_MESSAGE_LENGTH
+                      ? "text-red-400"
+                      : "text-[var(--color-text-muted)]"
+                  }`}
+                >
+                  {messageLength}/{MIN_MESSAGE_LENGTH}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={submitMutation.isPending}
+              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {submitMutation.isPending ? "Sending..." : "Send Message"}
+            </button>
+          </motion.form>
+        </div>
       </div>
     </section>
   );

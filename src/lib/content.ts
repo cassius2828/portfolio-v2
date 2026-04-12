@@ -197,3 +197,9 @@ export const connectionOptions = [
 ] as const;
 
 export type ConnectionType = (typeof connectionOptions)[number]["value"];
+
+/** Display label for the contact form role (e.g. `recruiter` → "Recruiter"). */
+export function getConnectionLabel(value: ConnectionType): string {
+  const opt = connectionOptions.find((o) => o.value === value);
+  return opt?.label ?? value;
+}
