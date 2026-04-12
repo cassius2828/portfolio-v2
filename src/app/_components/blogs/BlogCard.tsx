@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { SerializedBlog } from "~/lib/serialize";
+import type { SerializedBlog } from "~/lib/types";
 import { SafeImage } from "../shared/SafeImage";
 import { FALLBACK_IMG } from "~/lib/constants";
 import { formatDate, stripHtml } from "~/lib/format";

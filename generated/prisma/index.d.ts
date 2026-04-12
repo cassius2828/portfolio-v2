@@ -1395,10 +1395,12 @@ export namespace Prisma {
   }
 
   export type ProjectAvgAggregateOutputType = {
+    year: number | null
     priorityLevel: number | null
   }
 
   export type ProjectSumAggregateOutputType = {
+    year: number | null
     priorityLevel: number | null
   }
 
@@ -1412,6 +1414,7 @@ export namespace Prisma {
     featured: boolean | null
     archived: boolean | null
     img: string | null
+    year: number | null
     priorityLevel: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1427,6 +1430,7 @@ export namespace Prisma {
     featured: boolean | null
     archived: boolean | null
     img: string | null
+    year: number | null
     priorityLevel: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1442,6 +1446,7 @@ export namespace Prisma {
     featured: number
     archived: number
     img: number
+    year: number
     priorityLevel: number
     createdAt: number
     updatedAt: number
@@ -1450,10 +1455,12 @@ export namespace Prisma {
 
 
   export type ProjectAvgAggregateInputType = {
+    year?: true
     priorityLevel?: true
   }
 
   export type ProjectSumAggregateInputType = {
+    year?: true
     priorityLevel?: true
   }
 
@@ -1467,6 +1474,7 @@ export namespace Prisma {
     featured?: true
     archived?: true
     img?: true
+    year?: true
     priorityLevel?: true
     createdAt?: true
     updatedAt?: true
@@ -1482,6 +1490,7 @@ export namespace Prisma {
     featured?: true
     archived?: true
     img?: true
+    year?: true
     priorityLevel?: true
     createdAt?: true
     updatedAt?: true
@@ -1497,6 +1506,7 @@ export namespace Prisma {
     featured?: true
     archived?: true
     img?: true
+    year?: true
     priorityLevel?: true
     createdAt?: true
     updatedAt?: true
@@ -1599,6 +1609,7 @@ export namespace Prisma {
     featured: boolean | null
     archived: boolean
     img: string | null
+    year: number
     priorityLevel: number
     createdAt: Date | null
     updatedAt: Date | null
@@ -1634,6 +1645,7 @@ export namespace Prisma {
     featured?: boolean
     archived?: boolean
     img?: boolean
+    year?: boolean
     priorityLevel?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1651,12 +1663,13 @@ export namespace Prisma {
     featured?: boolean
     archived?: boolean
     img?: boolean
+    year?: boolean
     priorityLevel?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "prodLink" | "videoLink" | "githubLink" | "technologies" | "featured" | "archived" | "img" | "priorityLevel" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "prodLink" | "videoLink" | "githubLink" | "technologies" | "featured" | "archived" | "img" | "year" | "priorityLevel" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1672,6 +1685,7 @@ export namespace Prisma {
       featured: boolean | null
       archived: boolean
       img: string | null
+      year: number
       priorityLevel: number
       createdAt: Date | null
       updatedAt: Date | null
@@ -2078,6 +2092,7 @@ export namespace Prisma {
     readonly featured: FieldRef<"Project", 'Boolean'>
     readonly archived: FieldRef<"Project", 'Boolean'>
     readonly img: FieldRef<"Project", 'String'>
+    readonly year: FieldRef<"Project", 'Int'>
     readonly priorityLevel: FieldRef<"Project", 'Int'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
@@ -7569,6 +7584,7 @@ export namespace Prisma {
     featured: 'featured',
     archived: 'archived',
     img: 'img',
+    year: 'year',
     priorityLevel: 'priorityLevel',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -7742,6 +7758,7 @@ export namespace Prisma {
     featured?: BoolNullableFilter<"Project"> | boolean | null
     archived?: BoolFilter<"Project"> | boolean
     img?: StringNullableFilter<"Project"> | string | null
+    year?: IntFilter<"Project"> | number
     priorityLevel?: IntFilter<"Project"> | number
     createdAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
@@ -7758,6 +7775,7 @@ export namespace Prisma {
     featured?: SortOrder
     archived?: SortOrder
     img?: SortOrder
+    year?: SortOrder
     priorityLevel?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7777,6 +7795,7 @@ export namespace Prisma {
     featured?: BoolNullableFilter<"Project"> | boolean | null
     archived?: BoolFilter<"Project"> | boolean
     img?: StringNullableFilter<"Project"> | string | null
+    year?: IntFilter<"Project"> | number
     priorityLevel?: IntFilter<"Project"> | number
     createdAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
@@ -7792,6 +7811,7 @@ export namespace Prisma {
     featured?: SortOrder
     archived?: SortOrder
     img?: SortOrder
+    year?: SortOrder
     priorityLevel?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7815,6 +7835,7 @@ export namespace Prisma {
     featured?: BoolNullableWithAggregatesFilter<"Project"> | boolean | null
     archived?: BoolWithAggregatesFilter<"Project"> | boolean
     img?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    year?: IntWithAggregatesFilter<"Project"> | number
     priorityLevel?: IntWithAggregatesFilter<"Project"> | number
     createdAt?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
@@ -8158,6 +8179,7 @@ export namespace Prisma {
     featured?: boolean | null
     archived?: boolean
     img?: string | null
+    year?: number
     priorityLevel?: number
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -8174,6 +8196,7 @@ export namespace Prisma {
     featured?: boolean | null
     archived?: boolean
     img?: string | null
+    year?: number
     priorityLevel?: number
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -8189,6 +8212,7 @@ export namespace Prisma {
     featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     archived?: BoolFieldUpdateOperationsInput | boolean
     img?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: IntFieldUpdateOperationsInput | number
     priorityLevel?: IntFieldUpdateOperationsInput | number
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8204,6 +8228,7 @@ export namespace Prisma {
     featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     archived?: BoolFieldUpdateOperationsInput | boolean
     img?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: IntFieldUpdateOperationsInput | number
     priorityLevel?: IntFieldUpdateOperationsInput | number
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8220,6 +8245,7 @@ export namespace Prisma {
     featured?: boolean | null
     archived?: boolean
     img?: string | null
+    year?: number
     priorityLevel?: number
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -8235,6 +8261,7 @@ export namespace Prisma {
     featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     archived?: BoolFieldUpdateOperationsInput | boolean
     img?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: IntFieldUpdateOperationsInput | number
     priorityLevel?: IntFieldUpdateOperationsInput | number
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8250,6 +8277,7 @@ export namespace Prisma {
     featured?: NullableBoolFieldUpdateOperationsInput | boolean | null
     archived?: BoolFieldUpdateOperationsInput | boolean
     img?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: IntFieldUpdateOperationsInput | number
     priorityLevel?: IntFieldUpdateOperationsInput | number
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8680,12 +8708,14 @@ export namespace Prisma {
     featured?: SortOrder
     archived?: SortOrder
     img?: SortOrder
+    year?: SortOrder
     priorityLevel?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ProjectAvgOrderByAggregateInput = {
+    year?: SortOrder
     priorityLevel?: SortOrder
   }
 
@@ -8699,6 +8729,7 @@ export namespace Prisma {
     featured?: SortOrder
     archived?: SortOrder
     img?: SortOrder
+    year?: SortOrder
     priorityLevel?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8714,12 +8745,14 @@ export namespace Prisma {
     featured?: SortOrder
     archived?: SortOrder
     img?: SortOrder
+    year?: SortOrder
     priorityLevel?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ProjectSumOrderByAggregateInput = {
+    year?: SortOrder
     priorityLevel?: SortOrder
   }
 

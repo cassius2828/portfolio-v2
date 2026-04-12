@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ProjectCard, type SerializedProject } from "../shared/ProjectCard";
+import { ProjectCard } from "../shared/ProjectCard";
+import type { SerializedProject } from "~/lib/types";
 import { SectionHeading } from "../shared/SectionHeading";
 import { personalInfo, socialLinks } from "~/lib/content";
 import { withLineupLegendsFirst } from "~/lib/projectOrder";

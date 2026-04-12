@@ -20,6 +20,7 @@ describe("serializeProject", () => {
     featured: true,
     archived: false,
     img: "https://img.com/test.png",
+    year: 2024,
     priorityLevel: 1,
     createdAt: new Date("2025-01-01"),
     updatedAt: new Date("2025-06-01"),
@@ -41,6 +42,7 @@ describe("serializeProject", () => {
       featured: true,
       archived: false,
       img: "https://img.com/test.png",
+      year: 2024,
       priorityLevel: 1,
     });
   });

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BlogCard } from "./BlogCard";
-import type { SerializedBlog } from "~/lib/serialize";
+import type { SerializedBlog } from "~/lib/types";
 
 interface BlogListProps {
   blogs: SerializedBlog[];

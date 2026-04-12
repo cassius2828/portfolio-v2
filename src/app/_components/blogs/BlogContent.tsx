@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { SerializedBlog } from "~/lib/serialize";
+import type { SerializedBlog } from "~/lib/types";
 import { SafeImage } from "../shared/SafeImage";
 import { CopyLinkButton } from "../shared/CopyLinkButton";
 import { FALLBACK_IMG } from "~/lib/constants";

@@ -63,6 +63,7 @@ export const projectRouter = createTRPCRouter({
         featured: z.boolean().default(false),
         archived: z.boolean().default(false),
         img: z.string().optional(),
+        year: z.number().int().min(1990).max(2100).default(2024),
         priorityLevel: z.number().int().min(1).default(1),
       }),
     )
@@ -78,6 +79,7 @@ export const projectRouter = createTRPCRouter({
           featured: input.featured,
           archived: input.archived,
           img: input.img,
+          year: input.year,
           priorityLevel: input.priorityLevel,
         },
       });
@@ -97,6 +99,7 @@ export const projectRouter = createTRPCRouter({
         featured: z.boolean().optional(),
         archived: z.boolean().optional(),
         img: z.string().optional(),
+        year: z.number().int().min(1990).max(2100).optional(),
         priorityLevel: z.number().int().min(1).optional(),
       }),
     )

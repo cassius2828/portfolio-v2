@@ -3,8 +3,9 @@ import { TRPCError } from "@trpc/server";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { buildContactNotificationHtml } from "~/lib/contact-notification-email";
+import { getConnectionLabel } from "~/lib/content";
 import { env } from "~/env";
-import { escapeHtml } from "~/lib/html-escape";
 
 const sesClient = new SESClient({
   region: env.AWS_REGION,
@@ -31,85 +32,113 @@ const contactSchema = z.object({
     "collaborative developer",
     "other",
   ]),
+  website: z.string().max(0, "").optional(),
 });
 
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 3;
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
 export const contactRouter = createTRPCRouter({
-  // Submit contact form
-  submit: publicProcedure.input(contactSchema).mutation(async ({ input }) => {
-    const { name, email, subject, message, affiliation, connection } = input;
+  submit: publicProcedure
+    .input(contactSchema)
+    .mutation(async ({ ctx, input }) => {
+      if (input.website) {
+        return { success: true, message: "Email sent successfully" };
+      }
 
-    // Check if email configuration is available
-    if (!env.SES_FROM_EMAIL || !env.ADMIN_EMAIL || !env.AWS_REGION) {
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Contact form is temporarily unavailable",
-      });
-    }
+      const clientIp =
+        ctx.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+        ctx.headers.get("x-real-ip") ??
+        "unknown";
 
-    const command = new SendEmailCommand({
-      Source: env.SES_FROM_EMAIL,
-      Destination: {
-        ToAddresses: [env.ADMIN_EMAIL],
-      },
-      ReplyToAddresses: [email],
-      Message: {
-        Subject: {
-          Data: `Portfolio Contact: ${subject}`,
-          Charset: "UTF-8",
+      const now = Date.now();
+      const entry = rateLimitMap.get(clientIp);
+      if (entry && now < entry.resetAt) {
+        if (entry.count >= RATE_LIMIT_MAX) {
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "Too many messages. Please wait a minute and try again.",
+          });
+        }
+        entry.count += 1;
+      } else {
+        rateLimitMap.set(clientIp, {
+          count: 1,
+          resetAt: now + RATE_LIMIT_WINDOW_MS,
+        });
+      }
+
+      const { name, email, subject, message, affiliation, connection } = input;
+      const safeSubject = subject.replace(/[\r\n]/g, " ");
+      const connectionLabel = getConnectionLabel(connection);
+
+      // Check if email configuration is available
+      if (!env.SES_FROM_EMAIL || !env.ADMIN_EMAIL || !env.AWS_REGION) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Contact form is temporarily unavailable",
+        });
+      }
+
+      const command = new SendEmailCommand({
+        Source: env.SES_FROM_EMAIL,
+        Destination: {
+          ToAddresses: [env.ADMIN_EMAIL],
         },
-        Body: {
-          Text: {
-            Data: `
+        ReplyToAddresses: [email],
+        Message: {
+          Subject: {
+            Data: `Web Portfolio Contact: ${safeSubject}`,
+            Charset: "UTF-8",
+          },
+          Body: {
+            Text: {
+              Data: `
 Message from ${name}
 
 ${message}
 
 ---
 Company / Affiliation: ${affiliation ?? "Not specified"}
-Role/Connection: ${connection}
+Role/Connection: ${connectionLabel}
 Email: ${email}
             `.trim(),
-            Charset: "UTF-8",
-          },
-          Html: {
-            Data: `
-<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-  <h2 style="color: #333;">New Portfolio Contact</h2>
-  <p><strong>From:</strong> ${escapeHtml(name)}</p>
-  <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
-  <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-  <p><strong>Company/Affiliation:</strong> ${escapeHtml(affiliation ?? "Not specified")}</p>
-  <p><strong>Role:</strong> ${escapeHtml(connection)}</p>
-  <hr style="border: 1px solid #eee; margin: 20px 0;" />
-  <div style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
-    <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
-  </div>
-</div>
-            `.trim(),
-            Charset: "UTF-8",
+              Charset: "UTF-8",
+            },
+            Html: {
+              Data: buildContactNotificationHtml({
+                name,
+                email,
+                subject,
+                message,
+                affiliation: affiliation ?? "Not specified",
+                connection: connectionLabel,
+              }),
+              Charset: "UTF-8",
+            },
           },
         },
-      },
-    });
-
-    try {
-      await sesClient.send(command);
-    } catch (cause: unknown) {
-      const detail =
-        cause instanceof Error
-          ? `${cause.name}: ${cause.message}`
-          : String(cause);
-      console.error("[contact] SES send failed:", detail);
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message:
-          "Unable to send your message right now. Please try again in a few minutes, or use the email address in the Contact Information section.",
       });
-    }
 
-    return {
-      success: true,
-      message: "Email sent successfully",
-    };
-  }),
+      try {
+        await sesClient.send(command);
+      } catch (cause: unknown) {
+        const detail =
+          cause instanceof Error
+            ? `${cause.name}: ${cause.message}`
+            : String(cause);
+        console.error("[contact] SES send failed:", detail);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message:
+            "Unable to send your message right now. Please try again in a few minutes, or use the email address in the Contact Information section.",
+        });
+      }
+
+      return {
+        success: true,
+        message: "Email sent successfully",
+      };
+    }),
 });

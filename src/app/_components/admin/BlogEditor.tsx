@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
-import type { SerializedBlog } from "~/lib/serialize";
+import type { SerializedBlog } from "~/lib/types";
+import { INPUT_CLASS, LABEL_CLASS } from "~/lib/form-styles";
 
 interface BlogEditorProps {
   blog?: SerializedBlog;
@@ -72,7 +73,7 @@ export function BlogEditor({ blog }: BlogEditorProps) {
       )}
 
       <div>
-        <label htmlFor="title" className="mb-2 block text-sm font-medium">
+        <label htmlFor="title" className={LABEL_CLASS}>
           Title *
         </label>
         <input
@@ -82,13 +83,13 @@ export function BlogEditor({ blog }: BlogEditorProps) {
           value={formData.title}
           onChange={handleChange}
           required
-          className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+          className={INPUT_CLASS}
           placeholder="Enter blog title..."
         />
       </div>
 
       <div>
-        <label htmlFor="img" className="mb-2 block text-sm font-medium">
+        <label htmlFor="img" className={LABEL_CLASS}>
           Cover Image URL
         </label>
         <input
@@ -97,7 +98,7 @@ export function BlogEditor({ blog }: BlogEditorProps) {
           name="img"
           value={formData.img}
           onChange={handleChange}
-          className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+          className={INPUT_CLASS}
           placeholder="https://example.com/image.jpg"
         />
         <p className="mt-1 text-sm text-[var(--color-text-muted)]">
@@ -106,7 +107,7 @@ export function BlogEditor({ blog }: BlogEditorProps) {
       </div>
 
       <div>
-        <label htmlFor="content" className="mb-2 block text-sm font-medium">
+        <label htmlFor="content" className={LABEL_CLASS}>
           Content * (HTML supported)
         </label>
         <textarea
@@ -116,7 +117,7 @@ export function BlogEditor({ blog }: BlogEditorProps) {
           onChange={handleChange}
           required
           rows={20}
-          className="w-full resize-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-4 py-3 font-mono text-sm text-[var(--color-text-primary)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
+          className={`${INPUT_CLASS} resize-none font-mono text-sm`}
           placeholder="Write your blog content here... HTML is supported."
         />
         <p className="mt-1 text-sm text-[var(--color-text-muted)]">
