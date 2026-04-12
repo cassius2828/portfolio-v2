@@ -17,6 +17,7 @@ export async function generateStaticParams() {
   if (process.env.SKIP_ENV_VALIDATION) return [];
 
   const projects = await db.project.findMany({
+    where: { archived: false },
     select: { id: true },
   });
 
@@ -31,7 +32,7 @@ export async function generateMetadata({
   const { projectId } = await params;
   const project = await api.project.getById({ id: projectId });
 
-  if (!project) {
+  if (!project || project.archived) {
     return {
       title: "Project Not Found",
     };
@@ -109,7 +110,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const { projectId } = await params;
   const project = await api.project.getById({ id: projectId });
 
-  if (!project) {
+  if (!project || project.archived) {
     notFound();
   }
 

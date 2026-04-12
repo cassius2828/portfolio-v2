@@ -22,6 +22,7 @@ model Project {
   githubLink    String       @unique
   technologies  Technology[]
   featured      Boolean?     @default(false)
+  archived      Boolean      @default(false)
   img           String?
   priorityLevel Int          @default(1)
   createdAt     DateTime?

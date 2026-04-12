@@ -3,7 +3,6 @@ import { personalInfo, contactInfo, socialLinks } from "~/lib/content";
 export function ResumeDocument() {
   return (
     <div id="resume-document" className="resume-page">
-      {/* ─── Page 1 ─── */}
       <div className="resume-sheet">
         {/* Header */}
         <header className="border-b-2 border-[var(--resume-accent)] pb-3 text-center">
@@ -284,10 +283,7 @@ export function ResumeDocument() {
             </div>
           </div>
         </Section>
-      </div>
 
-      {/* ─── Page 2 ─── */}
-      <div className="resume-sheet resume-page-break">
         {/* Technical Skills */}
         <Section title="Technical Skills">
           <div className="grid grid-cols-3 gap-x-5 gap-y-1.5 text-[11px] leading-snug">
@@ -342,7 +338,15 @@ export function ResumeDocument() {
           <div className="mb-2.5">
             <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
               <span className="text-[11px] font-bold text-[var(--resume-text)]">
-                Lineup Legends — Full-Stack NBA Fantasy Platform
+                <a
+                  href="https://lineup-legends-v2.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--resume-text)] underline"
+                >
+                  Lineup Legends
+                </a>
+                {" — Full-Stack NBA Fantasy Platform"}
               </span>
               <span className="text-[11px] text-[var(--resume-text)] italic">
                 Next.js 15 &bull; React 19 &bull; TypeScript &bull; MongoDB

@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       orderBy: { updatedAt: "desc" },
     }),
     db.project.findMany({
+      where: { archived: false },
       select: { id: true },
       orderBy: { priorityLevel: "desc" },
     }),

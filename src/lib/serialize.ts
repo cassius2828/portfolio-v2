@@ -17,6 +17,7 @@ export function serializeProject(project: Project): SerializedProject {
     githubLink: project.githubLink,
     technologies: project.technologies,
     featured: project.featured,
+    archived: project.archived,
     img: project.img,
     priorityLevel: project.priorityLevel,
   };

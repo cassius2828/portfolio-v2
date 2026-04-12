@@ -78,12 +78,19 @@ export function AdminProjectList({
               className="border-b border-[var(--color-border)] transition-colors hover:bg-[var(--color-bg-hover)]"
             >
               <td className="px-6 py-4">
-                <Link
-                  href={`/projects/${project.id}`}
-                  className="font-medium hover:text-[var(--color-accent)]"
-                >
-                  {project.title}
-                </Link>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="font-medium hover:text-[var(--color-accent)]"
+                  >
+                    {project.title}
+                  </Link>
+                  {project.archived && (
+                    <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-400">
+                      Archived
+                    </span>
+                  )}
+                </div>
               </td>
               <td className="px-6 py-4">
                 {project.featured ? (

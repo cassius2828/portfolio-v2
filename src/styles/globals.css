@@ -304,7 +304,7 @@ body {
 /* ─── Resume print styles ─── */
 .resume-sheet {
   width: 8.5in;
-  min-height: 11in;
+  min-height: auto;
   padding: 0.6in 0.75in;
   box-sizing: border-box;
 }
@@ -323,38 +323,53 @@ body {
   .resume-sheet {
     border-bottom: 1px solid #d9e0eb;
   }
-
-  .resume-sheet + .resume-sheet {
-    border-top: 4px solid #e8ecf2;
-  }
 }
 
 @media print {
-  html,
-  body {
+  /*
+   * Screen uses min-height: 100vh on html/body — that can reserve a full extra
+   * printed page with no content. Collapse height in print so pagination
+   * matches actual content only.
+   */
+  html {
     margin: 0 !important;
     padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
     background: white !important;
-    color: black !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  /* Hide portfolio chrome */
-  header:not(.resume-page header),
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: white !important;
+    /* Do not force body text color — it overrides Tailwind / resume CSS vars */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /*
+   * App Router has no #__next — do NOT use body > * { display: none }, or the
+   * print preview will be blank. Hide site chrome only (resume uses <header>
+   * without .glass).
+   */
+  header.glass,
   footer,
-  nav {
+  [data-sonner-toaster] {
     display: none !important;
   }
 
-  /* Hide everything except the resume */
-  body > * {
-    display: none !important;
-  }
-
-  body > #__next,
-  body > div[data-nextjs-scroll-focus-boundary] {
+  main {
     display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    background: white !important;
   }
 
   /* Page setup */
@@ -363,27 +378,46 @@ body {
     margin: 0;
   }
 
-  .resume-page-break {
-    page-break-before: always;
-  }
-
   .resume-sheet {
-    width: 100%;
-    min-height: auto;
-    height: auto;
+    /* Match screen: same width & padding as .resume-sheet above */
+    width: 8.5in;
+    max-width: 100%;
+    min-height: 0 !important;
+    height: auto !important;
     border: none !important;
     box-shadow: none !important;
+    padding: 0.6in 0.75in !important;
+    box-sizing: border-box;
   }
 
-  /* Ensure links don't show URLs; keep body text black */
+  .resume-page {
+    min-height: 0 !important;
+    height: auto !important;
+    background-color: var(--resume-bg) !important;
+    color: var(--resume-text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #resume-document {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  /* Ensure links don't show URLs after the link text */
   .resume-page a {
     text-decoration: none;
     color: inherit;
   }
 
-  /* Preserve Winslow-style accent in PDF (body color can flatten headings) */
+  /* Headings & icons: keep accent (Chrome may still mute if “Background graphics” is off) */
   .resume-page h1,
   .resume-page h2 {
     color: var(--resume-accent) !important;
+  }
+
+  .resume-page svg {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

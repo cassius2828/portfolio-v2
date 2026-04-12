@@ -7,6 +7,7 @@ export interface SerializedProject {
   githubLink: string;
   technologies: { name: string; icon?: string | null }[];
   featured: boolean | null;
+  archived: boolean;
   img: string | null;
   priorityLevel: number;
 }

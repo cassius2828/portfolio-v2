@@ -19,7 +19,7 @@ export function ResumeViewer() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mx-auto max-w-5xl px-6 pb-24"
+      className="mx-auto max-w-5xl px-6 pb-24 print:pb-0"
     >
       {/* Screen-only heading & actions */}
       <div className="print:hidden">
@@ -30,10 +30,10 @@ export function ResumeViewer() {
         />
       </div>
 
-      {/* Resume preview */}
+      {/* Resume preview — capped at viewport height; long content scrolls inside */}
       <div
         ref={resumeRef}
-        className="mx-auto mb-8 max-w-[8.5in] overflow-hidden rounded-lg shadow-2xl print:max-w-none print:rounded-none print:shadow-none"
+        className="mx-auto mb-8 max-h-[100dvh] max-w-[8.5in] overflow-x-hidden overflow-y-auto rounded-lg shadow-2xl print:mb-0 print:max-h-none print:max-w-none print:overflow-visible print:rounded-none print:shadow-none"
       >
         <ResumeDocument />
       </div>

@@ -22,7 +22,7 @@ export const projectRouter = createTRPCRouter({
   // Get featured projects
   getFeatured: publicProcedure.query(async ({ ctx }) => {
     return ctx.db.project.findMany({
-      where: { featured: true },
+      where: { featured: true, archived: false },
       orderBy: { priorityLevel: "desc" },
     });
   }),
@@ -30,7 +30,7 @@ export const projectRouter = createTRPCRouter({
   // Get regular (non-featured) projects
   getRegular: publicProcedure.query(async ({ ctx }) => {
     return ctx.db.project.findMany({
-      where: { featured: false },
+      where: { featured: false, archived: false },
       orderBy: { priorityLevel: "desc" },
     });
   }),
@@ -61,6 +61,7 @@ export const projectRouter = createTRPCRouter({
         githubLink: z.string().url(),
         technologies: z.array(technologySchema),
         featured: z.boolean().default(false),
+        archived: z.boolean().default(false),
         img: z.string().optional(),
         priorityLevel: z.number().int().min(1).default(1),
       }),
@@ -75,6 +76,7 @@ export const projectRouter = createTRPCRouter({
           githubLink: input.githubLink,
           technologies: input.technologies,
           featured: input.featured,
+          archived: input.archived,
           img: input.img,
           priorityLevel: input.priorityLevel,
         },
@@ -93,6 +95,7 @@ export const projectRouter = createTRPCRouter({
         githubLink: z.string().url().optional(),
         technologies: z.array(technologySchema).optional(),
         featured: z.boolean().optional(),
+        archived: z.boolean().optional(),
         img: z.string().optional(),
         priorityLevel: z.number().int().min(1).optional(),
       }),
