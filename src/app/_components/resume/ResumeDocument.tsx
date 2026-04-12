@@ -40,7 +40,7 @@ export function ResumeDocument() {
               github.com/cassius2828
             </a>
             <a
-              href="https://cassiusreynolds.com"
+              href="https://cassiusreynolds.dev"
               className="inline-flex items-center gap-1"
             >
               <svg
@@ -53,7 +53,27 @@ export function ResumeDocument() {
                 <circle cx="12" cy="12" r="10" />
                 <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
               </svg>
-              cassiusreynolds.com
+              cassiusreynolds.dev
+            </a>
+            <a
+              href={socialLinks.credly.url}
+              className="inline-flex items-center gap-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {/* Shield (credentials) — Lucide shield path, filled */}
+              <svg
+                aria-hidden
+                className="h-3.5 w-3.5 shrink-0 text-gray-900"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                />
+              </svg>
+              credly.com/users/cassius-reynolds
             </a>
           </div>
         </header>
@@ -91,7 +111,7 @@ export function ResumeDocument() {
 
             <div className="flex items-baseline justify-between">
               <span className="text-[11px] italic">Full Stack Engineer</span>
-              <span className="text-[11px]">Jul 2025 – Present</span>
+              <span className="text-[11px]">Summer 2025 – Present</span>
             </div>
             <ul className="mt-0.5 ml-4 space-y-px text-[11px]">
               <li className="list-disc">
@@ -136,7 +156,7 @@ export function ResumeDocument() {
               <span className="text-[11px] italic">
                 Data Integration Platform Engineer
               </span>
-              <span className="text-[11px]">Apr 2025 – Jul 2025</span>
+              <span className="text-[11px]">Spring 2025 – Summer 2025</span>
             </div>
             <ul className="mt-0.5 ml-4 space-y-px text-[11px]">
               <li className="list-disc">
@@ -164,7 +184,7 @@ export function ResumeDocument() {
               <span className="text-[11px] font-bold">
                 Freelance Software Developer
               </span>
-              <span className="text-[11px]">Feb 2023 – Apr 2025</span>
+              <span className="text-[11px]">Winter 2023 – Spring 2025</span>
             </div>
             <ul className="mt-0.5 ml-4 space-y-px text-[11px]">
               <li className="list-disc">
@@ -194,7 +214,7 @@ export function ResumeDocument() {
               <span className="text-[11px] font-bold">
                 Southern New Hampshire University
               </span>
-              <span className="text-[11px]">Oct 2025 – Present</span>
+              <span className="text-[11px]">Fall 2025 – Present</span>
             </div>
             <p className="text-[11px] italic">
               Bachelor of Science in Computer Science (Software Engineering)
@@ -207,7 +227,7 @@ export function ResumeDocument() {
           <div className="mb-1.5">
             <div className="flex items-baseline justify-between">
               <span className="text-[11px] font-bold">General Assembly</span>
-              <span className="text-[11px]">May 2024 – Aug 2024</span>
+              <span className="text-[11px]">Summer 2024</span>
             </div>
             <p className="text-[11px] italic">Software Engineering Immersive</p>
           </div>
@@ -220,6 +240,34 @@ export function ResumeDocument() {
               Bachelor of Arts, Communication Management
             </p>
             <p className="text-[11px]">Graduated Cum Laude</p>
+          </div>
+        </Section>
+
+        {/* Certifications */}
+        <Section title="Certifications">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-[11px]">
+            <div className="flex items-baseline justify-between">
+              <span className="font-bold">
+                Professional Scrum Master&trade; I (PSM I)
+              </span>
+              <span className="ml-2 shrink-0">Spring 2025</span>
+            </div>
+            <div className="flex items-baseline justify-between">
+              <span className="font-bold">AWS Certified AI Practitioner</span>
+              <span className="ml-2 shrink-0">Spring 2025</span>
+            </div>
+            <div className="flex items-baseline justify-between">
+              <span className="font-bold">
+                AWS Certified Cloud Practitioner
+              </span>
+              <span className="ml-2 shrink-0">Winter 2025</span>
+            </div>
+            <div className="flex items-baseline justify-between">
+              <span className="font-bold">
+                AWS Cloud Quest: Cloud Practitioner
+              </span>
+              <span className="ml-2 shrink-0">Winter 2025</span>
+            </div>
           </div>
         </Section>
       </div>
@@ -276,19 +324,77 @@ export function ResumeDocument() {
 
         {/* Project Highlights */}
         <Section title="Project Highlights">
-          <ul className="ml-4 space-y-0.5 text-[11px]">
-            <li className="list-disc">
-              AI-powered mockup generator (in progress)
-            </li>
-            <li className="list-disc">
-              Real-time integrations platform with multi-system data
-              synchronization
-            </li>
-            <li className="list-disc">
-              Full-stack applications with authentication, billing, and
-              third-party API integrations
-            </li>
-          </ul>
+          {/* Lineup Legends */}
+          <div className="mb-2.5">
+            <div className="flex items-baseline justify-between">
+              <span className="text-[11px] font-bold">
+                Lineup Legends — Full-Stack NBA Fantasy Platform
+              </span>
+              <span className="text-[11px] italic">
+                Next.js 15 &bull; React 19 &bull; TypeScript &bull; MongoDB
+                &bull; Redis &bull; AWS
+              </span>
+            </div>
+            <ul className="mt-0.5 ml-4 space-y-px text-[11px]">
+              <li className="list-disc">
+                Built a salary-cap lineup builder ($15 budget, positional
+                constraints) with drag-and-drop ordering, community ratings, and
+                a gamble system featuring animations, sound effects, and
+                confetti
+              </li>
+              <li className="list-disc">
+                Implemented multi-factor authentication supporting TOTP, email
+                codes, and WebAuthn passkeys with encrypted secrets and
+                Redis-backed session verification
+              </li>
+              <li className="list-disc">
+                Designed a social layer including follows, threaded comments,
+                upvote/downvote voting, Giphy GIF embeds, bookmarks, and
+                automated profanity filtering with an admin moderation queue
+              </li>
+              <li className="list-disc">
+                Automated player data enrichment by scraping Wikipedia with
+                Cheerio, falling back to OpenAI GPT-4o-mini for career stats and
+                awards extraction
+              </li>
+              <li className="list-disc">
+                Architected end-to-end type-safe APIs with tRPC, TanStack React
+                Query, and SuperJSON; enforced sliding-window rate limiting on
+                auth endpoints via Redis
+              </li>
+              <li className="list-disc">
+                Applied Cache-Aside strategy with Redis to cache high-traffic,
+                low-churn public data, reducing database load and improving page
+                load times
+              </li>
+              <li className="list-disc">
+                Managed file uploads to S3 with CloudFront CDN delivery and
+                MIME-type validation; integrated YouTube Data API for curated
+                video content
+              </li>
+              <li className="list-disc">
+                Built an admin dashboard with user management, ban/suspend
+                enforcement, flagged content review, player request queue with
+                community value voting, and gamble animation tuning
+              </li>
+            </ul>
+          </div>
+
+          {/* Placeholder for future projects */}
+          <div className="mb-2.5">
+            <div className="flex items-baseline justify-between">
+              <span className="text-[11px] font-bold">
+                AI-Powered Mockup Generator
+              </span>
+              <span className="text-[11px] italic">In Progress</span>
+            </div>
+            <ul className="mt-0.5 ml-4 space-y-px text-[11px]">
+              <li className="list-disc">
+                Developing an AI-driven tool that generates UI mockups from
+                natural language descriptions and design references
+              </li>
+            </ul>
+          </div>
         </Section>
 
         {/* Leadership & Community Involvement */}
@@ -379,7 +485,7 @@ function Section({
 }) {
   return (
     <section className="mb-3">
-      <h2 className="mb-1.5 border-b border-gray-400 text-[12px] font-bold tracking-wide uppercase">
+      <h2 className="my-1.5 border-b border-gray-400 text-[12px] font-bold tracking-wide uppercase">
         {title}
       </h2>
       {children}
