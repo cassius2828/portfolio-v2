@@ -12,6 +12,13 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
+  const trimmedProdLink = project.prodLink?.trim() ?? "";
+  const imageHref =
+    trimmedProdLink !== "" ? trimmedProdLink : project.githubLink;
+  const imageLinkLabel = trimmedProdLink
+    ? `Open live site for ${project.title}`
+    : `View ${project.title} on GitHub`;
+
   return (
     <article className="mx-auto max-w-5xl px-6 pb-24">
       {/* Back Button */}
@@ -46,21 +53,28 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         )}
       </header>
 
-      {/* Featured Image */}
-      <div className="relative mb-12 aspect-video overflow-hidden rounded-2xl">
+      {/* Featured Image — links to live app when available, otherwise GitHub */}
+      <a
+        href={imageHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={imageLinkLabel}
+        className="group relative mb-12 block aspect-video overflow-hidden rounded-2xl ring-offset-2 ring-offset-[var(--color-bg-primary)] transition-shadow outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+      >
         <SafeImage
           // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- intentional: empty string "" must trigger fallback
           src={project.img || FALLBACK_IMG}
-          alt={project.title}
+          alt=""
           fallbackSrc={FALLBACK_IMG}
           fill
           quality={100}
           unoptimized={project.img?.endsWith(".png")}
           sizes="(max-width: 1280px) 100vw, 1024px"
-          className="object-cover"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           priority
         />
-      </div>
+        <span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
+      </a>
 
       {/* Description */}
       <section className="mb-12">

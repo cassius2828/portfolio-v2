@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
+import { Toaster, toast } from "sonner";
 import { api } from "~/trpc/react";
 import {
   contactInfo,
@@ -14,15 +14,17 @@ import { SectionHeading } from "../shared/SectionHeading";
 
 const MIN_MESSAGE_LENGTH = 10;
 
+/** Toasts from this section render here (below header) instead of the global top-of-page toaster. */
+const CONTACT_TOASTER_ID = "contact-form";
+
+const contactToastOpts = { toasterId: CONTACT_TOASTER_ID };
+
 function getHumanErrorMessage(raw: string): string {
   const lower = raw.toLowerCase();
-  if (lower.includes("email")) return "Please enter a valid email address.";
-  if (lower.includes("name")) return "Please enter your name.";
-  if (lower.includes("subject")) return "Please enter a subject.";
-  if (lower.includes("message") || lower.includes("10 characters"))
-    return "Your message must be at least 10 characters.";
+  /* Avoid substring checks on "email", "message", "name" — SES and other server errors contain those words. */
   if (lower.includes("unavailable"))
     return "The contact form is temporarily unavailable. Please try again later.";
+  if (lower.includes("unable to send")) return raw;
   return "Something went wrong. Please try again.";
 }
 
@@ -44,7 +46,9 @@ export function Contact() {
 
   const submitMutation = api.contact.submit.useMutation({
     onSuccess: () => {
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.success("Message sent successfully! I'll get back to you soon.", {
+        ...contactToastOpts,
+      });
       setFormData({
         name: "",
         email: "",
@@ -56,7 +60,29 @@ export function Contact() {
       setHasAttemptedSubmit(false);
     },
     onError: (error) => {
-      toast.error(getHumanErrorMessage(error.message));
+      const fieldErrors = error.data?.zodError?.fieldErrors as
+        | Record<string, string[] | undefined>
+        | undefined;
+      if (fieldErrors?.email?.length) {
+        toast.error("Please enter a valid email address.", contactToastOpts);
+        return;
+      }
+      if (fieldErrors?.message?.length) {
+        toast.error(
+          "Your message must be at least 10 characters.",
+          contactToastOpts,
+        );
+        return;
+      }
+      if (fieldErrors?.name?.length) {
+        toast.error("Please enter your name.", contactToastOpts);
+        return;
+      }
+      if (fieldErrors?.subject?.length) {
+        toast.error("Please enter a subject.", contactToastOpts);
+        return;
+      }
+      toast.error(getHumanErrorMessage(error.message), contactToastOpts);
     },
   });
 
@@ -65,7 +91,10 @@ export function Contact() {
     setHasAttemptedSubmit(true);
 
     if (messageLength < MIN_MESSAGE_LENGTH) {
-      toast.error("Your message must be at least 10 characters.");
+      toast.error(
+        "Your message must be at least 10 characters.",
+        contactToastOpts,
+      );
       return;
     }
 
@@ -99,6 +128,20 @@ export function Contact() {
         >
           <SectionHeading title="Get in Touch" className="mb-0 text-center" />
         </motion.div>
+
+        {/* Toasts for this section: below the fixed header, above the form area */}
+        <Toaster
+          id={CONTACT_TOASTER_ID}
+          position="top-center"
+          offset={{ top: "6.5rem" }}
+          toastOptions={{
+            style: {
+              background: "var(--color-bg-card)",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text-primary)",
+            },
+          }}
+        />
 
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Info */}

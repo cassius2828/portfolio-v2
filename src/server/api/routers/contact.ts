@@ -92,7 +92,16 @@ Email: ${email}
       },
     });
 
-    await sesClient.send(command);
+    try {
+      await sesClient.send(command);
+    } catch (cause: unknown) {
+      console.error("[contact] SES send failed:", cause);
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message:
+          "Unable to send your message right now. Please try again in a few minutes, or use the email address in the Contact Information section.",
+      });
+    }
 
     return {
       success: true,
