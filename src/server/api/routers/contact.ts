@@ -95,7 +95,11 @@ Email: ${email}
     try {
       await sesClient.send(command);
     } catch (cause: unknown) {
-      console.error("[contact] SES send failed:", cause);
+      const detail =
+        cause instanceof Error
+          ? `${cause.name}: ${cause.message}`
+          : String(cause);
+      console.error("[contact] SES send failed:", detail);
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
         message:
