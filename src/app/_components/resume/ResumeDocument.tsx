@@ -399,22 +399,6 @@ export function ResumeDocument() {
           </div>
 
           {/* Placeholder for future projects */}
-          <div className="mb-2.5">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-2">
-              <span className="text-[11px] font-bold text-[var(--resume-text)]">
-                AI-Powered Mockup Generator
-              </span>
-              <span className="text-[11px] text-[var(--resume-text)] italic">
-                In Progress
-              </span>
-            </div>
-            <ul className="mt-0.5 ml-4 space-y-px text-[11px]">
-              <li className="list-disc">
-                Developing an AI-driven tool that generates UI mockups from
-                natural language descriptions and design references
-              </li>
-            </ul>
-          </div>
         </Section>
 
         {/* Leadership & Community Involvement */}
