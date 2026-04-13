@@ -24,7 +24,8 @@ const contactSchema = z.object({
   subject: z.string().min(1, { error: "Subject is required" }),
   message: z
     .string()
-    .min(10, { error: "Message must be at least 10 characters" }),
+    .min(10, { error: "Message must be at least 10 characters" })
+    .max(500, { error: "Message must be at most 500 characters" }),
   affiliation: z.string().optional(),
   connection: z.enum([
     "recruiter",

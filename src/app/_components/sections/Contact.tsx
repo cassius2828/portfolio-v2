@@ -15,6 +15,7 @@ import { SectionHeading } from "../shared/SectionHeading";
 import { INPUT_CLASS, LABEL_CLASS } from "~/lib/form-styles";
 
 const MIN_MESSAGE_LENGTH = 10;
+const MAX_MESSAGE_LENGTH = 500;
 
 /** Toasts from this section render here (below header) instead of the global top-of-page toaster. */
 const CONTACT_TOASTER_ID = "contact-form";
@@ -73,7 +74,7 @@ export function Contact() {
       }
       if (fieldErrors?.message?.length) {
         toast.error(
-          "Your message must be at least 10 characters.",
+          fieldErrors.message[0] ?? "Please check your message.",
           contactToastOpts,
         );
         return;
@@ -287,6 +288,7 @@ export function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
+                maxLength={MAX_MESSAGE_LENGTH}
                 aria-invalid={isMessageInvalid}
                 aria-describedby="message-hint"
                 className={`w-full resize-none rounded-lg border bg-[var(--color-bg-tertiary)] px-4 py-3 text-[var(--color-text-primary)] transition-colors focus:outline-none ${
@@ -314,7 +316,7 @@ export function Contact() {
                       : "text-[var(--color-text-muted)]"
                   }`}
                 >
-                  {messageLength}/{MIN_MESSAGE_LENGTH}
+                  {messageLength}/{MAX_MESSAGE_LENGTH}
                 </p>
               </div>
             </div>
