@@ -18,7 +18,7 @@ test.describe("public pages", () => {
       page.getByRole("heading", { name: /coaching/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: /youth center mentorships/i }),
+      page.getByRole("heading", { name: /rosie the riveter trust/i }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: /community art contributions/i }),

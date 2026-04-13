@@ -78,8 +78,8 @@ export function About() {
               </p>
               <p>
                 Beyond engineering, I bring leadership shaped by 13 years of
-                competitive football, youth mentoring at the Richmond Youth
-                Center, and active community involvement. I&apos;m driven to
+                competitive football, youth mentoring at Rosie the Riveter Trust
+                — Richmond, and active community involvement. I&apos;m driven to
                 build efficient, scalable systems and to master engineering
                 fundamentals that complement modern tooling.
               </p>

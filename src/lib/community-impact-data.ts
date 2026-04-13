@@ -53,15 +53,15 @@ const coachingPhotoDefs: CommunityImpactPhotoDef[] = [
 const mentorshipPhotoDefs: CommunityImpactPhotoDef[] = [
   {
     key: "portfolio/community/mentorship/comm-1.JPG",
-    alt: "Toy drive and mentorship day with children and teens from the Richmond Youth Program, which partners with the Rosie the Riveter Foundation",
+    alt: "Toy drive and mentorship day with children and teens at Rosie the Riveter Trust — Richmond",
   },
   {
     key: "portfolio/community/mentorship/comm-2.webp",
-    alt: "Group photo with Richmond Youth Program; hosted two accomplished Bay Area guest artists who spoke with the kids about their creative paths and what it took to build successful careers",
+    alt: "Group photo with Rosie the Riveter Trust — Richmond; hosted two accomplished Bay Area guest artists who spoke with the kids about their creative paths and what it took to build successful careers",
   },
   {
     key: "portfolio/community/mentorship/comm-3.webp",
-    alt: "Motivational talk for the Richmond Youth Program on succeeding as a student-athlete in high school and college, and how discipline, teamwork, and lessons from sports transfer to school, work, and life",
+    alt: "Motivational talk for Rosie the Riveter Trust — Richmond on succeeding as a student-athlete in high school and college, and how discipline, teamwork, and lessons from sports transfer to school, work, and life",
   },
 ];
 
@@ -90,9 +90,9 @@ export const COMMUNITY_IMPACT_SECTION_DEFS: CommunityImpactSectionDef[] = [
   },
   {
     id: "youth-center-mentorships",
-    title: "Youth Center Mentorships",
+    title: "Rosie the Riveter Trust — Richmond",
     description:
-      "The Richmond Youth Program, affiliated with the Rosie the Riveter Foundation, is the main focus of this work—toy drives, mentorship days, guest speakers, and talks that meet young people where they are. I also continue mentoring former athletes and youth from other programs, building on the same commitment to growth, opportunity, and community.",
+      "This work includes toy drives, mentorship days, guest speakers, and talks that meet young people where they are. I also continue mentoring former athletes and youth from other programs, building on the same commitment to growth, opportunity, and community.",
     photoDefs: mentorshipPhotoDefs,
   },
   {
