@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: `Community work by ${personalInfo.name}: Coaching, Youth Mentorship, and Community Art.`,
   openGraph: {
     title: `Community Impact | ${personalInfo.name}`,
-    description: `Coaching, Youth Center Mentorships, and Community Art Contributions.`,
+    description: `Coaching, mentorship at Rosie the Riveter Trust — Richmond, and Community Art Contributions.`,
   },
 };
 

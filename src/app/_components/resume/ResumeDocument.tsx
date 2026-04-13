@@ -422,7 +422,7 @@ export function ResumeDocument() {
           <div className="mb-2">
             <div className="flex items-baseline justify-between">
               <span className="text-[11px] font-bold">
-                Richmond Youth Center — Mentor &amp; Coach
+                Rosie the Riveter Trust — Richmond, Mentor &amp; Coach
               </span>
               <span className="text-[11px]">2024 – Present</span>
             </div>
