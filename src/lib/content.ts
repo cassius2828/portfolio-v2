@@ -153,6 +153,13 @@ export const recommendations: Recommendation[] = [
     text: "Cassius is a standout React/Node/Next.js developer who brought real impact to our team. He’s not only technically sharp, but also an incredibly hard worker and an excellent communicator. Add to that a genuinely friendly and positive personality, and you’ve got someone any team would be lucky to have. Highly recommend!",
     linkedinUrl: "https://www.linkedin.com/in/eric-popelka-b6024145/",
   },
+  {
+    name: "Daniel Lynton",
+    role: "",
+    img: "",
+    text: "As a first-time professional, Cassius demonstrated a solid foundation in full stack development and a genuine eagerness to learn and grow. He was dependable, collaborative, and took feedback constructively. He was highly engaged and personally invested in project outcomes. Cassius worked effectively alongside engineers far more senior than him without slowing down the rest of the team.\n\nCassius' ability to translate business requirements and customer experience goals to tangible outcomes is a rare find. I could trust him with business context, I collaborated with him on product direction, and he followed through after our conversations with production-ready features.",
+    linkedinUrl: "",
+  },
 ];
 
 // ============================================

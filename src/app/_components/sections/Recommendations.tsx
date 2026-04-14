@@ -6,6 +6,13 @@ import { SafeImage } from "../shared/SafeImage";
 import { SectionHeading } from "../shared/SectionHeading";
 import { FADE_UP, staggerItem } from "~/lib/motion";
 
+function initialsFromName(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
+}
+
 export function Recommendations() {
   // Don't render section if there are no recommendations
   if (recommendations.length === 0) {
@@ -41,20 +48,29 @@ export function Recommendations() {
                 &ldquo;
               </div>
 
-              {/* Author image */}
+              {/* Author image or initials when no photo URL */}
               <div className="mb-4 flex items-center justify-center">
-                <SafeImage
-                  src={rec.img}
-                  alt={rec.name}
-                  fallbackSrc="/images/headshot.webp"
-                  width={64}
-                  height={64}
-                  className="h-16 w-16 rounded-full object-cover"
-                />
+                {rec.img ? (
+                  <SafeImage
+                    src={rec.img}
+                    alt={rec.name}
+                    fallbackSrc="/images/headshot.webp"
+                    width={64}
+                    height={64}
+                    className="h-16 w-16 rounded-full object-cover"
+                  />
+                ) : (
+                  <div
+                    className="flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] text-sm font-semibold tracking-wide text-[var(--color-text-muted)]"
+                    aria-hidden
+                  >
+                    {initialsFromName(rec.name)}
+                  </div>
+                )}
               </div>
 
               {/* Recommendation text */}
-              <p className="mb-6 flex-1 pt-4 text-[var(--color-text-secondary)]">
+              <p className="mb-6 flex-1 pt-4 whitespace-pre-line text-[var(--color-text-secondary)]">
                 {rec.text}
               </p>
 
@@ -64,28 +80,31 @@ export function Recommendations() {
                   <p className="font-semibold text-[var(--color-text-primary)]">
                     {rec.name}
                   </p>
-                  <p className="text-sm text-[var(--color-text-muted)]">
-                    {rec.role}
-                  </p>
+                  {rec.role ? (
+                    <p className="text-sm text-[var(--color-text-muted)]">
+                      {rec.role}
+                    </p>
+                  ) : null}
                 </div>
 
-                {/* LinkedIn link */}
-                <a
-                  href={rec.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition-all hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-                  aria-label={`View ${rec.name}'s recommendation on LinkedIn`}
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+                {rec.linkedinUrl ? (
+                  <a
+                    href={rec.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition-all hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                    aria-label={`View ${rec.name}'s profile on LinkedIn`}
                   >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </a>
+                    <svg
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                  </a>
+                ) : null}
               </div>
             </motion.div>
           ))}
