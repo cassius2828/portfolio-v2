@@ -26,7 +26,7 @@ const config = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.cloudfront.net https://*.s3.*.amazonaws.com https://5-06-sei.s3.us-west-1.amazonaws.com https://avatars.githubusercontent.com https://media.licdn.com https://lh3.googleusercontent.com; font-src 'self'; connect-src 'self'; frame-ancestors 'none';",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.cloudfront.net https://*.s3.*.amazonaws.com https://5-06-sei.s3.us-west-1.amazonaws.com https://avatars.githubusercontent.com https://media.licdn.com https://lh3.googleusercontent.com https://ui-avatars.com; font-src 'self'; connect-src 'self'; frame-ancestors 'none';",
           },
         ],
       },
@@ -59,6 +59,10 @@ const config = {
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ui-avatars.com",
       },
     ],
   },

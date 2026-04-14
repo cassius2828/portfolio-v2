@@ -140,6 +140,13 @@ export interface Recommendation {
 
 export const recommendations: Recommendation[] = [
   {
+    name: "Jamel Burgos",
+    role: "Binary Magician",
+    img: "https://media.licdn.com/dms/image/v2/C4E03AQEFxqlGYRx9Jw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1599843818434?e=1777507200&v=beta&t=EtBVELyGzfUkgGCzRBZJREFsZqSYGJTtu8HI8f8rUds",
+    text: "I had the pleasure of working with Cassius during our time at SyncSmart. His work is consistently top-notch, and he brings a high level of expertise to every project. Cassius is a dedicated professional who would be a fantastic asset to any team.",
+    linkedinUrl: "https://www.linkedin.com/in/jamel-burgos-831ab7a",
+  },
+  {
     name: "Eric Popelka",
     role: "Platform Architect",
     img: "https://media.licdn.com/dms/image/v2/D5603AQHQAUKsZNNCrw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1685231406979?e=1776297600&v=beta&t=3ICWHu6JQ3KEW1ImRz-t9ryEaeA1BA6O8Pd-CwlvBfk",
