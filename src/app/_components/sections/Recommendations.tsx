@@ -36,12 +36,17 @@ export function Recommendations() {
           />
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2">
           {recommendations.map((rec, i) => (
             <motion.div
               key={`${rec.name}-${i}`}
               {...staggerItem(i)}
-              className="card group relative flex flex-col p-6"
+              className={`card group relative flex flex-col p-6 ${
+                i === recommendations.length - 1 &&
+                recommendations.length % 2 === 1
+                  ? "md:col-start-2 md:row-span-2 md:row-start-1"
+                  : ""
+              }`}
             >
               {/* Quote icon */}
               <div className="absolute top-20 left-6 text-4xl text-[var(--color-accent)] opacity-30">
