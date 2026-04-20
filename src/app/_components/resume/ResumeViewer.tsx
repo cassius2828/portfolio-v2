@@ -33,9 +33,11 @@ export function ResumeViewer() {
       {/* Resume preview — capped at viewport height; long content scrolls inside */}
       <div
         ref={resumeRef}
-        className="mx-auto mb-8 max-h-[100dvh] max-w-[8.5in] overflow-x-hidden overflow-y-auto rounded-lg shadow-2xl print:mb-0 print:max-h-none print:max-w-none print:overflow-visible print:rounded-none print:shadow-none"
+        className="resume-preview-frame mx-auto mb-8 max-h-[100dvh] w-full max-w-[8.5in] min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain rounded-lg shadow-2xl [-webkit-overflow-scrolling:touch] print:mb-0 print:max-h-none print:max-w-none print:overflow-visible print:rounded-none print:shadow-none"
       >
-        <ResumeDocument />
+        <div className="resume-preview-zoom">
+          <ResumeDocument />
+        </div>
       </div>
 
       {/* Screen-only action buttons */}

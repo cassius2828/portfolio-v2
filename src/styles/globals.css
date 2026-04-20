@@ -354,6 +354,32 @@ body {
   }
 }
 
+/* Narrow viewports: fixed 8.5in sheet overflows the viewer — fit to container */
+@media screen and (max-width: 768px) {
+  .resume-sheet {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.48in 0.42in;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .resume-sheet {
+    padding: 0.4in 0.32in;
+  }
+}
+
+/*
+ * Slightly shrink the on-screen preview on phones (zoom affects px-based Tailwind
+ * sizes). Print is unaffected. Firefox ignores zoom; layout still fits via width:100%.
+ */
+@media screen and (max-width: 640px) {
+  .resume-preview-zoom {
+    zoom: 0.88;
+  }
+}
+
 @media print {
   /*
    * Screen uses min-height: 100vh on html/body — that can reserve a full extra
@@ -431,6 +457,10 @@ body {
   #resume-document {
     min-height: 0 !important;
     height: auto !important;
+  }
+
+  .resume-preview-zoom {
+    zoom: 1 !important;
   }
 
   /* Ensure links don't show URLs after the link text */
