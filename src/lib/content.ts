@@ -166,7 +166,7 @@ export const recommendations: Recommendation[] = [
 // RESUME LINKS
 // ============================================
 export const resumeLinks = {
-  s3: "https://5-06-sei.s3.us-west-1.amazonaws.com/portfolio/resume/Cassius_Reynolds_-_Software_Engineer.pdf",
+  s3: "https://5-06-sei.s3.us-west-1.amazonaws.com/portfolio/resume/Resume%20_Cassius%20Reynolds_04_13_2026.pdf",
   publicPortfolioUrl: "/images/Cassius_Reynolds_portfolio_2026.pdf",
   googleDrive:
     "https://drive.google.com/file/d/1Q3qWKgDjpOQriR39708bYz8hhhPDNFno/view?usp=drive_link",
