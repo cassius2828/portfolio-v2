@@ -14,6 +14,7 @@ describe("navItems", () => {
     expect(hrefs).toContain("/community-impact");
     expect(hrefs).toContain("/blogs");
     expect(hrefs).toContain("/resume");
+    expect(hrefs).toContain("/#recommendations");
   });
 
   it("should have a label for every item", () => {

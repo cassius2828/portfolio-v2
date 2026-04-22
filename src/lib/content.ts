@@ -133,23 +133,37 @@ export const codingJourneyStart = "2023";
 export interface Recommendation {
   name: string;
   role: string;
+  /** Portrait URL (`https://…` from CDN upload, or legacy S3 key resolved via `recommendationImageSrc`) */
   img: string;
   text: string;
   linkedinUrl: string;
+  /** On md+, card spans both columns (full-width row in the recommendations grid) */
+  fullWidth?: boolean;
 }
+
+const RECOMMENDATION_PORTRAITS_CDN =
+  "https://d2uth2nw0znbpc.cloudfront.net/portfolio/recommendations";
 
 export const recommendations: Recommendation[] = [
   {
+    name: "Spencer Darr",
+    role: "Director, Business Operations and Product at SyncSmart",
+    img: `${RECOMMENDATION_PORTRAITS_CDN}/spencer-darr.jpg`,
+    text: "I hired Cassius at SyncSmart, drawn by his unique background leading to software engineering and confident, relatable personality. We brought him in hoping for a quick learner and adaptable talent. He far surpassed that. Within 60 days he was delivering client-facing apps, and within 90 he was leading UI development for our team.\n\nCassius has a keen eye for detail and a natural instinct for anticipating user needs, and he's just as fast to act on them. He sees the whole picture - building features while staying communicative, collaborative, and open to feedback.\n\nI see him as a high-impact individual contributor today with a clear pathway into leadership. I would not hesitate to recommend Cassius as a coworker, contributor and person.",
+    linkedinUrl: "https://www.linkedin.com/in/spencerglendarr/",
+    fullWidth: true,
+  },
+  {
     name: "Jamel Burgos",
-    role: "Binary Magician",
-    img: "https://media.licdn.com/dms/image/v2/C4E03AQEFxqlGYRx9Jw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1599843818434?e=1777507200&v=beta&t=EtBVELyGzfUkgGCzRBZJREFsZqSYGJTtu8HI8f8rUds",
+    role: "Senior Support Engineer",
+    img: `${RECOMMENDATION_PORTRAITS_CDN}/jamel-burgos.jpg`,
     text: "I had the pleasure of working with Cassius during our time at SyncSmart. His work is consistently top-notch, and he brings a high level of expertise to every project. Cassius is a dedicated professional who would be a fantastic asset to any team.",
     linkedinUrl: "https://www.linkedin.com/in/jamel-burgos-831ab7a",
   },
   {
     name: "Eric Popelka",
     role: "Platform Architect",
-    img: "https://media.licdn.com/dms/image/v2/D5603AQHQAUKsZNNCrw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1685231406979?e=1776297600&v=beta&t=3ICWHu6JQ3KEW1ImRz-t9ryEaeA1BA6O8Pd-CwlvBfk",
+    img: `${RECOMMENDATION_PORTRAITS_CDN}/eric-popelka.jpg`,
     text: "Cassius is a standout React/Node/Next.js developer who brought real impact to our team. He’s not only technically sharp, but also an incredibly hard worker and an excellent communicator. Add to that a genuinely friendly and positive personality, and you’ve got someone any team would be lucky to have. Highly recommend!",
     linkedinUrl: "https://www.linkedin.com/in/eric-popelka-b6024145/",
   },
@@ -159,6 +173,7 @@ export const recommendations: Recommendation[] = [
     img: "",
     text: "As a first-time professional, Cassius demonstrated a solid foundation in full stack development and a genuine eagerness to learn and grow. He was dependable, collaborative, and took feedback constructively. He was highly engaged and personally invested in project outcomes. Cassius worked effectively alongside engineers far more senior than him without slowing down the rest of the team.\n\nCassius' ability to translate business requirements and customer experience goals to tangible outcomes is a rare find. I could trust him with business context, I collaborated with him on product direction, and he followed through after our conversations with production-ready features.",
     linkedinUrl: "",
+    fullWidth: true,
   },
 ];
 
@@ -179,10 +194,11 @@ export const navItems = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About" },
   { href: "/clients", label: "Clients" },
+  { href: "/#recommendations", label: "Recommendations" },
   { href: "/community-impact", label: "Community Impact" },
   { href: "/blogs", label: "Blog" },
-  { href: "/#contact", label: "Contact" },
   { href: "/resume", label: "Resume" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export const footerNavLinks = [

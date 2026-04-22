@@ -1,4 +1,5 @@
 import { api } from "~/trpc/server";
+import { HomeAnchorScroll } from "./_components/HomeAnchorScroll";
 import { Hero } from "./_components/sections/Hero";
 import { Projects } from "./_components/sections/Projects";
 import { About } from "./_components/sections/About";
@@ -14,6 +15,7 @@ export default async function Home() {
 
   return (
     <>
+      <HomeAnchorScroll />
       <Hero featuredProjects={featuredProjects.map(serializeProject)} />
       <About />
       <Recommendations />

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState, type MouseEvent } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { PORTFOLIO_SCROLL_TO_ID_KEY } from "../HomeAnchorScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo, navItems, socialLinks } from "~/lib/content";
 import { GithubIcon } from "../icons/GithubIcon";
@@ -27,16 +28,20 @@ const socialLinksWithIcons = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
-  const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    if (href.startsWith("/#")) {
-      const id = href.replace("/#", "");
-      if (pathname === "/") {
-        const element = document.getElementById(id);
-        element?.scrollIntoView({ behavior: "smooth" });
-      }
+  /** In-page sections on `/` — smooth scroll; from other routes go home then scroll via `HomeAnchorScroll`. */
+  const handleHashNav = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("/#")) return;
+    const id = href.replace("/#", "");
+    e.preventDefault();
+    if (pathname === "/") {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", href);
+      return;
     }
+    sessionStorage.setItem(PORTFOLIO_SCROLL_TO_ID_KEY, id);
+    router.push("/");
   };
 
   return (
@@ -59,7 +64,11 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => handleNavClick(item.href)}
+              onClick={(e) => {
+                if (item.href.startsWith("/#")) {
+                  handleHashNav(e, item.href);
+                }
+              }}
               className={`text-sm font-medium transition-colors hover:text-[var(--color-accent)] ${
                 pathname === item.href
                   ? "text-[var(--color-accent)]"
@@ -136,7 +145,12 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    onClick={() => handleNavClick(item.href)}
+                    onClick={(e) => {
+                      setIsOpen(false);
+                      if (item.href.startsWith("/#")) {
+                        handleHashNav(e, item.href);
+                      }
+                    }}
                     className="block py-3 text-lg font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
                   >
                     {item.label}

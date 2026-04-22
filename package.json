@@ -10,6 +10,7 @@
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:archive-projects": "npx tsx scripts/archive-projects.ts",
+    "upload-recommendation-images": "npx tsx scripts/upload-recommendation-images.ts",
     "db:studio": "prisma studio",
     "dev": "next dev --turbo",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",

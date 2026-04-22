@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
 import { recommendations } from "~/lib/content";
-import { SafeImage } from "../shared/SafeImage";
+import { recommendationImageSrc } from "~/lib/recommendation-image-src";
 import { SectionHeading } from "../shared/SectionHeading";
 import { FADE_UP, staggerItem } from "~/lib/motion";
 
@@ -11,6 +13,37 @@ function initialsFromName(name: string): string {
   if (parts.length === 0) return "?";
   if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
   return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
+}
+
+function initialsAvatar(name: string) {
+  return (
+    <div
+      className="flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] text-sm font-semibold tracking-wide text-[var(--color-text-muted)]"
+      aria-hidden
+    >
+      {initialsFromName(name)}
+    </div>
+  );
+}
+
+/** Never fall back to the site owner's headshot — LinkedIn URLs often expire. */
+function RecommendationAvatar({ name, src }: { name: string; src: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!src || failed) {
+    return initialsAvatar(name);
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={name}
+      width={64}
+      height={64}
+      className="h-16 w-16 rounded-full object-cover"
+      onError={() => setFailed(true)}
+    />
+  );
 }
 
 export function Recommendations() {
@@ -27,7 +60,7 @@ export function Recommendations() {
         <div className="absolute top-1/2 right-1/4 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto w-full max-w-4xl px-6">
         <motion.div {...FADE_UP} className="mb-12 text-center">
           <SectionHeading
             title="Recommendations"
@@ -42,10 +75,7 @@ export function Recommendations() {
               key={`${rec.name}-${i}`}
               {...staggerItem(i)}
               className={`card group relative flex flex-col p-6 ${
-                i === recommendations.length - 1 &&
-                recommendations.length % 2 === 1
-                  ? "md:col-start-2 md:row-span-2 md:row-start-1"
-                  : ""
+                rec.fullWidth ? "md:col-span-2" : ""
               }`}
             >
               {/* Quote icon */}
@@ -55,23 +85,10 @@ export function Recommendations() {
 
               {/* Author image or initials when no photo URL */}
               <div className="mb-4 flex items-center justify-center">
-                {rec.img ? (
-                  <SafeImage
-                    src={rec.img}
-                    alt={rec.name}
-                    fallbackSrc="/images/headshot.webp"
-                    width={64}
-                    height={64}
-                    className="h-16 w-16 rounded-full object-cover"
-                  />
-                ) : (
-                  <div
-                    className="flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] text-sm font-semibold tracking-wide text-[var(--color-text-muted)]"
-                    aria-hidden
-                  >
-                    {initialsFromName(rec.name)}
-                  </div>
-                )}
+                <RecommendationAvatar
+                  name={rec.name}
+                  src={recommendationImageSrc(rec.img)}
+                />
               </div>
 
               {/* Recommendation text */}
