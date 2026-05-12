@@ -230,7 +230,7 @@ export function ResumeDocument() {
               Bachelor of Science in Computer Science (Software Engineering)
             </p>
             <p className="text-[11px]">
-              GPA: 3.85 &bull; Multi-term Honor Roll
+              GPA: 3.93 &bull; Multi-term Honor Roll
             </p>
           </div>
 

@@ -11,6 +11,7 @@ import { loadMongoUri } from "./lib/env";
  */
 const YEAR_BY_TITLE: Record<string, number> = {
   "Lineup Legends": 2026,
+  "Activity Tracker": 2026,
   LibrisList: 2025,
   "Libris List": 2025,
   "Athlete 2 Athlete": 2025,

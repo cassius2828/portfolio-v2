@@ -86,6 +86,17 @@ const descriptions: Record<string, string> = {
 <li>Built with React, Tailwind CSS, Node.js, Express, PostgreSQL, Redis, and AWS S3</li>
 </ul>
 <p><em>No guest login available — please view the demo video to see admin features.</em></p>`,
+
+  "Activity Tracker": `<p>A learning-focused full-stack task tracker built deliberately <strong>from primitives</strong>. Where a real product would reach for a library, this project writes the moving parts by hand so the request lifecycle, auth, and data fetching stay visible end-to-end.</p>
+<ul>
+<li>Hand-rolled DB-backed cookie sessions with 32-byte opaque tokens stored as SHA-256 hashes in Postgres — no JWTs or Auth.js, with full issue → validate → revoke → expire control</li>
+<li>Custom data fetching hooks (<code>useTasks</code>, <code>useTeam</code>, <code>useUser</code>, <code>useDebouncedSearch</code>) with explicit loading, cancellation, and stale-response guarding — no React Query, SWR, or tRPC</li>
+<li><code>AbortController</code> threaded through every read service plus a single axios response interceptor for logging, 401 dispatch, and cancellation handling</li>
+<li>Express 5 API with hand-rolled <code>isSignedIn</code> / <code>isAdmin</code> middleware, validation, rate limiting, helmet, and bcrypt password hashing</li>
+<li>Drizzle ORM as a thin typed SQL wrapper (no DAO/repository layer), drizzle-kit migrations, and an idempotent dev seeder</li>
+<li>React 19 + Vite 8 + Tailwind 4 frontend with React Router 7, lazy routes, role-based guards, and PascalCase feature folders for component organization</li>
+</ul>
+<p><em>Personal learning project — no live deployment. Read the source to see how things work without a library hiding the mechanics.</em></p>`,
 };
 
 async function main() {

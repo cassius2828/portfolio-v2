@@ -74,7 +74,7 @@ export function About() {
                   BS in Computer Science
                 </span>{" "}
                 with a concentration in Software Engineering at SNHU,
-                maintaining a 3.85 GPA and earning Honor Roll every term.
+                maintaining a 3.93 GPA and earning Honor Roll every term.
               </p>
               <p>
                 Beyond engineering, I bring leadership shaped by 13 years of
