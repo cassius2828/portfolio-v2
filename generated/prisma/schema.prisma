@@ -50,6 +50,17 @@ model Blog {
   @@map("blogs")
 }
 
+model OpenAIWebhookReceipt {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  slot       String   @unique @default("latest")
+  receivedAt DateTime @default(now())
+  eventType  String
+  responseId String?
+  outputText String?
+
+  @@map("openai_webhook_receipts")
+}
+
 // NextAuth Models
 
 model Account {

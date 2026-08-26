@@ -140,6 +140,15 @@ exports.Prisma.BlogScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OpenAIWebhookReceiptScalarFieldEnum = {
+  id: 'id',
+  slot: 'slot',
+  receivedAt: 'receivedAt',
+  eventType: 'eventType',
+  responseId: 'responseId',
+  outputText: 'outputText'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -193,6 +202,7 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   Project: 'Project',
   Blog: 'Blog',
+  OpenAIWebhookReceipt: 'OpenAIWebhookReceipt',
   Account: 'Account',
   Session: 'Session',
   User: 'User',

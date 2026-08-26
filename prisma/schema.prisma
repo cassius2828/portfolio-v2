@@ -2,100 +2,111 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
-    output   = "../generated/prisma"
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
-    provider = "mongodb"
-    url      = env("MONGODB_URI")
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
 }
 
 // Portfolio Models
 
 model Project {
-    id            String       @id @default(auto()) @map("_id") @db.ObjectId
-    title         String
-    description   String
-    prodLink      String?
-    videoLink     String?
-    githubLink    String       @unique
-    technologies  Technology[]
-    featured      Boolean?     @default(false)
-    archived      Boolean      @default(false)
-    img           String?
-    year          Int          @default(2024)
-    priorityLevel Int          @default(1)
-    createdAt     DateTime?
-    updatedAt     DateTime?
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  description   String
+  prodLink      String?
+  videoLink     String?
+  githubLink    String       @unique
+  technologies  Technology[]
+  featured      Boolean?     @default(false)
+  archived      Boolean      @default(false)
+  img           String?
+  year          Int          @default(2024)
+  priorityLevel Int          @default(1)
+  createdAt     DateTime?
+  updatedAt     DateTime?
 
-    @@map("projects")
+  @@map("projects")
 }
 
 type Technology {
-    name String
-    icon String?
+  name String
+  icon String?
 }
 
 model Blog {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    title     String
-    content   String
-    img       String?
-    ownerId   String?  @db.ObjectId
-    owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  img       String?
+  ownerId   String?  @db.ObjectId
+  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@map("blogs")
+  @@map("blogs")
+}
+
+model OpenAIWebhookReceipt {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  slot       String   @unique @default("latest")
+  receivedAt DateTime @default(now())
+  eventType  String
+  responseId String?
+  outputText String?
+
+  @@map("openai_webhook_receipts")
 }
 
 // NextAuth Models
 
 model Account {
-    id                       String  @id @default(auto()) @map("_id") @db.ObjectId
-    userId                   String  @db.ObjectId
-    type                     String
-    provider                 String
-    providerAccountId        String
-    refresh_token            String?
-    access_token             String?
-    expires_at               Int?
-    token_type               String?
-    scope                    String?
-    id_token                 String?
-    session_state            String?
-    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    refresh_token_expires_in Int?
+  id                       String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId                   String  @db.ObjectId
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refresh_token_expires_in Int?
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(auto()) @map("_id") @db.ObjectId
-    sessionToken String   @unique
-    userId       String   @db.ObjectId
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(auto()) @map("_id") @db.ObjectId
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    isAdmin       Boolean   @default(false)
-    accounts      Account[]
-    sessions      Session[]
-    blogs         Blog[]
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  isAdmin       Boolean   @default(false)
+  accounts      Account[]
+  sessions      Session[]
+  blogs         Blog[]
 }
 
 model VerificationToken {
-    id         String   @id @default(auto()) @map("_id") @db.ObjectId
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }

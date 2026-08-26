@@ -29,6 +29,11 @@ export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
  */
 export type Blog = $Result.DefaultSelection<Prisma.$BlogPayload>
 /**
+ * Model OpenAIWebhookReceipt
+ * 
+ */
+export type OpenAIWebhookReceipt = $Result.DefaultSelection<Prisma.$OpenAIWebhookReceiptPayload>
+/**
  * Model Account
  * 
  */
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get blog(): Prisma.BlogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.openAIWebhookReceipt`: Exposes CRUD operations for the **OpenAIWebhookReceipt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OpenAIWebhookReceipts
+    * const openAIWebhookReceipts = await prisma.openAIWebhookReceipt.findMany()
+    * ```
+    */
+  get openAIWebhookReceipt(): Prisma.OpenAIWebhookReceiptDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -636,6 +651,7 @@ export namespace Prisma {
   export const ModelName: {
     Project: 'Project',
     Blog: 'Blog',
+    OpenAIWebhookReceipt: 'OpenAIWebhookReceipt',
     Account: 'Account',
     Session: 'Session',
     User: 'User',
@@ -658,7 +674,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "project" | "blog" | "account" | "session" | "user" | "verificationToken"
+      modelProps: "project" | "blog" | "openAIWebhookReceipt" | "account" | "session" | "user" | "verificationToken"
       txIsolationLevel: never
     }
     model: {
@@ -807,6 +823,80 @@ export namespace Prisma {
           count: {
             args: Prisma.BlogCountArgs<ExtArgs>
             result: $Utils.Optional<BlogCountAggregateOutputType> | number
+          }
+        }
+      }
+      OpenAIWebhookReceipt: {
+        payload: Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>
+        fields: Prisma.OpenAIWebhookReceiptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OpenAIWebhookReceiptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OpenAIWebhookReceiptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>
+          }
+          findFirst: {
+            args: Prisma.OpenAIWebhookReceiptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OpenAIWebhookReceiptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>
+          }
+          findMany: {
+            args: Prisma.OpenAIWebhookReceiptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>[]
+          }
+          create: {
+            args: Prisma.OpenAIWebhookReceiptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>
+          }
+          createMany: {
+            args: Prisma.OpenAIWebhookReceiptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.OpenAIWebhookReceiptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>
+          }
+          update: {
+            args: Prisma.OpenAIWebhookReceiptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>
+          }
+          deleteMany: {
+            args: Prisma.OpenAIWebhookReceiptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OpenAIWebhookReceiptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.OpenAIWebhookReceiptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpenAIWebhookReceiptPayload>
+          }
+          aggregate: {
+            args: Prisma.OpenAIWebhookReceiptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOpenAIWebhookReceipt>
+          }
+          groupBy: {
+            args: Prisma.OpenAIWebhookReceiptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OpenAIWebhookReceiptGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.OpenAIWebhookReceiptFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.OpenAIWebhookReceiptAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.OpenAIWebhookReceiptCountArgs<ExtArgs>
+            result: $Utils.Optional<OpenAIWebhookReceiptCountAggregateOutputType> | number
           }
         }
       }
@@ -1187,6 +1277,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     project?: ProjectOmit
     blog?: BlogOmit
+    openAIWebhookReceipt?: OpenAIWebhookReceiptOmit
     account?: AccountOmit
     session?: SessionOmit
     user?: UserOmit
@@ -3501,6 +3592,949 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BlogInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OpenAIWebhookReceipt
+   */
+
+  export type AggregateOpenAIWebhookReceipt = {
+    _count: OpenAIWebhookReceiptCountAggregateOutputType | null
+    _min: OpenAIWebhookReceiptMinAggregateOutputType | null
+    _max: OpenAIWebhookReceiptMaxAggregateOutputType | null
+  }
+
+  export type OpenAIWebhookReceiptMinAggregateOutputType = {
+    id: string | null
+    slot: string | null
+    receivedAt: Date | null
+    eventType: string | null
+    responseId: string | null
+    outputText: string | null
+  }
+
+  export type OpenAIWebhookReceiptMaxAggregateOutputType = {
+    id: string | null
+    slot: string | null
+    receivedAt: Date | null
+    eventType: string | null
+    responseId: string | null
+    outputText: string | null
+  }
+
+  export type OpenAIWebhookReceiptCountAggregateOutputType = {
+    id: number
+    slot: number
+    receivedAt: number
+    eventType: number
+    responseId: number
+    outputText: number
+    _all: number
+  }
+
+
+  export type OpenAIWebhookReceiptMinAggregateInputType = {
+    id?: true
+    slot?: true
+    receivedAt?: true
+    eventType?: true
+    responseId?: true
+    outputText?: true
+  }
+
+  export type OpenAIWebhookReceiptMaxAggregateInputType = {
+    id?: true
+    slot?: true
+    receivedAt?: true
+    eventType?: true
+    responseId?: true
+    outputText?: true
+  }
+
+  export type OpenAIWebhookReceiptCountAggregateInputType = {
+    id?: true
+    slot?: true
+    receivedAt?: true
+    eventType?: true
+    responseId?: true
+    outputText?: true
+    _all?: true
+  }
+
+  export type OpenAIWebhookReceiptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OpenAIWebhookReceipt to aggregate.
+     */
+    where?: OpenAIWebhookReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OpenAIWebhookReceipts to fetch.
+     */
+    orderBy?: OpenAIWebhookReceiptOrderByWithRelationInput | OpenAIWebhookReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OpenAIWebhookReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OpenAIWebhookReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OpenAIWebhookReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OpenAIWebhookReceipts
+    **/
+    _count?: true | OpenAIWebhookReceiptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OpenAIWebhookReceiptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OpenAIWebhookReceiptMaxAggregateInputType
+  }
+
+  export type GetOpenAIWebhookReceiptAggregateType<T extends OpenAIWebhookReceiptAggregateArgs> = {
+        [P in keyof T & keyof AggregateOpenAIWebhookReceipt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOpenAIWebhookReceipt[P]>
+      : GetScalarType<T[P], AggregateOpenAIWebhookReceipt[P]>
+  }
+
+
+
+
+  export type OpenAIWebhookReceiptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpenAIWebhookReceiptWhereInput
+    orderBy?: OpenAIWebhookReceiptOrderByWithAggregationInput | OpenAIWebhookReceiptOrderByWithAggregationInput[]
+    by: OpenAIWebhookReceiptScalarFieldEnum[] | OpenAIWebhookReceiptScalarFieldEnum
+    having?: OpenAIWebhookReceiptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OpenAIWebhookReceiptCountAggregateInputType | true
+    _min?: OpenAIWebhookReceiptMinAggregateInputType
+    _max?: OpenAIWebhookReceiptMaxAggregateInputType
+  }
+
+  export type OpenAIWebhookReceiptGroupByOutputType = {
+    id: string
+    slot: string
+    receivedAt: Date
+    eventType: string
+    responseId: string | null
+    outputText: string | null
+    _count: OpenAIWebhookReceiptCountAggregateOutputType | null
+    _min: OpenAIWebhookReceiptMinAggregateOutputType | null
+    _max: OpenAIWebhookReceiptMaxAggregateOutputType | null
+  }
+
+  type GetOpenAIWebhookReceiptGroupByPayload<T extends OpenAIWebhookReceiptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OpenAIWebhookReceiptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OpenAIWebhookReceiptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OpenAIWebhookReceiptGroupByOutputType[P]>
+            : GetScalarType<T[P], OpenAIWebhookReceiptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OpenAIWebhookReceiptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slot?: boolean
+    receivedAt?: boolean
+    eventType?: boolean
+    responseId?: boolean
+    outputText?: boolean
+  }, ExtArgs["result"]["openAIWebhookReceipt"]>
+
+
+
+  export type OpenAIWebhookReceiptSelectScalar = {
+    id?: boolean
+    slot?: boolean
+    receivedAt?: boolean
+    eventType?: boolean
+    responseId?: boolean
+    outputText?: boolean
+  }
+
+  export type OpenAIWebhookReceiptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slot" | "receivedAt" | "eventType" | "responseId" | "outputText", ExtArgs["result"]["openAIWebhookReceipt"]>
+
+  export type $OpenAIWebhookReceiptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OpenAIWebhookReceipt"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      slot: string
+      receivedAt: Date
+      eventType: string
+      responseId: string | null
+      outputText: string | null
+    }, ExtArgs["result"]["openAIWebhookReceipt"]>
+    composites: {}
+  }
+
+  type OpenAIWebhookReceiptGetPayload<S extends boolean | null | undefined | OpenAIWebhookReceiptDefaultArgs> = $Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload, S>
+
+  type OpenAIWebhookReceiptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OpenAIWebhookReceiptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OpenAIWebhookReceiptCountAggregateInputType | true
+    }
+
+  export interface OpenAIWebhookReceiptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OpenAIWebhookReceipt'], meta: { name: 'OpenAIWebhookReceipt' } }
+    /**
+     * Find zero or one OpenAIWebhookReceipt that matches the filter.
+     * @param {OpenAIWebhookReceiptFindUniqueArgs} args - Arguments to find a OpenAIWebhookReceipt
+     * @example
+     * // Get one OpenAIWebhookReceipt
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OpenAIWebhookReceiptFindUniqueArgs>(args: SelectSubset<T, OpenAIWebhookReceiptFindUniqueArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OpenAIWebhookReceipt that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OpenAIWebhookReceiptFindUniqueOrThrowArgs} args - Arguments to find a OpenAIWebhookReceipt
+     * @example
+     * // Get one OpenAIWebhookReceipt
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OpenAIWebhookReceiptFindUniqueOrThrowArgs>(args: SelectSubset<T, OpenAIWebhookReceiptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OpenAIWebhookReceipt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptFindFirstArgs} args - Arguments to find a OpenAIWebhookReceipt
+     * @example
+     * // Get one OpenAIWebhookReceipt
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OpenAIWebhookReceiptFindFirstArgs>(args?: SelectSubset<T, OpenAIWebhookReceiptFindFirstArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OpenAIWebhookReceipt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptFindFirstOrThrowArgs} args - Arguments to find a OpenAIWebhookReceipt
+     * @example
+     * // Get one OpenAIWebhookReceipt
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OpenAIWebhookReceiptFindFirstOrThrowArgs>(args?: SelectSubset<T, OpenAIWebhookReceiptFindFirstOrThrowArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OpenAIWebhookReceipts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OpenAIWebhookReceipts
+     * const openAIWebhookReceipts = await prisma.openAIWebhookReceipt.findMany()
+     * 
+     * // Get first 10 OpenAIWebhookReceipts
+     * const openAIWebhookReceipts = await prisma.openAIWebhookReceipt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const openAIWebhookReceiptWithIdOnly = await prisma.openAIWebhookReceipt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OpenAIWebhookReceiptFindManyArgs>(args?: SelectSubset<T, OpenAIWebhookReceiptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OpenAIWebhookReceipt.
+     * @param {OpenAIWebhookReceiptCreateArgs} args - Arguments to create a OpenAIWebhookReceipt.
+     * @example
+     * // Create one OpenAIWebhookReceipt
+     * const OpenAIWebhookReceipt = await prisma.openAIWebhookReceipt.create({
+     *   data: {
+     *     // ... data to create a OpenAIWebhookReceipt
+     *   }
+     * })
+     * 
+     */
+    create<T extends OpenAIWebhookReceiptCreateArgs>(args: SelectSubset<T, OpenAIWebhookReceiptCreateArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OpenAIWebhookReceipts.
+     * @param {OpenAIWebhookReceiptCreateManyArgs} args - Arguments to create many OpenAIWebhookReceipts.
+     * @example
+     * // Create many OpenAIWebhookReceipts
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OpenAIWebhookReceiptCreateManyArgs>(args?: SelectSubset<T, OpenAIWebhookReceiptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a OpenAIWebhookReceipt.
+     * @param {OpenAIWebhookReceiptDeleteArgs} args - Arguments to delete one OpenAIWebhookReceipt.
+     * @example
+     * // Delete one OpenAIWebhookReceipt
+     * const OpenAIWebhookReceipt = await prisma.openAIWebhookReceipt.delete({
+     *   where: {
+     *     // ... filter to delete one OpenAIWebhookReceipt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OpenAIWebhookReceiptDeleteArgs>(args: SelectSubset<T, OpenAIWebhookReceiptDeleteArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OpenAIWebhookReceipt.
+     * @param {OpenAIWebhookReceiptUpdateArgs} args - Arguments to update one OpenAIWebhookReceipt.
+     * @example
+     * // Update one OpenAIWebhookReceipt
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OpenAIWebhookReceiptUpdateArgs>(args: SelectSubset<T, OpenAIWebhookReceiptUpdateArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OpenAIWebhookReceipts.
+     * @param {OpenAIWebhookReceiptDeleteManyArgs} args - Arguments to filter OpenAIWebhookReceipts to delete.
+     * @example
+     * // Delete a few OpenAIWebhookReceipts
+     * const { count } = await prisma.openAIWebhookReceipt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OpenAIWebhookReceiptDeleteManyArgs>(args?: SelectSubset<T, OpenAIWebhookReceiptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OpenAIWebhookReceipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OpenAIWebhookReceipts
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OpenAIWebhookReceiptUpdateManyArgs>(args: SelectSubset<T, OpenAIWebhookReceiptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OpenAIWebhookReceipt.
+     * @param {OpenAIWebhookReceiptUpsertArgs} args - Arguments to update or create a OpenAIWebhookReceipt.
+     * @example
+     * // Update or create a OpenAIWebhookReceipt
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.upsert({
+     *   create: {
+     *     // ... data to create a OpenAIWebhookReceipt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OpenAIWebhookReceipt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OpenAIWebhookReceiptUpsertArgs>(args: SelectSubset<T, OpenAIWebhookReceiptUpsertArgs<ExtArgs>>): Prisma__OpenAIWebhookReceiptClient<$Result.GetResult<Prisma.$OpenAIWebhookReceiptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OpenAIWebhookReceipts that matches the filter.
+     * @param {OpenAIWebhookReceiptFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: OpenAIWebhookReceiptFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a OpenAIWebhookReceipt.
+     * @param {OpenAIWebhookReceiptAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const openAIWebhookReceipt = await prisma.openAIWebhookReceipt.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: OpenAIWebhookReceiptAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of OpenAIWebhookReceipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptCountArgs} args - Arguments to filter OpenAIWebhookReceipts to count.
+     * @example
+     * // Count the number of OpenAIWebhookReceipts
+     * const count = await prisma.openAIWebhookReceipt.count({
+     *   where: {
+     *     // ... the filter for the OpenAIWebhookReceipts we want to count
+     *   }
+     * })
+    **/
+    count<T extends OpenAIWebhookReceiptCountArgs>(
+      args?: Subset<T, OpenAIWebhookReceiptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OpenAIWebhookReceiptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OpenAIWebhookReceipt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OpenAIWebhookReceiptAggregateArgs>(args: Subset<T, OpenAIWebhookReceiptAggregateArgs>): Prisma.PrismaPromise<GetOpenAIWebhookReceiptAggregateType<T>>
+
+    /**
+     * Group by OpenAIWebhookReceipt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpenAIWebhookReceiptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OpenAIWebhookReceiptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OpenAIWebhookReceiptGroupByArgs['orderBy'] }
+        : { orderBy?: OpenAIWebhookReceiptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OpenAIWebhookReceiptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOpenAIWebhookReceiptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OpenAIWebhookReceipt model
+   */
+  readonly fields: OpenAIWebhookReceiptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OpenAIWebhookReceipt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OpenAIWebhookReceiptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OpenAIWebhookReceipt model
+   */
+  interface OpenAIWebhookReceiptFieldRefs {
+    readonly id: FieldRef<"OpenAIWebhookReceipt", 'String'>
+    readonly slot: FieldRef<"OpenAIWebhookReceipt", 'String'>
+    readonly receivedAt: FieldRef<"OpenAIWebhookReceipt", 'DateTime'>
+    readonly eventType: FieldRef<"OpenAIWebhookReceipt", 'String'>
+    readonly responseId: FieldRef<"OpenAIWebhookReceipt", 'String'>
+    readonly outputText: FieldRef<"OpenAIWebhookReceipt", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OpenAIWebhookReceipt findUnique
+   */
+  export type OpenAIWebhookReceiptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * Filter, which OpenAIWebhookReceipt to fetch.
+     */
+    where: OpenAIWebhookReceiptWhereUniqueInput
+  }
+
+  /**
+   * OpenAIWebhookReceipt findUniqueOrThrow
+   */
+  export type OpenAIWebhookReceiptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * Filter, which OpenAIWebhookReceipt to fetch.
+     */
+    where: OpenAIWebhookReceiptWhereUniqueInput
+  }
+
+  /**
+   * OpenAIWebhookReceipt findFirst
+   */
+  export type OpenAIWebhookReceiptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * Filter, which OpenAIWebhookReceipt to fetch.
+     */
+    where?: OpenAIWebhookReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OpenAIWebhookReceipts to fetch.
+     */
+    orderBy?: OpenAIWebhookReceiptOrderByWithRelationInput | OpenAIWebhookReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OpenAIWebhookReceipts.
+     */
+    cursor?: OpenAIWebhookReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OpenAIWebhookReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OpenAIWebhookReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OpenAIWebhookReceipts.
+     */
+    distinct?: OpenAIWebhookReceiptScalarFieldEnum | OpenAIWebhookReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * OpenAIWebhookReceipt findFirstOrThrow
+   */
+  export type OpenAIWebhookReceiptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * Filter, which OpenAIWebhookReceipt to fetch.
+     */
+    where?: OpenAIWebhookReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OpenAIWebhookReceipts to fetch.
+     */
+    orderBy?: OpenAIWebhookReceiptOrderByWithRelationInput | OpenAIWebhookReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OpenAIWebhookReceipts.
+     */
+    cursor?: OpenAIWebhookReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OpenAIWebhookReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OpenAIWebhookReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OpenAIWebhookReceipts.
+     */
+    distinct?: OpenAIWebhookReceiptScalarFieldEnum | OpenAIWebhookReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * OpenAIWebhookReceipt findMany
+   */
+  export type OpenAIWebhookReceiptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * Filter, which OpenAIWebhookReceipts to fetch.
+     */
+    where?: OpenAIWebhookReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OpenAIWebhookReceipts to fetch.
+     */
+    orderBy?: OpenAIWebhookReceiptOrderByWithRelationInput | OpenAIWebhookReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OpenAIWebhookReceipts.
+     */
+    cursor?: OpenAIWebhookReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OpenAIWebhookReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OpenAIWebhookReceipts.
+     */
+    skip?: number
+    distinct?: OpenAIWebhookReceiptScalarFieldEnum | OpenAIWebhookReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * OpenAIWebhookReceipt create
+   */
+  export type OpenAIWebhookReceiptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * The data needed to create a OpenAIWebhookReceipt.
+     */
+    data: XOR<OpenAIWebhookReceiptCreateInput, OpenAIWebhookReceiptUncheckedCreateInput>
+  }
+
+  /**
+   * OpenAIWebhookReceipt createMany
+   */
+  export type OpenAIWebhookReceiptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OpenAIWebhookReceipts.
+     */
+    data: OpenAIWebhookReceiptCreateManyInput | OpenAIWebhookReceiptCreateManyInput[]
+  }
+
+  /**
+   * OpenAIWebhookReceipt update
+   */
+  export type OpenAIWebhookReceiptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * The data needed to update a OpenAIWebhookReceipt.
+     */
+    data: XOR<OpenAIWebhookReceiptUpdateInput, OpenAIWebhookReceiptUncheckedUpdateInput>
+    /**
+     * Choose, which OpenAIWebhookReceipt to update.
+     */
+    where: OpenAIWebhookReceiptWhereUniqueInput
+  }
+
+  /**
+   * OpenAIWebhookReceipt updateMany
+   */
+  export type OpenAIWebhookReceiptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OpenAIWebhookReceipts.
+     */
+    data: XOR<OpenAIWebhookReceiptUpdateManyMutationInput, OpenAIWebhookReceiptUncheckedUpdateManyInput>
+    /**
+     * Filter which OpenAIWebhookReceipts to update
+     */
+    where?: OpenAIWebhookReceiptWhereInput
+    /**
+     * Limit how many OpenAIWebhookReceipts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OpenAIWebhookReceipt upsert
+   */
+  export type OpenAIWebhookReceiptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * The filter to search for the OpenAIWebhookReceipt to update in case it exists.
+     */
+    where: OpenAIWebhookReceiptWhereUniqueInput
+    /**
+     * In case the OpenAIWebhookReceipt found by the `where` argument doesn't exist, create a new OpenAIWebhookReceipt with this data.
+     */
+    create: XOR<OpenAIWebhookReceiptCreateInput, OpenAIWebhookReceiptUncheckedCreateInput>
+    /**
+     * In case the OpenAIWebhookReceipt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OpenAIWebhookReceiptUpdateInput, OpenAIWebhookReceiptUncheckedUpdateInput>
+  }
+
+  /**
+   * OpenAIWebhookReceipt delete
+   */
+  export type OpenAIWebhookReceiptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
+    /**
+     * Filter which OpenAIWebhookReceipt to delete.
+     */
+    where: OpenAIWebhookReceiptWhereUniqueInput
+  }
+
+  /**
+   * OpenAIWebhookReceipt deleteMany
+   */
+  export type OpenAIWebhookReceiptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OpenAIWebhookReceipts to delete
+     */
+    where?: OpenAIWebhookReceiptWhereInput
+    /**
+     * Limit how many OpenAIWebhookReceipts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OpenAIWebhookReceipt findRaw
+   */
+  export type OpenAIWebhookReceiptFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * OpenAIWebhookReceipt aggregateRaw
+   */
+  export type OpenAIWebhookReceiptAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * OpenAIWebhookReceipt without action
+   */
+  export type OpenAIWebhookReceiptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpenAIWebhookReceipt
+     */
+    select?: OpenAIWebhookReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OpenAIWebhookReceipt
+     */
+    omit?: OpenAIWebhookReceiptOmit<ExtArgs> | null
   }
 
 
@@ -7606,6 +8640,18 @@ export namespace Prisma {
   export type BlogScalarFieldEnum = (typeof BlogScalarFieldEnum)[keyof typeof BlogScalarFieldEnum]
 
 
+  export const OpenAIWebhookReceiptScalarFieldEnum: {
+    id: 'id',
+    slot: 'slot',
+    receivedAt: 'receivedAt',
+    eventType: 'eventType',
+    responseId: 'responseId',
+    outputText: 'outputText'
+  };
+
+  export type OpenAIWebhookReceiptScalarFieldEnum = (typeof OpenAIWebhookReceiptScalarFieldEnum)[keyof typeof OpenAIWebhookReceiptScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -7904,6 +8950,63 @@ export namespace Prisma {
     ownerId?: StringNullableWithAggregatesFilter<"Blog"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Blog"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Blog"> | Date | string
+  }
+
+  export type OpenAIWebhookReceiptWhereInput = {
+    AND?: OpenAIWebhookReceiptWhereInput | OpenAIWebhookReceiptWhereInput[]
+    OR?: OpenAIWebhookReceiptWhereInput[]
+    NOT?: OpenAIWebhookReceiptWhereInput | OpenAIWebhookReceiptWhereInput[]
+    id?: StringFilter<"OpenAIWebhookReceipt"> | string
+    slot?: StringFilter<"OpenAIWebhookReceipt"> | string
+    receivedAt?: DateTimeFilter<"OpenAIWebhookReceipt"> | Date | string
+    eventType?: StringFilter<"OpenAIWebhookReceipt"> | string
+    responseId?: StringNullableFilter<"OpenAIWebhookReceipt"> | string | null
+    outputText?: StringNullableFilter<"OpenAIWebhookReceipt"> | string | null
+  }
+
+  export type OpenAIWebhookReceiptOrderByWithRelationInput = {
+    id?: SortOrder
+    slot?: SortOrder
+    receivedAt?: SortOrder
+    eventType?: SortOrder
+    responseId?: SortOrder
+    outputText?: SortOrder
+  }
+
+  export type OpenAIWebhookReceiptWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slot?: string
+    AND?: OpenAIWebhookReceiptWhereInput | OpenAIWebhookReceiptWhereInput[]
+    OR?: OpenAIWebhookReceiptWhereInput[]
+    NOT?: OpenAIWebhookReceiptWhereInput | OpenAIWebhookReceiptWhereInput[]
+    receivedAt?: DateTimeFilter<"OpenAIWebhookReceipt"> | Date | string
+    eventType?: StringFilter<"OpenAIWebhookReceipt"> | string
+    responseId?: StringNullableFilter<"OpenAIWebhookReceipt"> | string | null
+    outputText?: StringNullableFilter<"OpenAIWebhookReceipt"> | string | null
+  }, "id" | "slot">
+
+  export type OpenAIWebhookReceiptOrderByWithAggregationInput = {
+    id?: SortOrder
+    slot?: SortOrder
+    receivedAt?: SortOrder
+    eventType?: SortOrder
+    responseId?: SortOrder
+    outputText?: SortOrder
+    _count?: OpenAIWebhookReceiptCountOrderByAggregateInput
+    _max?: OpenAIWebhookReceiptMaxOrderByAggregateInput
+    _min?: OpenAIWebhookReceiptMinOrderByAggregateInput
+  }
+
+  export type OpenAIWebhookReceiptScalarWhereWithAggregatesInput = {
+    AND?: OpenAIWebhookReceiptScalarWhereWithAggregatesInput | OpenAIWebhookReceiptScalarWhereWithAggregatesInput[]
+    OR?: OpenAIWebhookReceiptScalarWhereWithAggregatesInput[]
+    NOT?: OpenAIWebhookReceiptScalarWhereWithAggregatesInput | OpenAIWebhookReceiptScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OpenAIWebhookReceipt"> | string
+    slot?: StringWithAggregatesFilter<"OpenAIWebhookReceipt"> | string
+    receivedAt?: DateTimeWithAggregatesFilter<"OpenAIWebhookReceipt"> | Date | string
+    eventType?: StringWithAggregatesFilter<"OpenAIWebhookReceipt"> | string
+    responseId?: StringNullableWithAggregatesFilter<"OpenAIWebhookReceipt"> | string | null
+    outputText?: StringNullableWithAggregatesFilter<"OpenAIWebhookReceipt"> | string | null
   }
 
   export type AccountWhereInput = {
@@ -8346,6 +9449,65 @@ export namespace Prisma {
     ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OpenAIWebhookReceiptCreateInput = {
+    id?: string
+    slot?: string
+    receivedAt?: Date | string
+    eventType: string
+    responseId?: string | null
+    outputText?: string | null
+  }
+
+  export type OpenAIWebhookReceiptUncheckedCreateInput = {
+    id?: string
+    slot?: string
+    receivedAt?: Date | string
+    eventType: string
+    responseId?: string | null
+    outputText?: string | null
+  }
+
+  export type OpenAIWebhookReceiptUpdateInput = {
+    slot?: StringFieldUpdateOperationsInput | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    responseId?: NullableStringFieldUpdateOperationsInput | string | null
+    outputText?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OpenAIWebhookReceiptUncheckedUpdateInput = {
+    slot?: StringFieldUpdateOperationsInput | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    responseId?: NullableStringFieldUpdateOperationsInput | string | null
+    outputText?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OpenAIWebhookReceiptCreateManyInput = {
+    id?: string
+    slot?: string
+    receivedAt?: Date | string
+    eventType: string
+    responseId?: string | null
+    outputText?: string | null
+  }
+
+  export type OpenAIWebhookReceiptUpdateManyMutationInput = {
+    slot?: StringFieldUpdateOperationsInput | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    responseId?: NullableStringFieldUpdateOperationsInput | string | null
+    outputText?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OpenAIWebhookReceiptUncheckedUpdateManyInput = {
+    slot?: StringFieldUpdateOperationsInput | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    responseId?: NullableStringFieldUpdateOperationsInput | string | null
+    outputText?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountCreateInput = {
@@ -8899,6 +10061,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type OpenAIWebhookReceiptCountOrderByAggregateInput = {
+    id?: SortOrder
+    slot?: SortOrder
+    receivedAt?: SortOrder
+    eventType?: SortOrder
+    responseId?: SortOrder
+    outputText?: SortOrder
+  }
+
+  export type OpenAIWebhookReceiptMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slot?: SortOrder
+    receivedAt?: SortOrder
+    eventType?: SortOrder
+    responseId?: SortOrder
+    outputText?: SortOrder
+  }
+
+  export type OpenAIWebhookReceiptMinOrderByAggregateInput = {
+    id?: SortOrder
+    slot?: SortOrder
+    receivedAt?: SortOrder
+    eventType?: SortOrder
+    responseId?: SortOrder
+    outputText?: SortOrder
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
