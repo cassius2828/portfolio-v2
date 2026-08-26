@@ -25,6 +25,8 @@ export const env = createEnv({
     // SES Email Configuration
     SES_FROM_EMAIL: z.string().email().optional(),
     ADMIN_EMAIL: z.string().email().optional(),
+    OPENAI_API_KEY: z.string().min(1),
+    OPENAI_WEBHOOK_SECRET: z.string().min(1),
   },
 
   /**
@@ -60,6 +62,8 @@ export const env = createEnv({
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_CLOUDFRONT_URL: process.env.NEXT_PUBLIC_CLOUDFRONT_URL,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    OPENAI_WEBHOOK_SECRET: process.env.OPENAI_WEBHOOK_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

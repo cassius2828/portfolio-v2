@@ -1,6 +1,7 @@
 import { projectRouter } from "~/server/api/routers/project";
 import { blogRouter } from "~/server/api/routers/blog";
 import { contactRouter } from "~/server/api/routers/contact";
+import { webhookRouter } from "~/server/api/routers/webhook";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -12,6 +13,7 @@ export const appRouter = createTRPCRouter({
   project: projectRouter,
   blog: blogRouter,
   contact: contactRouter,
+  webhook: webhookRouter,
 });
 
 // export type definition of API
