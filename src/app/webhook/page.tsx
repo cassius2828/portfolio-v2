@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export default async function WebhookPage() {
   const latest = await api.webhook.getLatest();
-
+return <div>Hello World</div>
   return (
     <PageShell>
       <main className="mx-auto max-w-3xl px-6 pb-24">
